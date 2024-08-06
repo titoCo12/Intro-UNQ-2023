@@ -1,0 +1,19 @@
+function distanciaAlBorde_(direccion) {
+    /*
+        PROPÓSITO: Indicar la cantidad de celdas que hay entre la celda
+        actual y el borde en direccion al **direccion**
+        PARÁMETROS:
+            *direccion: Direccion - direccion en la cual contar celdas
+        TIPO: Cantidad.
+        PRECONDICIONES: Ninguna
+    */
+    distanciaBorde := 0
+    while(puedeMover(direccion)) {
+        Mover(direccion)
+        distanciaBorde := distanciaBorde + 1
+    }
+    return (distanciaBorde)
+}
+
+
+

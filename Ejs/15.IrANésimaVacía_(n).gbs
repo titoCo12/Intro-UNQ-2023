@@ -1,0 +1,15 @@
+procedure IrANésimaVacía_(numeroDeCelda){
+    
+    /*
+    PROPOSITO: Posicionar el cabezal en la celda vacía numero *numeroDeCelda*. Si no hay suficientes celdas vacías deja el cabezal en la esquina NorEste
+    PRECONDICION: Ninguna
+    PARAMETROS: *numeroDeCelda - numero - determina el numero de celda que se usara para posicionar el cabezal
+    */
+    
+    cantidadDeCeldasVistas := 0 
+    IrAlInicioDeUnRecorridoAl_Y_(Este, Norte)
+    while(not estoyAlFinalDeUnRecorridoAl_Y_(Este, Norte) && cantidadDeCeldasVistas /= numeroDeCelda){
+        PasarALaSiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte)
+        cantidadDeCeldasVistas := cantidadDeCeldasVistas + indicarSiEsCeldaVacía()
+    }
+}

@@ -1,0 +1,14 @@
+function colorMínimoConBolitas(){
+    
+    /*
+    PROPOSITO: Indicar cual es el color minimo entre las bolitas de una celda
+    PRECONDICION: Debería haber almenos una bolita
+    */
+    
+    colorActual := minColor()
+    while(not haybolitas(colorActual)){
+        colorActual := siguiente(minColor())
+    }
+    
+    return(colorActual)
+}

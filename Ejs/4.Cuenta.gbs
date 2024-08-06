@@ -1,0 +1,184 @@
+type TipoDeCuenta is variant {
+
+    /* 
+    PROPÓSITO: modelar los diferentes tipos de cuenta que ofrece el banco
+    */
+
+    case CuentaCorriente {}
+    case CajaDeAhorro {}
+    case CuentaSueldo {}
+}
+
+type Moneda is variant {
+
+    /* 
+    PROPÓSITO: modelar los diferentes tipos de moneda con los que trabaja el banco
+    */
+
+    case Pesos {}
+    case Dólares {}
+    case Euros {}
+    case Reales {}
+}
+
+type Cuenta is record{
+    
+    /*
+    PROPOSITO: Modelar una cuenta de un banco
+    */
+    
+    field numeroDeCuenta {} //Tipo Numero
+    field tipoDeCuenta {} //Tipo TipoDeCuenta 
+    field nombreDeCliente {} //Tipo String
+    field tipoDeMoneda {} //Tipo Moneda
+    field saldo {}  //Tipo Numero  
+}
+
+// a) -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+function cuenta_ConSaldoActualizadoA_(cuentaPorActualizar, saldoActualizado){
+    
+    /*
+    PROPOSITO: Describe la cuenta *cuentaPorActualizar* con el saldo *saldoActual* actualizado
+    PRECONDICION: Debe existir una cuenta
+    PARAMETROS: *cuentaPorActualizar - Cuenta - describe la cuenta que se le actualizara el saldo
+                *saldoActual - Cuenta - describe el saldo a actualizar
+    TIPO: Cuenta
+    */
+    
+    return(Cuenta(cuentaPorActualizar | saldo <- saldoActualizado))
+}
+
+// b) -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+function cuenta_ConTipoDeCuentaCambiadoA_{cuentaPorActualizar, tipoDeCuentaActualizado)){
+    
+    /*
+    PROPOSITO: Describe la cuenta *cuentaPorActualizar* con el tipo de cuenta *tipoDeCuentaActualizado* actualizado
+    PRECONDICION: Debe existir una cuenta
+    PARAMETROS: *cuentaPorActualizar - Cuenta - describe la cuenta que se le actualizara el saldo
+                *tipoDeCuentaActualizado - Cuenta - describe el tipo de cuenta a actualizar
+    TIPO: Cuenta
+    */
+    
+    return(Cuenta(cuentaPorActualizar | tipoDeCuenta <- tipoDeCuentaActualizado))
+}
+
+// c) -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+function cuenta_ConTipoCambiadoSegúnDisposición(cuentaPorActualizar){
+    
+    /*
+    PROPOSITO: Describe la cuenta *cuentaPorActualizar* con el tipo de cuenta cambiado a caja de ahorro si lo amerita
+    PRECONDICION: Debe existir una cuenta
+    PARAMETROS: *cuentaPorActualizar - Cuenta - describe la cuenta que se le actualizara el tipo
+    TIPO: Cuenta
+    */
+    
+    return(choose Cuenta(cuentaPorActualizar | tipoDeCuenta <- CajaDeAhorro) when (laCuenta_TieneMásDe25MilPesos(cuentaPorActualizar)
+                cuentaPorActualizar otherwise)
+}
+
+function laCuenta_TieneMásDe25MilPesos(cuenta){
+    
+    /*
+    PROPOSITO: Describe si la cuenta del banco *cuenta* tiene más de 25 mil pesos y es una cuenta de tipo Sueldo
+    PRECONDICION: Debe haber una cuenta de banco
+    PARAMETROS: cuenta - Cuenta - determina la cuenta que se escrutinara
+    TIPO: Booleano
+    */
+    
+    return(tipoDeCuenta(cuenta) == CuentaSueldo && saldo(cuenta) > 25000)
+}
+
+// d) -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+function saldoEnPesosDe_(cuenta){
+    
+    /*
+    PROPÓSITO: Describre el saldo en pesos de la "cuenta"
+    PRECONDICION: Ninguna
+    PARAMETROS: *cuenta - Cuenta - describe la cuenta a la que se le realizara la conversión
+    TIPO: Numero
+    */
+    
+    return(convertirSaldoEn_A_(saldo(cuenta), 68) when (tipoDeMoneda(cuenta) == Dólares)
+           convertirSaldoEn_A_(saldo(cuenta), 74) when (tipoDeMoneda(cuenta) == Euros)
+           convertirSaldoEn_A_(saldo(cuenta), 12) when (tipoDeMoneda(cuenta) == Reales)
+           saldo(cuenta) when (tipoDeMoneda(cuenta) == Pesos)
+           BOOM("No hay otro tipo de ahorros, pusiste cualquier cosa") otherwise)
+}
+
+function convertirSaldoEn_A_(saldoEnLaCuenta, precioDeConversion){
+    
+    /*
+    PROPÓSITO: Convierte el "saldo" al "tipoDeMoneda" dada
+    PRECONDICION: Ninguna
+    PARAMETROS: *saldo - Numero - determina la cantidad de dinero en la cuenta
+                *valorDelCambio - Numero - determina el precio que se tomara como margen para hacer la conversion
+    TIPO: Numero
+    */
+    
+    return(saldoEnLaCuenta * precioDeConversion)
+}
+
+// e) -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+function númeroDeCuentaConMayorSaldoEntre_Y_(primerCuentaBancaria, segundaCuentaBancaria){
+    
+    /*
+    PROPOSITO: Describe el número de la cuenta que tiene mayor saldo entre la cuenta *primerCuentaBancaria* y la otra cuenta *segundaCuentaBancaria*
+    PRECONDICION: Ninguna
+    PARAMETROS: *primerCuentaBancaria - Cuenta - determina la primer cuenta a comparar
+                *segundaCuentaBancaria - Cuenta - determina la segunda cuenta a comparar
+    TIPO: Numero
+    */
+    
+    return(choose Cuenta(primerCuentaBancaria) when (saldoEnPesosDe_(primerCuentaBancaria) > saldoEnPesosDe_(segundaCuentaBancaria))
+                  saldoEnPesosDe_(segundaCuenta) otherwise)
+}
+
+// f) -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+function cuenta_ActualizadaTrasExtracciónDeCajeroDe_(cuentaPorActualizar, montoAExtraer){
+    
+    /*
+    PROPOSITO: Describe la cuenta *cuentaPorActualizar* luego de extraer la cantidad indicada por *montoAExtraer*
+    PRECONDICION: El saldo en la cuenta no debe ser menor a la cantidad por extraer
+    PARAMETROS: *cuentaPorActualizar - Cuenta - determina la cuenta que se actualizara
+                *montoAExtraer - numero - determina la cantidad de dinero por extraer
+    TIPO: Numero
+    */
+    
+    return(Cuenta(cuentaPorActualizar | saldo <- saldo(cuentaPorActualizar) - montoAExtraer))
+}
+
+// g) -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+function puedeExtraer_PorCajeroDeLaCuenta_(cantidadDeExtraccion, cuenta){
+    
+    /*
+    PROPOSITO: Describe si la cuenta *cuenta* tiene permitido extraer *cantidadMaximaDeExtraccion* sin quedarse en saldo negativo
+    PRECONDICION: Ninguna
+    PARAMETROS: *cantidadDeExtraccion - Numero - determina la cantidad limite de extraccion antes de entrar en negativos
+                *cuenta - Cuenta - determina la segunda cuenta a utilizar para la extraccion
+    TIPO: Booleano
+    */
+    
+    return(saldo(cuentaPorActualizar) >= cantidadMaximaDeExtraccion)
+}
+
+// h) -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+function cuenta_ActualizadaTrasDepósitoEnCajeroDe_(cuentaPorActualizar, montoADepositar){
+    
+    /*
+    PROPOSITO: Describe la cuenta *cuentaPorActualizar* luego de depositar la cantidad indicada por *montoADepositar*
+    PRECONDICION: Ninguna
+    PARAMETROS: *cuentaPorActualizar - Cuenta - determina la cuenta que se actualizara
+                *montoADepositar - numero - determina la cantidad de dinero por depositar en la cuenta
+    TIPO: Numero
+    */
+    
+    return(Cuenta(cuentaPorActualizar | saldo <- saldo(cuentaPorActualizar) + montoADepositar))
+}

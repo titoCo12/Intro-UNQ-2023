@@ -1,0 +1,69 @@
+procedure MoverseHaciaLaPelota() {
+    /*PROPOSITO: Hacer que Beto se mueva dos espacios hacia el Este
+    PRECONDICIONES: Beto debe tener dos celdas en direccion al Este
+    */
+    Sacar(Azul)
+    Mover(Este)
+    Poner(Azul)
+    Sacar(Azul)
+    Mover(Este)
+    Poner(Azul)
+}
+
+procedure PatearPelota() {
+    /*PROPOSITO: Hacer que Beto mueva el pie para patear la pelota
+    dos espacios hacia la izquierda
+    PRECONDICION: Tiene que haber una pelota en la misma celda que Beto
+    */
+    Poner(Azul)
+    Sacar(Azul)
+    Sacar(Negro)
+    Mover(Este)
+    Poner(Negro)
+    Sacar(Negro)
+    Mover(Este)
+    Poner(Negro)
+}
+
+procedure VolverABeto() {
+    /*PROPOSITO: Hacer que el cabezal vuelva a estar sobre Beto
+    PRECONDICION: Beto tiene que estar dos celdas hacia el Oeste
+    del cabezal
+    */
+    Mover(Oeste)
+    Mover(Oeste)
+}
+
+procedure Festejar() {
+    Poner(Azul)
+    Sacar(Azul)
+    Poner(Azul)
+    Sacar(Azul)
+    Poner(Azul)
+    Sacar(Azul)
+    Poner(Azul)
+    Sacar(Azul)
+    Poner(Azul)
+    Sacar(Azul)
+    Poner(Azul)
+    Sacar(Azul)
+    Poner(Azul)
+    Sacar(Azul)
+    Poner(Azul)
+    Sacar(Azul)
+    Poner(Azul)
+    Sacar(Azul)
+}
+
+program {
+    MoverseHaciaLaPelota()
+    PatearPelota()
+    VolverABeto()
+    MoverseHaciaLaPelota()
+    PatearPelota()
+    VolverABeto()
+    MoverseHaciaLaPelota()
+    PatearPelota()
+    VolverABeto()
+    Festejar()
+}

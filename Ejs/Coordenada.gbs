@@ -1,0 +1,198 @@
+
+
+type Coordenada is record {
+    /* PROPOSITO: modelar una coordenada del tablero.
+       INV.REP.: 
+       - tanto fila como columna son >= 0.
+       - fila es un numero menor o igual al alto del
+       tablero.
+       - columna es un numero menor o igual al ancho
+       del tablero.
+    */
+    field fila // tipo numero
+    field columna // tipo numero 
+}
+
+
+
+function coordenada__(numeroX, numeroY) {
+    /*
+        PROPOSITO:  Describir una coordenada con valor de fila
+        igual a  **numeroX**, y con valor de columna igual a 
+        **numeroY**.
+        PARAMETROS: 
+        *numeroX: Numero - numero de fila de la coordenada a 
+        devolver.
+        *numeroY: Numero - numero de columna de la coordenada 
+        a devolver.
+        TIPO: Coordenada.
+        PRECONDICIONES: Los parametros **numeroX** y **numeroY** 
+        son numeros mayores o iguales a 0.
+    */
+    return(Coordenada(fila    <- numeroX
+                     ,columna <- numeroY)
+    )
+}
+
+
+
+function esCoordenadaOrigen_(coordDada) {
+    /*
+        PROPOSITO: Indicar si la coordenada **coordDada** es
+        la coordenada del origen del tablero.
+        PARAMETROS:
+        *coordDada: Coordenada - coordenada a determinar si es
+        de origen.
+        TIPO: Booleano.
+        PRECONDICIONES: Ninguna.
+        OBSERVACIONES: La coordenada origen se considera como 
+        la coordenada cuyo valor de fila y columna es = 0.
+    */
+    return( ( fila(coordDada) + columna(coordDada ) ) == 0  )
+}
+
+
+
+function es_MayorCoordenadaA_(c1, c2) {
+    /*
+        PROPOSITO: Indicar si la coordenada **c1** es mayor 
+        que la coordenada **c2**.
+        PARAMETROS:
+        *c1: Coordenada - coordenada la cual se busca indicar
+        que es mayor.
+        *c2: Coordenada - coordenada la cual se busca indicar
+        que es menor.
+        TIPO: Booleano.
+        PRECONDICIONES: Ninguna.
+        OBSERVACIONES: se considera mayor a la coordenada que se encuentre 
+        mas tarde en un recorrido del tablero hacia el Norte y Este.
+    */
+    return( _TieneMayorColumnaQue_(c1, c2) || 
+            ( _TieneMismaColumnaQue_(c1, c2) && _TieneMayorFilaQue_(c1, c2) ) 
+    )
+}
+
+
+function _TieneMayorColumnaQue_(coord1, coord2) {
+    /*
+        PROPOSITO: Indicar si la coordenada **coord1** tiene un valor
+        de columna mayor al de la coordenada **coord2**.
+        PARAMETROS:
+        *coord1: Coordenada - coordenada con columna a comparar.
+        *coord2: Coordenada - coordenada con columna a comparar.
+        TIPO: Booleano
+        PRECONDICIONES: Ninguna.
+    */
+    return(columna(coord1) > columna(coord2))
+}
+
+
+function _TieneMismaColumnaQue_(coord1, coord2) {
+    /*
+        PROPOSITO: Indicar si la coordenada **coord1** tiene un valor
+        de columna equivalente al de la coordenada **coord2**.
+        PARAMETROS:
+        *coord1: Coordenada - coordenada con columna a comparar.
+        *coord2: Coordenada - coordenada con columna a comparar.
+        TIPO: Booleano
+        PRECONDICIONES: Ninguna.
+    */
+    return(columna(coord1) == columna(coord2))
+}
+
+
+function _TieneMayorFilaQue_(coord1, coord2) {
+    /*
+        PROPOSITO: Indicar si la coordenada **coord1** tiene un valor
+        de fila mayor al de la coordenada **coord2**.
+        PARAMETROS:
+        *coord1: Coordenada - coordenada con fila a comparar.
+        *coord2: Coordenada - coordenada con fila a comparar.
+        TIPO: Booleano
+        PRECONDICIONES: Ninguna.
+    */
+    return(fila(coord1) > fila(coord2))
+}
+
+
+
+function coordenadaActual() {
+    /*
+        PROPOSITO: Describir la coordenada en la que se encuentra
+        el cabezal.
+        TIPO: Coordenada.
+        PRECONDICIONES: Ninguna.
+    */
+    return(Coordenada(fila    <- coordenadaY() 
+                      columna <- coordenadaX())
+    )
+}
+
+
+
+function ultimaCoordenada() {
+    /*
+        PROPOSITO: Describir la ultima coordenada del tablero
+        actual en un recorrido hacia el Noreste.
+        TIPO: Coordenada.
+        PRECONDICIONES: Ninguna.
+    */
+    IrAPrimeraCeldaEnUnRecorridoAl_Y_(Oeste, Sur)
+    return(Coordenada(fila    <- coordenadaY() 
+                      columna <- coordenadaX() )
+    )
+}
+
+
+
+procedure IrACoordenada_(cDada) {
+    /*
+        PROPOSITO: Mover al cabezal a la celda correspondiente de la
+        coordenada **cDada**.
+        PARAMETROS:
+        *cDada: Coordenada - coordenada en la cual se colocara el cabezal.
+        PRECONDICIONES: El tablero tiene por lo menos un alto equivalente
+        al numero de fila de **cDada** y por lo menos un ancho equivalente
+        al numero de columna de **cDada**.
+    */
+    IrAPrimeraCeldaEnUnRecorridoAl_Y_(Este,Norte)
+    Mover_VecesAl_(fila(cDada), Norte)
+    Mover_VecesAl_(columna(cDada), Este)
+}
+
+
+
+function siguienteCoordenadaA_(cDada) {
+    /*
+        PROPOSITO: Describir la coordenada siguiente a **cDada** en
+        un recorrido hacia el Norte y Este.
+        PARAMETROS:
+        *cDada: Coordenada - coordenada de la cual describir su 
+        siguiente.
+        TIPO: Coordenada.
+        PRECONDICIONES: La coordenada **cDada** no modela la coordenada
+        de la ultima celda del tablero en un recorrido al Norte y Este.
+    */
+    return(choose Coordenada(cDada | fila    <- fila(cDada) + 1) when puedeMover(Norte)
+           Coordenada(cDada | columna <- columna(cDada) +1, fila <- 0) otherwise
+    )
+}
+
+
+
+function reflejoDe_(cDada) {
+    /*
+        PROPOSITO: Describir la coordenada de reflejo de la coordenada
+        **cDada**.
+        PARAMETROS:
+        *cDada: Coordenada - coordenada a reflejar.
+        TIPO: Coordenada.
+        PRECONDICIONES: Ninguna.
+        OBSERVACIONES: el reflejo de una coordenada es una coordenada que
+        usa los mismos valores de fila y columna, pero intercambiados.
+    */
+    return(Coordenada(fila    <- columna(cDada)
+                      columna <- fila(cDada) )
+    )
+}
+

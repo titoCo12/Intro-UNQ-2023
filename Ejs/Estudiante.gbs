@@ -1,0 +1,102 @@
+type Estudiante is record {
+    /* PROPOSITO: Modelar a un estudiante
+       INV.REP: El numero de materias aprobadas es menor o igual
+       al numero de materias rendidas.
+       La fecha de fechaIngreso es mas reciente que la fecha de nacimiento
+       de la persona en el campo identidad.
+    */ 
+    field identidad // tipo Persona
+    field numLegajo // tipo Numero
+    field fechaIngreso // tipo Fecha
+    field rendidas // tipo Numero
+    field aprobadas // tipo Numero
+}
+
+
+
+function ingresante_En_Con_(persona, fIngreso, legajo) {
+    /*
+        PROPOSITO: Describe al estudiante **persona** cuya fecha de ingreso
+        es **fIngreso** y con numero de legajo **legajo**, el cual no aprobo
+        ni rindio ninguna materia hasta el momento.
+        PARAMETROS:
+        *persona: Persona - identidad de persona a usar en la descripcion del
+        estudiante.
+        *fIngreso: Fecha - fecha de ingreso del estudiante.
+        *legajo: Numero - numero de legajo a aplicar en la descripcion.
+        TIPO: Estudiante.
+        PRECONDICIONES: Ninguna.
+    */
+    return(Estudiante( identidad    <- persona,
+                       numLegajo    <- legajo,
+                       fechaIngreso <- fIngreso,
+                       rendidas     <- 0,
+                       aprobadas    <- 0 )
+    )
+}
+
+
+
+function materiasDesaprobadasPor_(estudiante) {
+    /*
+        PROPOSITO: Describir el numero de materias desaprobadas por
+        el estudiante **estudiante**.
+        PARAMETROS:
+        *estudiante: Estudiante - estudiante con materias desaprobadas a 
+        numerar.
+        TIPO: Numero.
+        PRECONDICIONES: Ninguna.
+    */
+    return( rendidas(estudiante) - aprobadas(estudiante) )
+}
+
+
+
+function estudiante_ConLegajoNuevo_(estudiante, numNuevo) {
+    /*
+        PROPOSITO: Describir al estudiante **estudiante** con el numero de
+        legajo **numNuevo**.
+        PARAMETROS:
+        *estudiante: Estudiante - estudiante con numero de legajo viejo a cambiar.
+        *numNuevo: Numero - numero de legajo nuevo.
+        TIPO: Estudiante
+        PRECONDICIONES: Ninguna.
+    */
+    return(Estudiante(estudiante | numLegajo <- numNuevo)
+    )
+}
+
+
+
+function estudiante_ConDomicilioNuevo_(estudiante, domNuevo) {
+    /*
+        PROPOSITO: Describir al estudiante **estudiante** con el domicilio
+        cambiado a **domNuevo**.
+        PARAMETROS:
+        *estudiante: Estudiante - estudiante con domicilio a modificar.
+        *domNuevo: String - domicilio a usar para reemplazar el viejo.
+        TIPO: Estudiante.
+        PRECONDICIONES: Ninguna.
+    */
+    return(Estudiante( estudiante | identidad <- persona_ConDomicilioNuevoEn_(identidad(estudiante), domNuevo) )
+    )
+}
+
+
+
+function edadDelEstudiante_AlIngresar(estudiante) {
+    /*
+        PROPOSITO: Describir la edad que tenia el estudiante **estudiante**
+        al ingresar a la universidad.
+        PARAMETROS:
+        *estudiante: Estudiante - estudiante con edad en fecha de ingreso a
+        describir.
+        TIPO: Numero.
+        PRECONDICIONES: Ninguna.
+    */
+    return(edadDe_Al_(identidad(estudiante), fechaIngreso(estudiante))
+    )
+}
+
+
+

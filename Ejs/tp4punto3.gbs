@@ -1,0 +1,27 @@
+procedure PonerElDobleDe_QueDe_(colorAPoner
+, colorAImitar)
+/* PROPÓSITO: Poner bolitas de color **colorAPoner** en
+una cantidad que sea el doble de las que
+hay de color **colorAImitar** en la
+celda actual
+PRECONDICIONES: ninguna
+PARÁMETROS:
+* colorAPoner: Color. El color de las bolitas a
+poner
+* colorAImitar: Color. El color de las bolitas cuya
+cantidad se va a imitar en la celda
+actual
+*/
+
+/*
+a. nroBolitas(Negro) + nroBolitas(Azul) -> ambas son de tipo numero, en el caso del azul el valor seria un A) 3, luego
+un B) 4 y luego C) 0, y en el caso del negro seria A) 0, B) 4 y C) 0
+
+b. opuesto(opuesto(Este)) -> su tipo de dato es una direccion, y en este caso el opuesto del Este
+
+c. nroBolitas(siguiente(Azul))
+
+*/
+
+:D XX
+

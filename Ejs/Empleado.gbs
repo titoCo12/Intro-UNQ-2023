@@ -1,0 +1,121 @@
+
+
+
+type Empleado is record {
+    /*  PROPOSITO: Modelar a un empleado
+        INV.REP: Ninguna.
+    */
+    field identidad // tipo Persona
+    field puesto // tipo Puesto
+    field sueldo // tipo Numero
+}
+
+
+
+type Puesto is variant {
+    /* PROPÓSITO: modelar los diferentes puestos que hay dentro
+    de una empresa de software
+    */
+    case GestorDeProyecto {}
+    case LíderDeProyecto {}
+    case Desarrollador {}
+    case Operador {}
+}
+
+
+
+function empleado_ConSueldoActualizadoA_(empleado, nuevoSueldo) {
+    /*
+        PROPOSITO: Describir al empleado **empleado** con el saldo actualizado
+        a **nuevoSueldo**.
+        PARAMETROS:
+        *empleado: Empleado - empleado con sueldo viejo a cambiar.
+        *nuevoSueldo: Numero - sueldo nuevo.
+        TIPO: Empleado.
+        PRECONDICIONES: Ninguna.
+    */
+    return(Empleado(empleado | sueldo <- nuevoSueldo)
+    )
+}
+
+
+
+function empleado_ConNuevoPuesto_(empleado, puestoNuevo) {
+    /*
+        PROPOSITO: Describir al empleado **empleado** con un nuevo puesto
+        en **puestoNuevo**.
+        PARAMETROS:
+        *empleado: Empleado - empleado con puesto a cambiar.
+        *puestoNuevo: Puesto - puesto nuevo.
+        TIPO: Empleado.
+        PRECONDICIONES: Ninguna.
+    */
+    return(Empleado(empleado | puesto <- puestoNuevo)
+    )
+}
+
+
+
+function categoriaDelPuesto_(puesto) {
+    /*
+        PROPOSITO: Desciribir el numero de categoria del puesto **puesto**.
+        PARAMETROS:
+        *puesto: Puesto - puesto a categorizar.
+        TIPO: Numero.
+        PRECONDICION: Ninguna.
+    */
+    return(choose 1 when puesto == Operador
+                  2 when puesto == Desarrollador
+                  3 when puesto == LiderDeProyecto
+                  4 otherwise
+
+    )
+}
+
+
+
+function empleadoConMayorCargoEntre_Y_(empleado1, empleado2) {
+    /*
+        PROPOSITO: Describir al empleado que tenga un puesto con mayor categoria
+        entre **empleado1** y **empleado2**.
+        PARAMETROS:
+        *empleado1: Empleado - empleado a comparar con empleado2.
+        *empleado2: Empleado - empleado a comparar con empleado1.
+        TIPO: Empleado.
+        PRECONDICIONES: Ninguna.
+    */
+    return(choose empleado1 when cateogriaDelPuesto_( puesto(empleado1) ) > categoriaDelPuesto_( puesto(empleado2) )
+                  empleado2 otherswise
+    )
+}
+
+
+
+function tienenIgualSueldo_Y_(empleado1, empleado2) {
+    /*
+        PROPOSITO: Indicar si los empleados **empleado1** y **empleado2** tienen el mismo
+        sueldo.
+        PARAMETROS:
+        *empleado1: Empleado - empleado a comparar con empleado2.
+        *empleado2: Empleado - empleado a comparar con empleado1.
+        TIPO: Booleano.
+        PRECONDICIONES: Ninguna.
+    */
+    retunr(sueldo(empleado1) == sueldo(empleado2))
+}
+
+
+
+function empleado_ConAumentoEn_PorBonoDeFinalizacionDeProyecto(empleado, porcentaje) {
+    /*
+        PROPOSITO: Describir al empleado **empleado** con su sueldo aumentado en un **porcentaje**
+        porciento.
+        PARAMETROS: 
+        *empleado: Empleado - empleado con sueldo a aumentar.
+        *porcentaje: Numero - porcentaje a aumentar del sueldo.
+        TIPO: Empleado.
+        PRECONDICIONES: El parametro de porcentaje es un numero del 0 al 100.
+    */
+    return(Empleado(empleado | sueldo <- (sueldo(empleado) * porcentaje) div 100)
+    )
+}

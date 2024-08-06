@@ -1,0 +1,34 @@
+function coordenadaX() {
+    /*
+        PROPÓSITO: Indicar el numero de la columna en la que se encuentra el
+        cabezal
+        TIPO: Cantidad
+        PRECONDICIONES: Ninguna
+    */
+    coordenadaEquis := 0
+    while(puedeMover(Oeste)) {
+        Mover(Oeste)
+        coordenadaEquis := coordenadaEquis + 1
+    }
+    return (coordenadaEquis)
+}
+
+
+
+function coordenadaY() {
+    /*
+        PROPÓSITO: Indicar el numero de la fila en la que se encuentra el
+        cabezal
+        TIPO: Cantidad
+        PRECONDICIONES: Ninguna
+    */
+    coordenadaIgriega := 0
+    while(puedeMover(Sur)) {
+        Mover(Sur)
+        coordenadaIgriega := coordenadaIgriega + 1
+    }
+    return (coordenadaIgriega)
+}
+
+
+/* Tambien se puede usar el distanciaAlBorde*/

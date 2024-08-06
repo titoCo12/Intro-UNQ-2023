@@ -1,0 +1,17 @@
+function cantidadesDeRojasEnFilaActual(){
+    
+    /*
+    PROPOSITO: Describre una lista de numero cuyos elementos son cantidades  de bolitas rojas en cada una de las celdas de la fila actual
+    PRECONDICION: Ninguna
+    TIPO: Lista de cantidad de bolitas rojas
+    */
+    
+    IrAlBorde(Oeste)
+    cantidadDeBolitasRojasYaVistas := []
+    while(puedeMover(Este)){
+        cantidadDeBolitasRojasYaVistas := cantidadDeBolitasRojasYaVistas ++ [nroBolitas(Rojo)]
+        Mover(Este)
+    }
+
+    return(cantidadDeBolitasRojasYaVistas ++ [nroBolitas(Rojo)])
+}

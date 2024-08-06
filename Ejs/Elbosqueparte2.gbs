@@ -1,0 +1,144 @@
+
+procedure Poner_Semillas(cantidadDeSemillasAPoner) {
+    /*
+        PROPÓSITO:
+        PARÁMETROS:
+        *cantidadDeSemillasAPoner: 
+        PRECONDICIONES:
+    */
+    repeat (cantidadDeSemillasAPoner) {
+        PonerUnaSemilla()
+    }
+}
+
+procedure Sacar_Semillas(cantidadDeSemillasASacar) {
+    /*
+        PROPÓSITO:
+        PARÁMETROS:
+        *cantidadDeSemillasASacar:
+        PRECONDICIONES:
+    */
+    repeat (cantidadDeSemillasASacar) {
+        SacarUnaSemilla()
+    }
+}
+
+procedure Poner_Arboles(cantidadDeArbolasAPoner) {
+    /*
+        PROPÓSITO: 
+        PARÁMETROS:
+        *
+        PRECONDICIONES:
+    */
+    repeat (cantidadDeArbolasAPoner) {
+        PonerUnÁrbol()
+    }
+}
+
+procedure Sacar_Arboles(cantidadDeArbolesASacar) {
+    /*
+        PROPÓSITO:
+        PARÁMETROS:
+        *
+        PRECONDICIONES:
+    */
+    repeat (cantidadDeArbolesASacar) {
+        SacarUnÁrbol()
+    }
+}
+
+procedure Poner_Nutrientes(cantidadDeNutrientesAPoner) {
+    /*
+        PROPÓSITO:
+        PARÁMETROS:
+        *
+        PRECONDICIONES:
+    */
+    repeat (cantidadDeNutrientesAPoner) {
+        PonerUnNutriente()
+    }
+}
+
+procedure Sacar_Nutrientes(cantidadDeNutrientesASacar) {
+    /*
+        PROPOSITO:
+        PARAMETROS:
+        *
+        PRECONDICIONES: 
+    */
+    repeat (cantidadDeNutrientesASacar) {
+        SacarUnNutriente()
+    }
+}
+
+
+
+procedure PonerUnaSemilla() {
+    /*
+        PROPÓSITO: Poner una bolita Roja
+        PRECONDICIONES: -
+    */
+    Poner(Rojo)
+    
+} 
+
+procedure PonerUnÁrbol() {
+    /*
+        PROPÓSITO: Poner una bolita Verde
+        PRECONDICIONES: -
+    */
+    Poner(Verde)
+    
+}
+
+procedure PonerUnaBomba() {
+    /*
+        PROPÓSITO: Poner una bolita Negra
+        PRECONDICIONES: -
+    */
+    Poner(Negro)    
+}
+
+procedure PonerUnNutriente(){
+    /*
+        PROPÓSITO: Poner una bolita Azul
+        PRECONDICIONES: -
+    */
+    Poner(Azul)
+}
+
+procedure SacarUnaSemilla() {
+    /*
+        PROPÓSITO:  Sacar una bolita de color Rojo
+        PRECONDICIONES: Debe haber por lo menos una bolita de color Rojo en
+        la casilla actual
+    */
+    Sacar(Rojo)
+}
+
+procedure SacarUnÁrbol() {
+    /*
+        PROPÓSITO: Sacar una bolita de color verde
+        PRECONDICIONES: Debe haber por lo menos una bolita de color Verde en
+        la casilla actual
+    */
+    Sacar(Verde)
+}
+
+procedure SacarUnaBomba() {
+    /*
+        PROPÓSITO: Sacar una bolita de color Negro
+        PRECONDICIONES: Debe haber por lo menos una bolita de color Negro en 
+        la casilla actual
+    */
+    Sacar(Negro)
+}
+
+procedure SacarUnNutriente() {
+    /*
+        PROPÓSITO: Sacar una bolita de color Azul 
+        PRECONDICIONES: Debe haber por lo menos una bolita de color Azul en 
+        la casilla actual
+    */
+    Sacar(Azul)
+}

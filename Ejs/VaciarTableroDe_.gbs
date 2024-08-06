@@ -1,0 +1,16 @@
+procedure VaciarTableroDe_(color) {
+    /*
+        PROPÓSITO: Quitar todas las bolitas de color **color** del tablero.
+        PARÁMETROS:
+            *color: Color - color de las bolitas a sacar.
+        PRECONDICIONES: Debe haber por lo menos una bolita de color **color**
+        en el tablero.
+    */
+    IrAlBorde_(Sur)
+    VaciarFilaDe_(color)
+    while(puedeMover(Norte)) {
+        Mover(Norte)
+        VaciarFilaDe_(color)
+    }
+}
+

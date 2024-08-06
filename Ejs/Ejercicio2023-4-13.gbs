@@ -1,0 +1,39 @@
+/*
+Juan tiene una plantacion de arboles frutales organizados en hileras de arboles, 
+intercaladas por hileras de zurcos. Con la ayuda de un inversor compró maquinaria 
+sofisticada para ayudarle en sus tareas de cosecha y mantenimiento.
+
+
+Juan quiere programar la tarea trabajarHileraDe_ArbolesAl_ que dada una cantidad de arboles
+y una direcccion, recorre una hilera de tantos arboles como fue indicado 
+operando segun los siguientes criterios:
+En aquellos arboles donde haya fruto maduro, quiere cosechar tanto de este como haya.
+En aquellos arboles donde haya fruto verde, quiere regar las secciones de zurco lindantes
+a ambos lados de la hilera.
+Para cada arbol, quiere retirar tanta maleza como exista en la ubicacion del arbol como el
+las secciones de zurco lindantes a ambos lados de la hilera.
+
+Las hileras tanto de arboles como de zurcos estan representadas por secciones de filas
+o columnas del tablero. El largo de ellas que va a trabajarse y su direccion dependen de
+la cantidad de arboles y direccion indicadas por Juan como argumento.
+
+Cada arbol esta representado por una bolita verde, y solo puede haber un arbol por celda.
+La cantidad de frutos total (maduros y verdes) esta representada por la cantidad de bolitas rojas,
+mientras que la cantidad de negras indica cuantos de esos frutos totales estan verdes. 
+Diremos que una seccion de zurco ha sido regada si tiene una bolita azul.
+La maleza estara representada por 3 bolitas de color verde, que se adicionaran a la unica bolita en el caso
+de las celdas con arboles. 
+*/
+
+
+procedure trabajarHileraDe_ArbolesAl_(cantidadArboles, direccionHilera) {
+    /*
+        PROPÓSITO:  ....
+        PARÁMETROS:
+            * parámetro1: tipo - descripción.
+            * parámetro2: tipo - descripción.
+        PRECONDICIONES:
+            * ....
+    */
+     
+}

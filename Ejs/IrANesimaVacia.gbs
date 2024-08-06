@@ -1,0 +1,85 @@
+
+
+procedure IrANesimaVacia_(n) {
+    /*
+        PROPÓSITO: Mover al cabezal a la celda vacia numero **n**
+        considerando el orden de un recorrido con direcciones hacia el
+        Este y Norte, Y en el caso de que no haya suficientes celdas 
+        vacias dejar al cabezal en la esquina NorEste.
+        PARÁMETROS:
+            *n: Cantida - Numero de la celda vacia que se busca
+        PRECONDICIONES: Ninguna.
+    */
+    IrAPrimeraCeldaEnUnRecorridoAl_Y_(Este,Norte)
+    if (hayNesimaVacia_(n)) {
+    Mover__Veces(Este, nesimaVaciaX(n))
+    Mover__Veces(Norte, nesimaVaciaY(n))
+    }
+    else {
+        IrAPrimeraCeldaEnUnRecorridoAl_Y_(Sur, Oeste)
+    }
+}
+
+
+
+function hayNesimaVacia_(n) {
+    /*
+        PROPÓSITO: Indicar si es que hay una celda vacia numero **n**
+        en un recorrido hacia el Este y Norte.
+        PARÁMETROS:
+            *n : Cantidad - Numero de la celda vacia que se busca
+        TIPO: Tipo
+        PRECONDICIONES: Ninguna.
+    */
+    IrAPrimeraCeldaEnUnRecorridoAl_Y_(Este, Norte)
+    vacioContado := cantidadDeVacio()
+    while(vacioContado /= n && haySiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte)) {
+        IrASiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte)
+        vacioContado := vacioContado + cantidadDeVacio()
+    }
+    return (vacioContado == n)
+}
+
+
+
+function nesimaVaciaX(numeroNesima) {
+    /*
+        PROPÓSITO: Describir la coordenada X del
+        PARÁMETROS:
+            * parámetro1: tipo - descripción.
+            * parámetro2: tipo - descripción.
+        TIPO: Tipo
+        PRECONDICIONES:
+            * ....
+    */
+    IrAPrimeraCeldaEnUnRecorridoAl_Y_(Este, Norte)
+    contador := cantidadDeVacio()
+    while(contador /= numeroNesima) {
+        IrASiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte)
+        contador := contador + cantidadDeVacio()
+    }
+    contador := coordenadaX()
+    return (contador)
+}
+
+
+
+function nesimaVaciaY(numeroNesima) {
+    /*
+        PROPÓSITO: Describir la coordenada Y del
+        PARÁMETROS:
+            * parámetro1: tipo - descripción.
+            * parámetro2: tipo - descripción.
+        TIPO: Tipo
+        PRECONDICIONES:
+            * ....
+    */
+    IrAPrimeraCeldaEnUnRecorridoAl_Y_(Este, Norte)
+    contador := cantidadDeVacio()
+    while(contador /= numeroNesima) {
+        IrASiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte)
+        contador := contador + cantidadDeVacio()
+    }
+    contador := coordenadaY()
+    return (contador)
+}

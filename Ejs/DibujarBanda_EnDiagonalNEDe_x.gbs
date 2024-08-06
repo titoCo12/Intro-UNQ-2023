@@ -1,0 +1,62 @@
+program {
+    /*
+        PROPÓSITO: Dibujar una banda diagonal con inclinacion hacia el Noreste
+        PRECONDICIONES: El tablero debe tener por lo menos 7 casillas de alto y 
+        5 casillas de ancho 
+        OBSERVACIONES: El cabezal empieza siempre en la esquina Sur Oeste del tablero
+    */
+    DibujarBanda_EnDiagonalNEDe_x_(Negro, 3, 5)
+}
+
+procedure DibujarBanda_EnDiagonalNEDe_x_(color, alto, largo) {
+    /*
+        PROPÓSITO: Dibujar una banda diagonal de color **color**, con un alto de **alto** bolitas y
+        un largo de **largo** bolitas hacia el Noreste
+        PARAMETROS:
+        *color: Color - color de bolitas que se usara para dibujar la banda
+        *alto: Numero - alto de la banda
+        *largo: Numero - largo de la banda
+        PRECONDICIONES: Debe haber por lo menos **alto** casillas hacia el Norte del cabezal
+        y **largo** casillas hacia el Este del cabezal
+    */
+    repeat (alto) {
+       DibujarLineaDiagonaDe_Bolitas_HaciaElNorEste(largo, color)
+        BajarEnDiagonalHaciaElOeste_Veces(largo)
+        Mover(Norte)
+    }
+}
+
+procedure DibujarLineaDiagonaDe_Bolitas_HaciaElNorEste(subirVeces, colorBolita) {
+    /*
+        PROPÓSITO: Dibujar una linea diagonal de **subirVeces** de largo de color **colorBolita**
+        hacia el Noreste 
+        PARAMETROS:
+        *subirVeces: Numero - numero de veces que el cabezal subira en diagonal hacia el Este mientras
+        dibuja
+        *colorBolita: Color - color que usara para dibujar
+        PRECONDICIONES: debe haber por lo menos **subirVeces** casillas hacia el Norte y Este del
+        cabezal
+    */
+    repeat (subirVeces - 1) {
+        Poner(colorBolita)
+        Mover(Este)
+        Mover(Norte)
+    }
+    Poner(colorBolita)
+}
+
+procedure BajarEnDiagonalHaciaElOeste_Veces(bajarVeces) {
+    /*
+        PROPÓSITO: Hacer que el cabezal baje en forma diagonal hacia el Oeste **bajarVeces**
+        veces
+        PARAMETROS: 
+        *bajarVeces: Numero - Numero de veces que el cabezal bajara en forma diagonal hacia
+        el Oeste
+        PRECONDICIONES: Debe haber por lo menos **bajarVeces** de casillas hacia el Sur y Oeste
+        del cabezal
+    */
+    repeat (bajarVeces - 1) {
+        Mover(Sur)
+        Mover(Oeste)
+    }
+}

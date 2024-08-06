@@ -1,0 +1,21 @@
+function nroBolitas_EnLaFilaActual(color) {
+    /*
+        PROPÓSITO: Indicar el numero de bolitas de color **color**
+        que hay en la fila actual
+        PARÁMETROS:
+            *color: Color - color de bolitas a contar
+        TIPO: Cantidad
+        PRECONDICIONES: Ninguna
+    */
+    IrAlBorde(Oeste)
+    cantidadDeBolitasYaVistas := nroBolitas(color)
+    while(puedeMover(Este)) {
+        Mover(Este)
+        cantidadDeBolitasYaVistas := cantidadDeBolitasYaVistas
+         + nroBolitas(color)
+    }
+    return (cantidadDeBolitasYaVistas)
+}
+
+
+/* El cabezal queda en la celda en la que estuvo antes de ejecutar la funcion, nunca se mueve*/

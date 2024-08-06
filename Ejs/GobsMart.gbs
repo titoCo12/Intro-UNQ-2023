@@ -1,0 +1,80 @@
+
+
+type TipoDePago is variant {
+/* PROP: modelar Tipos de pago aceptados */
+case Tarjeta {}
+case MartPago {}
+case Efectivo {}
+}
+
+
+type Producto is record{
+/* PROP: modelar productos
+INV.REP.: precio > 0 */
+field nombre // String
+field marca // String
+field precio // Número
+}
+
+
+type Cliente is record {
+/* PROP: modelar clientes */
+field dni // String
+field tipoDePago // TipoDePago
+field productos // [Producto]
+}
+
+
+type Caja is record {
+/* PROP: modelar cajas
+INV.REP.: número > 0
+facturado >= 0 */
+field número // Número
+field clientesEsperando // [Cliente]
+field aceptaPagos // [TipoDePago]
+field esRápida // Bool
+field facturado // Número
+}
+
+
+//2 A-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+function cantidadDeClientesEsperandoEn_(cajaDada) {
+    /*
+        PROPOSITO: Describir la cantidad de clientes que estan esperando en la caja
+        **cajaDada**.
+        PARAMETROS:
+        *cajaDada: Caja - caja a analizar.
+        TIPO: Numero.
+        PRECONDICIONES: Ninguna.
+        OBSERVACION: Es un recorrido sobre la lista de clientes esperando de la caja dada.
+    */
+    return(cantidadDeElementosDe_(clientesEsperando(cajaDada)))
+}
+
+
+function cantidadDeElementosDe_(lista) {
+    /*
+        PROPOSITO: Describir la cantidad de elementos de la lista **lista**
+        PARAMETROS:
+        *lista: Lista de cualquier tipo.
+        TIPO: Numero.
+        PRECONDICIONES: Ninguna
+        OBSERVACIONES: Es un recorrido de acumulacion sobre la lista **lista**, acumulando un 1 por cada elemento
+        que se encuentra en dicha lista.
+    */
+    contador := 0
+    foreach elemento in lista {
+        contador := contador + 1
+    }
+    return(contador)
+}
+
+//B  -----------------------------------------------------------------------------------------------------------------------------------------------------
+
+function cajaMenosOcupadaDe_(listaCajas) {
+    /*
+    
+    */
+}

@@ -1,0 +1,88 @@
+procedure Sembrar(){
+    /* PROPÓSITO: Sembrar una semilla en la celda actual
+    PRECONDICIONES: * la celda actual está vacía
+    */
+    Poner(Negro)
+}
+
+procedure Regar() {
+    /* PROPÓSITO: Regar la celda actual
+    PRECONDICIONES: * hay una semilla sembrada en la celda actual
+    */
+    Poner(Azul)
+}
+
+procedure SubirUnaCasilla() {
+    /*
+        PROPÓSITO: Hacer que el cabezal se mueva una casilla hacia el Norte
+        PRECONDICIONES: Debe Haber por lo menos una casilla hacia el Norte
+    */
+    Mover(Norte)
+}
+
+procedure TrasladarseALaEsquinaOesteInferior() {
+    /*
+        PROPÓSITO: Hacer que el cabezal se mueva hacia la esquina Oeste Inferior del tablero
+        PRECONDICIONES: -
+    */
+    IrAlBorde(Oeste)
+    IrAlBorde(Sur)
+}
+
+procedure CultivarFilaDe5CasillasHaciaElEste() {
+    /*
+        PROPÓSITO: Hacer que el cabezal siembre y riegue una fila de 5 casillas en direccion
+        hacia el Este
+        PRECONDICIÓN: Debe haber por lo menos 4 casillas hacia el Este de la casilla actual
+    */
+    Sembrar()
+    Regar()
+    Mover(Este)
+    Sembrar()
+    Regar()
+    Mover(Este)
+    Sembrar()
+    Regar()
+    Mover(Este)
+    Sembrar()
+    Regar()
+    Mover(Este)
+    Sembrar()
+    Regar()
+}
+
+procedure CultivarFilaDe5CasillasHaciaElOeste() {
+    /*
+        PROPÓSITO: Hacer que el cabezal siembre y riegue una fila de 5 casillas en direccion
+        hacia el Oeste
+        PRECONDICIÓN: Debe haber por lo menos 4 casillas hacia el Oeste de la casilla actual
+    */
+    Sembrar()
+    Regar()
+    Mover(Oeste)
+    Sembrar()
+    Regar()
+    Mover(Oeste)
+    Sembrar()
+    Regar()
+    Mover(Oeste)
+    Sembrar()
+    Regar()
+    Mover(Oeste)
+    Sembrar()
+    Regar()
+}
+
+program {
+    /*
+        PROPÓSITO: Hacer que el cabezal recorra todo un espacio cuadrado de 2 casillas hacia
+        el Norte y 4 casillas hacia el Este y siembre y regue todas las casillas de dicho espacio
+        PRECONDICIONES: El tablero debe tener por lo menos 5 columnas y 3 filas de casillas
+    */
+    TrasladarseALaEsquinaOesteInferior()
+    CultivarFilaDe5CasillasHaciaElEste()
+    SubirUnaCasilla()
+    CultivarFilaDe5CasillasHaciaElOeste()
+    SubirUnaCasilla()
+    CultivarFilaDe5CasillasHaciaElEste()
+}

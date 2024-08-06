@@ -1,0 +1,44 @@
+program {
+    /*
+   PROPÓSITO: Dibujar 4 cuadrados rojos huecos de lados con tamaño de 3 
+   celdas en todas las esquinas del tablero
+   PRECONDICIONES: El tablero debe tener por lo menos 6 filas y 6 columnas
+*/  
+    IrAlBorde(Oeste)
+    IrAlBorde(Sur)
+    DibujarCuadradoRojo()
+    IrAlBorde(Este)
+    Mover(Oeste)
+    Mover(Oeste)
+    DibujarCuadradoRojo()
+    IrAlBorde(Norte) 
+    Mover(Sur)
+    Mover(Sur)
+    DibujarCuadradoRojo()
+    IrAlBorde(Oeste)
+    DibujarCuadradoRojo()
+}
+	 
+procedure DibujarCuadradoRojo() {
+  /*
+     PROPÓSITO: Dibujar un cuadrado rojo hueco de ladas con tamaño
+     de 3 celdas
+     PRECONDICIONES: El tablero debe tener por lo menos 3 filas y 3 columnas
+  */
+  Poner(Rojo)
+  Mover(Norte)
+  Poner(Rojo)
+  Mover(Norte)
+  Poner(Rojo)
+  Mover(Este)
+  Poner(Rojo)
+  Mover(Este)
+  Poner(Rojo)
+  Mover(Sur)
+  Poner(Rojo)
+  Mover(Sur)
+  Poner(Rojo)
+  Mover(Oeste)
+  Poner(Rojo)
+  Mover(Oeste)
+}

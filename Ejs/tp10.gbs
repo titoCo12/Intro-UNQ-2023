@@ -1,0 +1,208 @@
+
+//1---------------------------------------------------------------------------------------------------------------------
+
+
+procedure PonerColores_EnLaCeldaActual(listaColores) {
+    /*
+        PROPOSITO: Poner una bolita del color correspondiente por cada uno de los
+        elementos de la lista **listaColores** en la celda actual.
+        PARAMETROS:
+        *listaColores: [Color] - lista de colores.
+        PRECONDICIONES: Ninguna.
+        OBSERVACIONES: Es un recorrido de procesamiento sobre las celdas del tablero actual, poniendo la celda actual
+        cada uno de los colores de la lista **listaColores**.
+    */
+    foreach color in listaColores {
+        Poner(color)
+    }
+}
+
+//2---------------------------------------------------------------------------------------------------------------------
+
+
+
+procedure RecorrerCamino_(listaDir) {
+    /*
+        PROPOSITO: Mueve al cabezal en las direccion indicada por cada elemento
+        de la lista **listaDir** en orden.
+        PARAMETROS:
+        *listaDir: [Direccion] - lista de direcciones.
+        PRECONDICIONES: El cabezal puede moverse en las direcciones dadas en el
+        orden en el que esten sin salirse del tablero.
+        OBSERVACIONES: Es un recorrido de procesamiento sobre el cabezal, desplazando al mismo
+        en las direcciones de la lista **listaDir**.
+    */
+    foreach dir in listaDir {
+        Mover(dir)
+    }
+}
+
+
+
+//3---------------------------------------------------------------------------------------------------------------------
+
+
+
+function aparicionesDeColor_(colorBuscado) {
+    /*
+        PROPOSITO: Describir una lista de numeros que indican para cada una
+        de las celdas del tablero recorridas en direccion hacia el Norte y Oeste,
+        la cantidad de bolitas de color **colorBuscado** de dicha celda.
+        PARAMETROS:
+        *colorBuscado: Color - color a buscar en cada celda.
+        TIPO: [Numero]
+        PRECONDICIONES: Ninguna.
+        OBSERVACIONES: Es un recorrido de acumulacion sobre la lista de numeros a crear, acumulando
+        la cantidad de bolitas que haya en cada celda del tablero.
+    */
+    listaBolitas := []
+    IrAPrimeraCeldaEnUnRecorridoAl_Y_(Norte, Oeste)
+    while(haySiguienteCeldaEnUnRecorridoAl_Y_(Norte,Oeste)) {
+        listaBolitas := listaBolitas ++ nroBolitas(colorBuscado)
+        IrASiguienteCeldaEnUnRecorridoAl_Y_(Norte,Oeste)
+    }
+    return(listaBolitas ++ nroBolitas(colorBuscado))
+}
+
+
+
+//4---------------------------------------------------------------------------------------------------------------------
+
+
+
+procedure Poner_Bolitas_EnElTablero(listaNum, color) {
+    /*
+        PROPOSITO: Recorrer el tablero en direccion hacia el Norte y Oeste y poner
+        en cada celda una cantidad de bolitas segun cada numero de la  lista
+        **listaNum** en orden y de color **color**.
+        PARAMETROS:
+        *listaNum: [Numero] - lista de numeros.
+        *color: Color - color de las bolitas a colocar.
+        PRECONDICIONES: Ninguna.
+        OBSERVACIONES: Es un recorrido de procesamiento sobre las celdas del tablero, colocando
+        el color dado en cada celda del tablero en una cantidad indicada por cada elemento de la lista
+        **listaNum**.
+    */
+    IrAPrimeraCeldaEnUnRecorridoAl_Y_(Norte, Oeste)
+    listaSinRecorrer := listaNum
+    while(not( esVacía(listaNum) ) || haySiguienteCeldaEnUnRecorridoAl_Y_(Norte, Oeste)) {
+        Poner_DeColor_(primero(listaSinRecorrer), color)
+        listaSinRecorrer := resto(listaSinRecorrer)
+        IrASiguienteCeldaEnUnRecorridoAl_Y_(Norte, Oeste)
+    }
+    Poner_DeColor_(primero(listaSinRecorrer), color)
+} 
+
+
+
+//5---------------------------------------------------------------------------------------------------------------------
+
+
+
+function coloresEnLaCeldaActual() {
+    /*
+        PROPOSITO: Describir una lista cuyos elementos sean los colores de las bolitas presentes
+        en la celda actual.
+        TIPO: [Color]
+        PRECONDICIONES: Ninguna.
+        OBSERVACIONES: Es un recorrido de acumulacion sobre la lista de colores a crear, acumulando 
+        los colores de las bolitas que hayan presentes en la celda actual.
+    */
+    colorRevisar := minColor()
+    listaColores := []
+    while(colorRevisar /= maxColor()) {
+        listaColores := listaColores ++ singular_Si_(colorRevisar, hayBolitas(colorRevisar))
+        colorRevisar := siguiente(colorRevisar)
+    }
+    return(listaColores ++ singular_Si_(colorRevisar, hayBolitas(colorRevisar)))
+}
+
+
+
+//6---------------------------------------------------------------------------------------------------------------------
+
+
+
+function aparicionesDelColor_EnElCamino_(colorBuscado, direccionesDelCamino) {
+    /*
+        PROPOSITO: Describir una lista con la cantidad de bolitas del color dado que
+        se encuentran siguiendo el camino de direcciones en la lista **direccionesDelCamino**.
+        PARAMETROS:
+        *colorBuscado: Color - color de las bolitas a buscar.
+        *listaDir: [Direccion] - lista de direcciones a seguir.
+        TIPO: [Numero]
+        PRECONDICIONES: El cabezal se puede mover en el orden de las direcciones de la 
+        lista **direccionesDelCamino** sin salirse del tablero.
+        OBSERVACIONES: Es un recorrido de acumulacion sobre la lista de numeros a crear, acumulando
+        la cantidad de bolitas del color dado en cada una de las celdas que pise el cabezal siguiendo
+        las direcciones en la lista dada.
+    */
+    caminoASeguir := direccionesDelCamino
+    listaNumeros := []
+    while( not(esVacía(caminoASeguir)) ) {
+        Mover(primero(caminoASeguir))
+        listaNumeros := listaNumeros ++ nroBolitas(colorBuscado)
+        caminoASeguir := resto(caminoASeguir)
+    }
+    return(listaNumeros)
+}
+
+
+
+//7---------------------------------------------------------------------------------------------------------------------
+
+
+
+function longitudDe_(listaDada) {
+    /*
+        PROPOSITO: Describir la cantidad de elementos de la 
+        lista **listaDada**.
+        PARAMETROS:
+        *listaDada: lista de cualquier tipo.
+        TIPO: Numero.
+        PRECONDICIONES: Ninguna.
+        OBSERVACIONES: Es un recorrido sobre la lista **listaDada**.
+    */
+    cantidadElementos := 0
+    foreach elemento in listaDada {
+        cantidadElementos := cantidadElementos + 1
+    }
+    return(cantidadElementos)
+}
+
+
+
+//8---------------------------------------------------------------------------------------------------------------------
+
+
+
+function sumatoriaDe_(listaNum) {
+    /*
+        PROPOSITO: Describir la suma de todos los numeros que son elementos
+        de la lista **listaNum**.
+        PARAMETROS:
+        *listaNum: [Numero] - lista de numeros.
+        TIPO: Numero.
+        PRECONDICIONES: Ninguna.
+        OBSERVACIONES: Es un recorrido de acumulacion sobre los numeros elementos 
+        de la lista **listaNum**, acumulando cada numero que sea elemento de dicha
+        lista.
+    */
+    suma := 0
+    foreach numero in listaNum {
+        suma := suma + numero
+    }
+    return(suma)
+}
+
+
+function productoriaDe_(listaNum) {
+    /*
+        PROPOSITO: Describir el producto de todos los elementos 
+        PARAMETROS:
+            *
+        TIPO:
+        PRECONDICIONES:
+        OBSERVACIONES:
+    */
+}

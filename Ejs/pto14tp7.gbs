@@ -1,0 +1,28 @@
+/*A con la primera, B con la segunda*/
+
+
+function total(color) {
+// nro bolitas **color** en el tablero
+IrAPrimeraCeldaEnUnRecorridoAl_Y_(Sur,Oeste)
+var := nroBolitas(color)
+while(haySiguienteCeldaEnUnRecorridoAl_Y_(Norte, Este)) { 
+    IrASiguienteCeldaEnUnRecorridoAl_Y_(Norte, Este)
+    var := var + nroBolitas(color) 
+}
+return(var)
+}
+
+
+
+
+function bolitasDeColor(color) {
+    // nro máximo bolitas n en una celda
+    IrAPrimeraCeldaEnUnRecorridoAl_Y_(Norte, Este)
+    var := nroBolitas(color)
+    IrASiguienteCeldaEnUnRecorridoAl_Y_(Norte, Este)
+    while(haySiguienteCeldaEnUnRecorridoAl_Y_(Norte, Este)) { 
+        IrASiguienteCeldaEnUnRecorridoAl_Y_(Norte, Este)
+        var := máximoEntre_Y_(var, nroBolitas(color))
+    }
+    return(var)
+}

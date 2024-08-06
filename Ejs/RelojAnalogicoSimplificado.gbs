@@ -1,0 +1,148 @@
+procedure DibujarRelojAnalógicoSimplificado() {
+    /*
+        PROPÓSITO: Dibujar un reloj analogico de agujas circular 
+        de radio de dos casillas con los numeros 12, 3, 6 y 9
+        representados en bolitas rojas
+        PRECONDICIONES: Debe haber por lo menos dos casillas hacia
+        el Norte, Sur, Oeste y Este del cabezal
+    */
+    PosicionarseYPoner12()
+    BajarDosVeces()
+    PosicionarseYPoner3()
+    OesteDosVeces()
+    PosicionarseYPoner6()
+    SubirDosVeces()
+    PosicionarseYPoner9()
+}
+
+procedure BajarDosVeces() {
+    /*
+        PROPÓSITO: Hacer que el cabezal se mueva dos casillas hacia el Sur
+        PRECONDICIONES: Debe haber por lo menos dos casillas hacia el Sur
+        del cabezal
+    */
+    Mover(Sur)
+    Mover(Sur)
+}
+
+procedure OesteDosVeces() {
+    /*
+        PROPÓSITO: Hacer que el cabezal se mueva dos casillas hacia el Oeste
+        PRECONDICIONES: Debe haber por lo menos dos casillas hacia el Oeste
+        del cabezal
+    */
+    Mover(Oeste)
+    Mover(Oeste)
+}
+
+procedure SubirDosVeces() {
+    /*
+        PROPÓSITO: Hacer que el cabezal se mueva dos casillas hacia el Norte
+        PRECONDICIONES: Debe haber por lo menos dos casillas hacia el Norte
+        del cabezal
+    */
+    Mover(Norte)
+    Mover(Norte)
+}
+
+procedure PosicionarseYPoner12() {
+    /*
+        PROPÓSITO: Moverse dos casillas hacia el Norte y poner 12 bolitas rojas
+        PRECONDICIONES: Debe haber por lo menos dos casillas hacia el Norte del
+        cabezal
+    */
+    Mover(Norte)
+    Mover(Norte)
+    Poner12BolitasRojas()
+}
+
+procedure Poner12BolitasRojas() {
+    /*
+        PROPÓSITO: Poner 12 bolitas rojas en la casilla actual
+        PRECONDICIONES: -
+    */
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+}
+
+procedure PosicionarseYPoner3() {
+    /*
+        PROPÓSITO: Moverse dos casillas hacia el Este y colocar 3 bolitas rojas
+        PRECONDICIONES: Debe haber por lo menos dos casillas hacia el Este del
+        cabezal
+    */
+    Mover(Este)
+    Mover(Este)
+    Poner3BolitasRojas()
+}
+
+procedure Poner3BolitasRojas() {
+    /*
+        PROPÓSITO: Poner 3 bolitas rojas en la casilla actual
+        PRECONDICIONES: -
+    */
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+}
+
+procedure PosicionarseYPoner6() {
+    /*
+        PROPÓSITO: Moverse dos casillas hacia el Sur y colocar 6 bolitas rojas
+        PRECONDICIONES: Debe haber por lo menos dos casillas hacia el Sur del
+        cabezal
+    */
+    Mover(Sur)
+    Mover(Sur)
+    Poner6BolitasRojas()
+}
+
+procedure Poner6BolitasRojas() {
+    /*
+        PROPÓSITO: Poner 6 bolitas rojas en la casilla actual
+        PRECONDICIONES: -
+    */
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+}
+
+procedure PosicionarseYPoner9() {
+    /*
+        PROPÓSITO: Moverse dos casillas hacia el Oeste y poner 9 bolitas rojas
+        PRECONDICIONES: Debe haber por lo menos dos casillas hacia el Oeste del
+        cabezal
+    */
+    Mover(Oeste)
+    Mover(Oeste)
+    Poner9BolitasRojas()
+}
+
+procedure Poner9BolitasRojas() {
+    /*
+        PROPÓSITO: Poner 9 bolitas rojas en la casilla actual
+        PRECONDICIONES: -
+    */
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+}

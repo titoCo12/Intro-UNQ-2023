@@ -1,0 +1,411 @@
+//1------------------------------------------------------------------------------------------------------
+
+
+
+function cantidadesDeRojasEnFilaActual() {
+    /*
+        PROPOSITO: Describir una lista de numeros cuyos elementos son las
+        cantidades de bolitas rojas en cada una de las celdas de la fila
+        actual, leidas del Oeste al Este.
+        TIPO: [Numeros]
+        PRECONDICIONES: Ninguna.
+    */
+    IrAlBorde(Oeste)
+    filaProcesada := []
+    while(puedeMover(Este)) {
+        filaProcesada := filaProcesada ++ [nroBolitas(Rojo)]
+        Mover(Este)
+    }
+    return(filaProcesada ++ [nroBolitas(Rojo)])
+}
+
+
+
+//2------------------------------------------------------------------------------------------------------
+
+
+
+function cantidadDeRojasADistancia2DelBordeOesteDe_(listaDada) {
+    /*
+        PROPOSITO: Describir la cantidad de bolitas rojas que habia en la celda
+        a distancia 2 del borde Oeste en la fila de celdas de la lista **listaDada**.
+        PARAMETROS:
+        *listaDada: [Numero] - Lista de numeros.
+        TIPO: Numero.
+        PRECONDICIONES: La lista **listaDada** tiene por lo menos 3 elementos.
+    */
+    return(primero(resto(resto(listaDada))))
+} 
+
+
+
+//3------------------------------------------------------------------------------------------------------
+
+
+
+function las3PrimerasDe_ConLaMismaCantidad(listaFila) {
+    /*
+        PROPOSITO: Indicar si las 3 primeras celdas al Oeste de la fila
+        representada en la lista **listaFila** tenian la misma cantidad de 
+        bolitas rojas cuando la fila fue leida.
+        PARAMETROS:
+        *listaFila: [Numero] - lista de numeros.
+        TIPO: Booleano.
+        PRECONDICIONES: La lista **listaFila** tiene por lo menos 3 elementos.
+    */
+    return(primero(listaFila) == segundoElemento_(listaFila) &&
+           primero(listaFila) == tercerElemento_(listaFila)      
+    )
+}
+
+
+function segundoElemento_(listaDada) {
+    /*
+        PROPOSITO: Describir el segundo elemento de la lista **listaDada**
+        PARAMETROS: 
+        *listaDada: Una lista de cualquier tipo.
+        TIPO: El de los elementos de la lista **listaDada**
+        PRECONDICIONES: La lista **listaDada** tiene por lo menos 2 elementos.
+    */
+    return(primero( resto(listaDada) )
+    )
+}
+
+function tercerElemento_(listaDada) {
+    /*
+        PROPOSITO: Describir el tercer elemento de la lista **listaDada**
+        PARAMETROS: 
+        *listaDada: Una lista de cualquier tipo.
+        TIPO: El de los elementos de la lista **listaDada**
+        PRECONDICIONES: La lista **listaDada** tiene por lo menos 3 elementos.
+    */
+    return(primero( resto(resto(listaDada)) )
+    )
+}
+
+
+
+function las3PrimerasDe_ConDistintasCantidades(listaDada) {
+    /*
+        PROPOSITO: Indicar si las 3 primeras celdas al Oeste de la fila
+        representada en la lista **listaFila** tenian distintas cantidades 
+        de bolitas rojas cuando la fila fue leida.
+        PARAMETROS:
+        *listaDada: [Numero] - lista de numeros.
+        TIPO: Booleano.
+        PRECONDICIONES: la lista **listaDada** tiene por lo menos 3 elementos.
+    */
+    return(primero(listaDada) /= segundoElemento_(listaDada) &&
+           primero(listaDada) /= tercerElemento_(listaDada) &&
+           segundoElemento_(listaDada) /= tercerElemento_(listaDada)
+    )
+}
+
+
+
+function hayAlgunaCantidadIgualEnLas3PrimerasDe_(listaDada) {
+    /*
+        PROPOSITO: Indicar si hay algun caso en la lista sobre filas del tablero
+        **listaDada** en el que almenos dos celdas de las 3 primeras al Oeste
+        tengan la misma cantidad de bolitas rojas.
+        PARAMETROS:
+        *listaDada: [Numero] - Lista de numeros.
+        TIPO: Booleano.
+        PRECONDICCIONES: La lista **listaDada** tiene por lo menos 3 elementos.
+    */
+    return(primero(listaDada) == segundoElemento_(listaDada) || 
+           primero(listaDada) == tercerElemento_(listaDada) ||
+           segundoElemento_(listaDada) == tercerElemento_(listaDada)
+    )
+}
+
+
+
+//4------------------------------------------------------------------------------------------------------
+
+
+
+function direccionesAlBorde() {
+    /*
+        PROPOSITO: Describir la lista de direcciones en las que el cabezal no se puede mover.
+        TIPO: [Direccion].
+        PRECONDICIONES: Ninguna.
+    */
+    listaDirImposibles := []
+    dirAEvaluar := minDir() 
+    while(dirAEvaluar /= maxDir()) {
+        listaDirImposibles := listaDirImposibles ++ listaCon_Si_(dirAEvaluar, not(puedeMover(dirAEvaluar)))
+        dirAEvaluar := siguiente(dirAEvaluar)
+    }
+    return(listaDirImposibles ++ listaCon_Si_(dirAEvaluar, not(puedeMover(dirAEvaluar))))
+}
+
+
+function singular_Si_(elemento, condicion) {
+    /*
+        PROPÓSITO: Describir una lista con el elemento **elemento**
+        PARÁMETROS:
+            *elemento: Elemento - elemento a devolver en una lista en 
+            caso de que se cumpla la condicion dada.
+            *condicion: Booleano - condicion a comprobar.
+        TIPO: Tipo del elemento **elemento**
+        PRECONDICIONES: Ninguna.
+    */
+    return (Choose [elemento] when condicion
+            [] otherwise
+    )
+}
+
+
+// se puede saber si el tablero tiene una unica celda cuando la funcion devuelve una lista con todas las direcciones.
+
+
+
+//5------------------------------------------------------------------------------------------------------
+
+
+
+function es_Singular(listaDada) {
+    /*
+        PROPOSITO: Indicar si la lista **listaDada** tiene exactamente un unico elemento.
+        PARAMETROS:
+        *listaDada: Una lista de cualquier tipo.
+        TIPO: Booleano.
+        PRECONDICIONES: Ninguna.
+    */
+    esVacía(resto(listaDada))
+}
+
+
+
+//6------------------------------------------------------------------------------------------------------
+
+
+
+function haysiguienteTramoEn_(listaRuta) {
+    /*
+        PROPOSITO: Indicar si la ruta tiene al menos un tramo completo
+        PARAMETROS:
+        *listaRuta: [Direccion] - lista de direcciones.
+        TIPO: Booleano.
+        PRECONDICIONES: Ninguna.
+        OBSERVACIONES: Un tramo de la ruta equivale a dos direcciones.
+    */
+    return(resto(listaRuta) /= [] || esVacía(listaRuta))
+}
+
+
+
+function sigueUnaCurvaEn_(listaRuta) {
+    /*
+        PROPOSITO: Indicar si el tramo que sigue en la ruta es una curva.
+        PARAMETROS:
+        *listaRuta: [Direccion] - lista de direcciones.
+        TIPO: Booleano.
+        PRECONDICIONES: La lista de direcciones dada tiene por lo menos
+        dos elementos.
+        OBSERVACIONES: Una curva es representada por dos direcciones de un
+        tramo de la lista cuando una es Norte o Sur y la otra es Oeste o Este.
+    */
+    return(es_NorteOSur(primero(listaRuta)) && es_EsteOOeste(segundoElemento_(listaRuta)) ||
+           es_NorteOSur(segundoElemento_(listaRuta)) && es_EsteOOeste(primero(listaRuta))
+    )
+}
+
+
+function es_EsteOOeste(dir) {
+    /*
+        PROPOSITO: Indicar si la direccion **dir** es Este o Oeste.
+        PARAMETROS:
+        *dir: Direccion - direccion a evaluar.
+        TIPO: Booleano
+        PRECONDICIONES: Ninguna.
+    */
+    return(dir == Este || dir == Oeste)
+}
+
+function es_NorteOSur(dir) {
+    /*
+        PROPOSITO: Indicar si la direccion **dir** es Norte o Sur.
+        PARAMETROS:
+        *dir: Direccion - direccion a evaluar.
+        TIPO: Booleano
+        PRECONDICIONES: Ninguna.
+    */
+    return(dir == Norte || dir == Sur)
+}
+
+
+
+function sigueCurvaADerechaEn_(listaRuta) {
+    /*
+        PROPOSITO: Indicar si la curva que sigue en la ruta es hacia la derecha.
+        PARAMETROS:
+        *listaRuta: [Direccion] - lista de direcciones.
+        TIPO: Booleano.
+        PRECONDICIONES: El siguiente tramo en la lista de direcciones **listaRuta**
+        es una curva.
+    */
+    return(segundoElemento_(listaRuta) == Este)
+}
+
+
+
+function sigueCurvaAIzquierdaEn_(listaRuta) {
+    /*
+        PROPOSITO: Indicar si la curva que sigue en la ruta es hacia la izquierda.
+        PARAMETROS:
+        *listaRuta: [Direccion] - lista de direcciones.
+        TIPO: Booleano.
+        PRECONDICIONES: El siguiente tramo en la lista de direcciones **listaRuta**
+        es una curva.
+    */
+    return(segundoElemento_(listaRuta) == Oeste)
+}
+
+
+function sigueRectaEn_(listaRuta) {
+    /*
+        PROPOSITO: Indicar si el tramo que sigue en la lista de direcciones
+        **listaRuta** es una recta.
+        PARAMETROS:
+        *listaRuta: [Direcciones] - lista de direcciones.
+        TIPO: Booleano.
+        PRECONDICIONES: la lista **listaRuta** tiene por lo menos dos elementos.
+        OBSERVACIONES: una recta se representa como un tramo cuyas dos direcciones son
+        iguales.
+    */
+    return(primero(listaRuta) == segundoElemento_(listaRuta))
+}
+
+
+
+//10------------------------------------------------------------------------------------------------------
+
+
+
+type BoletoDeColectivo is record {
+    /*PROPOSITO: Modelar un boleto de coletivo antiguo.
+      INV.REP: el numero de tramos puede tener un valor entre 1 y 4
+      la lista de numeros de numBoleto tiene 5 elementos y todos son
+      numeros de un solo digito.
+    */
+    field numLinea //tipo Numero
+    field tramos // tipo Numero
+    field serie // tipo string
+    field numBoleto // tipo Lista de numeros.
+}
+
+
+
+function es_Capicúa(boleto) {
+    /*
+        PROPOSITO: Indicar si el numero de boleto del boleto **boleto** es capicúa
+        PARAMETROS:
+        *boleto: Boleto - boleto con numero a analizar.
+        TIPO: Booleano.
+        PRECONDICIONES: Ninguna.
+    */
+    return(primero(boleto) == quintoElemento_(boleto) &&
+           segundoElemento_(boleto) == cuartoElemento_(boleto)
+    )
+}
+
+
+function quintoElemento_(lista) {
+    /*
+    PROPOSITO: Describir el quinto elemento de la lista **listaDada**
+    PARAMETROS: 
+    *listaDada: Una lista de cualquier tipo.
+    TIPO: El de los elementos de la lista **listaDada**
+    PRECONDICIONES: La lista **listaDada** tiene por lo menos 5 elementos.
+    */
+    return(primero(resto(resto(resto(resto(lista))))))
+}
+
+
+
+function cuartoElemento_(lista) {
+    /*
+    PROPOSITO: Describir el cuarto elemento de la lista **listaDada**
+    PARAMETROS: 
+    *listaDada: Una lista de cualquier tipo.
+    TIPO: El de los elementos de la lista **listaDada**
+    PRECONDICIONES: La lista **listaDada** tiene por lo menos 4 elementos.
+    */
+    return(primero(resto(resto(resto(lista)))))
+}
+
+
+
+function costoDeBoleto_(boletoDado) {
+    /*
+        PROPOSITO: Describir el numero del costo del boleto.
+        PARAMETROS:
+        *boletoDado: Boleto - boleto con precio a describir.
+        TIPO: Numero.
+        PRECONDICIONES: Ninguna.
+    */
+    return(15 + tramos(boletoDado) * 3 )
+}
+
+
+
+function elBoleto_TieneElMismoNúmeroQue_(boleto1, boleto2) {
+    /*
+        PROPOSITO: Indicar si los boletos **boleto1** y **boleto2** tienen el
+        mismo numero de boleto.
+        PARAMETROS:
+        *boleto1: Boleto - boleto a comparar.
+        *boleto2: Boleto - boleto a comparar.
+        TIPO: Booleano.
+        PRECONDICIONES: Ninguna.
+    */
+    return(numBoleto(boleto1) == numBoleto(boleto2))
+}
+
+
+
+function elBoleto_EsParejaCapicúaDe_(boleto1, boleto2) {
+    /*
+        PROPOSITO: Indicar si los boletos **boleto1** y **boleto2** son pareja
+        capicúa.
+        PARAMETROS:
+        *boleto1: Boleto - boleto a comparar.
+        *boleto2: Boleto - boleto a comparar.
+        TIPO: Booleano.
+        PRECONDICIONES: Ninguna.
+    */
+    return( reflejoDeListaDe5Elementos_(num(boleto2) == num(boleto1)))
+}
+
+
+function reflejoDeListaDe5Elementos_(lista) {
+    /*
+        PROPOSITO: Describir a la lista **lista** con sus elementos reflejados.
+        PARAMETROS:
+        *lista: lista de cualquier tipo.
+        TIPO: mismo tipo que los elementos de la lista **lista**
+        PRECONDICIONES: la lista **lista** tiene 5 elementos.
+    */
+    return(quintoElemento_(lista) ++ cuartoElemento_(lista) ++
+           tercerElemento_(lista) ++ segundoElemento_(lista) ++
+           primero(lista)
+    )
+}
+
+
+
+function es_CapicúaDePrimeraSerie(boleto) {
+    /*
+        PROPOSITO: Indicar si el boleto dado es capicúa y a la vez de primera serie.
+        PARAMETROS:
+        *boleto: Boleto - boleto a analizar.
+        TIPO: Booleano.
+        PRECONDICIONES: Ninguna.
+        OBSERVACIONES: los boletos de primera serie son aquellos cuya serie es igual a "1"
+        o "A".
+    */
+    return(es_Capicúa(numBoleto(boleto)) && ( serie(boleto) == "A" || serie(boleto) == "1" ))
+}
+

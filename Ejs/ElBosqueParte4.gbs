@@ -1,0 +1,224 @@
+
+/* a) ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+procedure GerminarSemilla() {
+    /*
+        PROPÓSITO: Transforma una unidad de semilla en un arbol en la celda actual
+        PRECONDICIONES: Ninguna
+    */
+    if {sePuedeGerminar()} {
+        SacarUnaSemilla()
+        PonerUnÁrbol()
+        Sacar_Nutrientes(3)
+    }
+    
+}
+
+
+procedure Sacar_Nutrientes(cantidadNutrientes) {
+    /*
+        PROPÓSITO: Sacar **cantidadNutrientes** de la celda actual
+        PARÁMETROS:
+            *cantidadNutrietnes: Numero - cantidad de nutrientes a sacar de la celda actual
+        PRECONDICIONES: Debe haber por lo menos **cantidadNutrientes** nutrientes en la celda
+        actual
+    */
+    repeat (cantidadNutrientes) {
+        SacarUnNutriente()
+    }
+}
+
+
+function sePuedeGerminar() {
+    /*
+        PROPÓSITO: Indicar si la celda actual es apta para germinar
+        TIPO: Booleano
+        PRECONDICIONES: Ninguna
+    */   
+    return (haySemilla() && hay3Nutrientes())
+}
+
+
+function haySemilla() {
+    /*
+        PROPÓSITO: Indicar si hay por lo menos una semilla en la celda actual
+        TIPO: Booleano
+        PRECONDICIONES: Ninguna
+    */
+    
+    return (nroBolitas(Rojo) >= 1)
+}
+
+
+function hay3Nutrientes() {
+    /*
+        PROPÓSITO: Indicar si hay por lo menos 3 nutrientes en la celda actual
+        TIPO: Booleano
+        PRECONDICIONES: Ninguna
+    */
+    return (nroBolitas(Azul) >= 3)
+}
+
+
+/* b) ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+procedure AlimentarÁrboles() {
+    /*
+        PROPÓSITO: Alimentar a los arboles de la celda actual, proporcionando un nutriente a cada uno, o 
+        en caso de tener menos de los necesarios de todas formas utilizar todos los nutrientes.
+        PRECONDICIONES: Ninguna
+    */
+    if (hayNutrienteParaTodos()) {
+        AlimentarATodosLosArboles()
+    }
+    else {
+        AlimentarLoQueSePueda()
+    }
+}
+
+
+procedure AlimentarATodosLosArboles() {
+    /*
+        PROPÓSITO: Alimentar a todos los arboles de la celda actual con un nutriente cada uno
+        PRECONDICIONES: Debe haber por lo menos la misma cantidad de nutrientes que de arboles en 
+        la celda actual
+    */
+    Sacar_Nutrientes(nroBolitas(Verde))
+}
+
+
+procedure AlimentarLoQueSePueda() {
+    /*
+        PROPÓSITO: Alimentar a los arboles lo maximo posible usando todos los nutrientes disponibles
+        en la celda actual
+        PRECONDICIONES: Ninguna
+    */
+    Sacar_Nutrientes(nroBolitas(Azul))
+}
+
+
+function hayNutrienteParaTodos() {
+    /*
+        PROPÓSITO: Indicar si es que hay un nutriente para cada arbol de la celda actual
+        TIPO: Booleano
+        PRECONDICIONES: Ninguna
+    */   
+    return (nroBolitas(Verde) == nroBolitas(Azul))
+}
+
+
+/* c) ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+procedure ExplotarBomba() {
+    /*
+        PROPÓSITO: Explotar una bomba eliminando hasta 5 arboles de la celda actual y hasta 3 arboles
+        en la celda lindante al Norte
+        PRECONDICIONES: Debe haber por lo menos una bomba en la celda actual
+    */
+    if (hay_ArbolesOMas(5)) {
+        Explotar_Arboles(5)
+        ExplosionHaciaElNorteYVolver()
+        SacarUnaBomba()
+    }
+    else {
+        ExplotarLosArbolesQueHaya()
+        ExplosionHaciaElNorteYVolver()
+        SacarUnaBomba()
+    }
+}
+
+
+function hay_ArbolesOMas(cantidadArbol) {
+    /*
+        PROPÓSITO: Indicar si en la celda actual hay **cantidadArbol** arboles o mas
+        PARAMETROS:
+        *cantidadArbol: Numero - cantidad de arboles a comprobar
+        TIPO: Booleano
+        PRECONDICIONES: Ninguna
+    */
+    return (nroBolitas(Verde) >= cantidadArbol)
+}
+
+
+procedure Explotar_Arboles(arbolesAExplotar) {
+    /*
+        PROPÓSITO: Explotar 5 arboles en la celda actual
+        PARAMETROS: 
+        *arbolesAExplotar: Numero - cantidad de arboles a explotar
+        PRECONDICIONES: Debe haber por lo menos **arbolesAExplotar** arboles en la celda actual
+    */
+    Sacar_Arboles(arbolesAExplotar)
+}
+
+
+procedure ExplosionHaciaElNorteYVolver() {
+    /*
+        PROPÓSITO: Explotar si es posible hasta 3 arboles en la celda lindante hacia el Norte
+        de la actual
+        PRECONDICIONES: Ninguna
+    */
+    if(puedeMover(Norte)) {
+        Mover(Norte)
+        ExplotarHasta3Arboles()
+        Mover(Sur)
+    }   
+}
+
+
+procedure ExplotarLosArbolesQueHaya() {
+    /*
+        PROPÓSITO: Explotar todos los arboles de la celda actual.
+        PRECONDICIONES: Ninguna.
+    */
+    Sacar_Arboles(nroBolitas(Verde))
+}
+
+
+procedure ExplotarHasta3Arboles() {
+    /*
+        PROPÓSITO: Explotar un maximo de 3 arboles de la celda actual.
+        PRECONDICIONES: Ninguna.
+    */
+    if (hay_ArbolesOMas(3)) {
+        Explotar_Arboles(3)
+    }
+    else {
+        ExplotarLosArbolesQueHaya()
+    }
+    
+}
+
+
+/* d) ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+procedure Polinizar() {
+    /*
+        PROPÓSITO: Hacer que los arboles de la celda actual polinizen a la celda lindante hacia
+        el Este.
+        menos 3
+        PRECONDICIONES: Debe haber por lo menos una celda lindante hacia el Este.
+    */
+    if (puedeMover(Este)) {
+        PolinizarCeldaEste()
+    }
+}
+
+
+procedure PolinizarCeldaEste() {
+    /*
+        PROPÓSITO: Generar tantas semillas en la celda lindante hacia el Este como arboles haya 
+        en la celda actual menos 3.
+        PRECONDICIONES: Debe haber una celda hacia el Este de la actual
+    */
+    repeat(nroBolitas(Verde) - 3) {
+        Mover(Este)
+        PonerUnaSemilla()
+        Mover(Oeste)
+    }
+}
+
+

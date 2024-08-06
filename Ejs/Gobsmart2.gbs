@@ -1,0 +1,296 @@
+
+
+type TipoDePago is variant {
+/* PROP: modelar Tipos de pago aceptados */
+case Tarjeta {}
+case MartPago {}
+case Efectivo {}
+}
+
+
+type Producto is record{
+/* PROP: modelar productos
+INV.REP.: precio > 0 */
+field nombre // String
+field marca // String
+field precio // Número
+}
+
+
+type Cliente is record {
+/* PROP: modelar clientes */
+field dni // String
+field tipoDePago // TipoDePago
+field productos // [Producto]
+}
+
+
+type Caja is record {
+/* PROP: modelar cajas
+INV.REP.: número > 0
+facturado >= 0 */
+field número // Número
+field clientesEsperando // [Cliente]
+field aceptaPagos // [TipoDePago]
+field esRápida // Bool
+field facturado // Número
+}
+
+
+//----------------------------------------------------------------------------------------------------------------------------------------
+
+
+function cantidadDeClientesEsperandoEn_(cajaDada) {
+    /*
+        PROPOSITO: Describir la cantidad de clientes que estan esperando en la
+        caja **cajaDada**.
+        PARAMETROS:
+        *cajaDada: Caja - caja con lista de clientes esperando a contar.
+        TIPO: Numero.
+        PRECONDICIONES: Ninguna.
+        OBSERVACIONES: Es un recorrido de acumulacion sobre la lista de clientes esperando
+        que esta en la caja dada, acumulando la cantidad de elementos de la lista.
+    */
+    return(cantidadDeElementosDe_(clientesEsperando(cajaDada)))
+}
+
+
+function cantidadDeElementosDe_(listaDada) {
+    /*
+        PROPOSITO: Describir la cantidad de elementos que hay en la lista
+        **listaDada**
+        PARAMETROS: 
+        *listaDada: Lista de cualquier tipo - lista con elementos a contar.
+        TIPO: Numero.
+        PRECONDICIONES: Ninguna.
+        OBSERVACIONES: Es un recorrido de acumulacion sobre la lista dada, acumulando
+        la cantidad de elementos de la lista.
+    */
+    cantidadDeElementos := 0
+    foreach elemento in listaDada {
+        cantidaDeElementos := cantidadDeElementos + 1
+    }
+    return(cantidadDeElementos)
+}
+
+
+//----------------------------------------------------------------------------------------------------------------------------------------
+
+
+function cajaMenosOcupadaDe_(listaCajas) {
+    /*
+        PROPOSITO: Describir la caja con menos clientes esperando entre todas las
+        cajas de **listaCajas**
+        PARAMETROS:
+        *listaCajas: [Caja] - lista de cajas a comparar y analizar.
+        TIPO: Caja.
+        PRECONDICIONES: La lista **listaCajas** tiene por lo menos una caja.
+        Hay una caja entre todas las cajas en la lista cuya lista de clientes en espera 
+        tiene una menor cantidad de elementos que cualquier otra.
+        OBSERVACIONES: Es un recorrido de busqueda sobre las cajas de la lista **listaCajas**,
+        buscando a la caja con menos clientes esperando entre todas.
+    */
+    cajaMenosOcupada := primero(listaCajas)
+    cajasARevisar := resto(listaCajas)
+    while (cajasARevisar /= []) {
+        cajaMenosOcupada := cajaConMenosClientesEsperandoEntre_Y_(primero(cajasARevisar), cajaMenosOcupada)
+        cajasARevisar := resto(cajasARevisar)
+    }
+    return(cajaMenosOcupada)
+}
+
+function cajaConMenosClientesEsperandoEntre_Y_(caja1, caja2) {
+    /*
+        PROPOSITO: Describir la caja que tenga menos clientes esperando entre **caja1**
+        y **caja2**
+        PARAMETROS:
+        *caja1: Caja - caja a comparar con caja2
+        *caja2: Caja - caja a comparar con caja1
+        TIPO: Caja.
+        PRECONDICIONES: Ninguna.
+        OBSERVACIONES: En caso de que ambas tengan la misma cantidad de clientes esperando
+        devuelve la caja2.
+    */
+    return (choose caja1 when cantidadDeClientesEsperandoEn_(caja1) < cantidadDeClientesEsperandoEn_(caja2)
+            caja2 otherwise
+    )
+}
+
+
+//----------------------------------------------------------------------------------------------------------------------------------------
+
+
+function gobsMart_ConIngresoDe_aCaja_(listaCajas, clienteNuevo, numCaja) {
+    /*
+        PROPOSITO: Describir la lista de cajas **listaCajas** con el cliente **clienteNuevo**
+        agregado en la fila de espera de la caja **numCaja**.
+        PARAMETROS:
+        *listaCajas: [Caja] - lista de cajas a recorrer con caja a modificar.
+        *clienteNuevo: Cliente - cliente a agregar en la caja especificada.
+        *numCaja: Numero - numero de la caja en la que se busca agregar al cliente
+        dado.
+        TIPO: [Caja].
+        PRECONDICIONES: Hay una caja en la lista de cajas dadas con el numero **numCaja**.
+        OBSERVACIONES: El cliente es colocado al final de la fila de espera.
+        Es un recorrido de busqueda sobre la lista dada, donde al encontrar la caja que
+        se busca se la intercambia por la misma con los cambios requeridos realizados.
+        Usa la idea de separar a la lista en dos partes.
+    */
+    primerMitadLista := []
+    numCajaActual := numeroDeLaCaja_(primero(listaCajas))
+    cajasSinRevisar := listaCajas
+    while (numCajaActual /= numCaja) {
+        primerMitadLista := primerMitadLista ++ [primero(cajasSinRevisar)]
+        cajasSinRevisar := resto(cajasSinRevisar)
+    }
+    return(primerMitadLista ++ [caja_ConCliente_Agregado(primero(cajasSinRevisar), clienteNuevo)] ++ resto(cajasSinRevisar)
+    )
+}
+
+
+function numeroDeLaCaja_(cajaDada) {
+    /*
+        PROPOSITO: Describir el numero de la caja dada.
+        PARAMETROS:
+        *cajaDada: Caja - caja con numero a devolver.
+        TIPO: Numero.
+        PRECONDICIONES: Ninguna.
+    */
+    return(número(cajaDada))
+}
+
+
+function caja_ConCliente_Agregado(cajaDada, clienteAAgregar) {
+    /*
+        PROPOSITO: Describir la caja **cajaDada** con el cliente **clienteAAgregar** agregado
+        al final de la lista de clientes esperando de dicha caja.
+        PARAMETROS:
+        *cajaDada:
+        *clienteAAgregar:
+        TIPO: Caja
+        PRECONDICIONES: Ninguna.
+    */
+    return(Caja(cajaDada | clientesEsperando <- clientesEsperando ++ [clienteAAgregar]
+               )
+    )
+}
+
+
+//----------------------------------------------------------------------------------------------------------------------------------------
+
+
+function gobsMart_conIngresosDe_(listaCajas, listaClientes) {
+    /*
+        PROPOSITO: Describir la lista de cajas **listaCajas** actualizada con los clientes
+        de **listaClientes** agregados cada uno en su caja ideal.
+        PARAMETROS:
+        *listaCajas: [Caja] - lista de cajas a en las cuales agregar clientes.
+        *listaClientes: [Cliente] - lista de clientes a agregar en las cajas de la lista dada.
+        TIPO: [Caja].
+        PRECONDICIONES: Hay por lo menos una caja con un tipo de pago aceptado para cada cliente.
+        OBSERVACIONES: Es un recorrido de busqueda sobre la lista de cajas dadas, donde se busca la caja ideal para
+        cada cliente a agregar.
+        Una caja se considera ideal cuando acepta el metodo de pago del cliente que se esta agregando y a la vez
+        es la menos ocupada de dicho tipo de caja.
+        En caso de que se encuentre mas de una caja ideal para un cliente, el cliente es agregado en la caja 
+        mas cercana al fondo de la lista de cajas.
+    */
+    clientesSinAgregar := listaClientes
+    listaCajasNueva := listaCajas
+    while(clientesSinAgregar /= []) {
+        listaCajasNueva := lista_Con_AgregadoEnCajaIdeal(listaCajasNuevas, primero(clientesSinAgregar))
+        clientesSinAgregar := resto(clientesSinAgregar)
+    }
+    return(listaCajasNueva)
+}
+
+
+function lista_Con_AgregadoEnCajaIdeal(listaCajas, clienteDado) {
+    /*
+        PROPOSITO: Describir la lista de cajas **listaCajas** con el cliente **clienteDado** 
+        agregado en la caja que sea ideal para el.
+        PARAMETROS:
+        *listaCajas: [Caja] - lista de cajas en la cual buscar la caja ideal y agregar
+        al cliente dado.
+        *clienteDado: Cliente - cliente a agregar. 
+        TIPO: [Caja].
+        PRECONDICIONES:  Hay por lo menos una caja que acepta el tipo de pago que utiliza el cliente
+        **clienteDado**.
+        OBSERVACIONES: Una caja se considera ideal cuando acepta el metodo de pago del cliente que se esta agregando y a la vez
+        es la menos ocupada de dicho tipo de caja.
+    */
+    primerMitadListaNueva := []
+    cajasSegundaMitad := listaCajas
+    numeroCajaIdeal := numCajaIdealDe_Para_(listaCajas, clienteDado)
+    while(numeroDeLaCaja_(primero(cajasSegundoMitad)) /= numeroCajaIdeal) {
+        primerMitadListaNueva := primerMitadListaNueva ++ [primero(cajasSegundaMitad)]
+        cajasSegundaMitad := resto(cajasSegundaMitad)
+    }
+    return(primerMitadListaNueva ++ [caja_ConCliente_Agregado(primero(cajasSegundaMitad), clienteDado)] ++ resto(cajasSegundaMitad)
+    )
+}
+
+
+function numCajaIdealDe_Para_(listaCajas, clienteDado) {
+    /*
+        PROPOSITO: Describe el numero de la caja que se consideraria ideal para el cliente
+        **clienteDado** en la lista de cajas **listaCajas**.
+        PARAMETROS:
+        *listaCajas: [Caja] - lista de cajas en la cual buscar la caja ideal para el cliente dado.
+        *clienteDado: Cliente - cliente en el cual basarse para buscar caja ideal.
+        TIPO: Numero.
+        PRECONDICIONES: Hay por lo menos una caja que acepta el tipo de pago que utiliza el cliente
+        **clienteDado**.
+        OBSERVACION: Una caja se considera ideal cuando acepta el metodo de pago del cliente que se esta agregando y a la vez
+        es la menos ocupada de dicho tipo de caja.
+    */
+    cajasSinRevisar := listaCajas
+    cajaMasIdeal := primero(listaCajas)
+    while(cajasSinRevisar /= []) {
+        cajaMasIdeal := cajaMasIdealPara_Entre_Y_(clienteDado, cajaMasIdeal, primero(cajasSinRevisar))
+        cajasSinRevisar := resto(cajasSinRevisar)
+    }
+    return(numeroDeLaCaja_(cajaMasIdeal)
+    )
+}
+
+
+function cajaMasIdealPara_Entre_Y_(clienteDado, caja1, caja2) {
+    /*
+        PROPOSITO: Describir la caja que se consideria mas ideal para el cliente
+        **clienteDado** entre **caja1** y **caja2**.
+        PARAMETROS:
+        *clienteDado: Cliente - cliente en el que basarse para resaltar que caja seria mas
+        ideal.
+        *caja1: Caja - caja a comparar con caja2.
+        *caja2: Caja - caja a comparar con caja1.
+        TIPO: Caja
+        PRECONDICIONES: Ninguna.
+        OBSERVACION: Una caja se considera ideal cuando acepta el metodo de pago del cliente que se esta agregando y a la vez
+        es la menos ocupada de dicho tipo de caja.
+    */
+    return(choose caja1 when cajaConMenosClientesEsperandoEntre_Y_(caja1, caja2) == caja1 && 
+                             lista_TieneMetodoDePago_(aceptaPagos(caja1), tipoDePago(clienteDado))
+           caja2 otherwise
+    )
+}
+
+
+function lista_TieneMetodoDePago_(listaPagosAceptados, metodoDePagoDado) {
+    /*
+        PROPOSITO: Indicar si la lista de metodos de pagos aceptados **listaPagosACeptados** acepta pagos por 
+        **metodoDePagoDado**.
+        PARAMETROS:
+        *listaPagosAceptados: [tipoDePago] - lista de metodos de pago.
+        *metodoDePagoDado: TipoDePago - tipo de pago que se busca.
+        TIPO: Booleano.
+        PRECONDICIONES: Ninguna.
+    */
+    mayorACeroSiTiene := 0 
+    foreach metodoAceptado in listaPagosACeptados {
+        mayorACeroSiTiene := mayorACeroSiTiene + 1Si_0Sino(metodoAceptado == metodoDePagoDado)
+    }  
+    return(mayorACeroSiTiene > 0)
+}
+
+

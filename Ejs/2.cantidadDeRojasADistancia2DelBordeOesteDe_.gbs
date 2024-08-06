@@ -1,0 +1,18 @@
+function cantidadDeRojasADistancia2DelBordeOesteDe_(listaDeBolitasRojasDeLaFilaActual){
+    
+    /*
+    PROPOSITO: Describir la cantidad de bolitas rojas que había en la celda a distancia 2 del borde Oeste de la fila dada al momento de su lectura
+    PRECONDICION: Debe haber dos celdas al Este de la celda actual
+    PARAMETROS: listaDeBolitasRojasDeLaFilaActual - Lista de cantidad de bolitas - Describe una lista que se compone de numeros de bolitas rojas
+    TIPO: Numero
+    */
+    
+    IrAlBorde(Oeste)
+    cantidadDeBolitasRojasYaVistas := [nroBolitas(Rojo)]
+    while(puedeMover(Este)){
+        Mover(Este)
+        cantidadDeBolitasRojasYaVistas := cantidadDeBolitasRojasYaVistas ++ [nroBolitas(Rojo)]
+    }
+
+    return(primero(resto(resto(listaDeBolitasRojasDeLaFilaActual))))
+}

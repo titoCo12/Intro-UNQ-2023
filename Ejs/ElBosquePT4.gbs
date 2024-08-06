@@ -1,0 +1,77 @@
+
+/* a) --------------------------------------------------------------------------------------------------------------------*/
+
+
+procedure GerminarSemilla() {
+    /*
+        PROPÓSITO:
+        PRECONDICIONES:
+    */
+    if (sePuedeGerminar()) {
+        SacarUnaSemilla()
+        Remover_Nutrientes(3)
+        PonerUnArbol()
+    }
+}
+
+function sePuedeGerminar() {
+    /*
+        PROPÓSITO: Indicar si es que la celda actual cumple las condiciones necesarias para
+        ser germinada
+        TIPO: Booleano
+        PRECONDICIONES: Ninguna
+    */
+    return (nroBolitas(Azul) >= 3 && nroBolitas(Rojo) >= 1)
+}
+
+procedure Remover_Nutrientes(cantidadNutrientes) {
+    /*
+        PROPÓSITO: Sacar **cantidadNutrientes** nutrientes de la celda actual
+        PARÁMETROS:
+            *cantidadNutrientes: Numero - numero de nutrientes a sacar
+        PRECONDICIONES: Debe haber por lo menos **cantidadNutrientes** en la celda actual
+    */
+    repeat(cantidadNutrientes) {
+        SacarUnNutriente()
+    }
+}
+
+
+/*b) --------------------------------------------------------------------------------------------------------------------*/
+
+
+procedure AlimentarArboles() {
+    /*
+        PROPÓSITO: Alimenta a los arboles de la celda actual dandole un nutriente a cada arbol,
+        y eliminando todos los nutrientes en caso de que no hayan suficientes
+        PRECONDICIONES: Ninguna
+    */
+    if (nroArboles() <= nroNutrientes()) {
+        AlimentarUnNutrientePorArbol()
+    }
+    else {
+        AlimentarConLosNutrientesQueHay()
+    }
+}
+
+procedure AlimentarUnNutrientePorArbol() {
+    /*
+        PROPÓSITO: Alimentar a todos los arboles de la celda actual dandole un nutriente a cada uno
+        PRECONDICIONES: Debe haber por lo menos la misma cantidad de arboles que de nutrientes
+    */
+    repeat(nroArboles()) {
+        SacarUnNutriente()
+    }
+}
+
+procedure AlimentarConLosNutrientesQueHay() {
+    /*
+        PROPÓSITO: Alimentar a todos los arboles que se llegue a alimentar con todos los nutrientes 
+        presentes
+        PRECONDICIONES: Ninguna
+    */
+    repeat(nroNutrientes()) {
+        SacarUnNutriente()
+    }
+    
+}

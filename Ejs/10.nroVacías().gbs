@@ -1,0 +1,77 @@
+function indicarSiEsCeldaVacia(){
+    
+    /*
+    PROPOSITO: Describe 1 si la celda esta vacia
+    PRECONDICION: NINGUNA
+    TIPO: Numero
+    */
+    
+    return(choose 1 when (esCeldaVacia())
+                0 otherwise)
+}
+
+function esCeldaVacia(){
+    
+    /*
+    PROPOSITO: Describe si la celda no contiene ningun color de bolita
+    PRECONDICION: NINGUNA
+    TIPO: Numero
+    */
+    
+    return(not hayBolitas(Azul) && not hayBolitas(Negro) && not hayBolitas(Rojo) && not hayBolitas(Verde))
+}
+
+function estoyElFinalDeUnRecorrido__(dirPrincipal, dirSecundaria){
+    /*
+        PROPOSITO: Denota verdadero si estamos en el final del recorrido
+        PRECONDICION: Ninguna
+        PARAMETROS: *dirPrincipal: Tipo Dirección, indica la primer dirección a chequiar
+                    *dirSecundaria: Tipo Dirección, indica la segunda dirección a chequiar
+        
+    */
+    return(not puedeMover(dirPrincipal) && not puedeMover(dirSecundaria))
+}
+
+procedure PasarASiguienteCeldaAl_Y_(dirPrincipal, dirSecundaria){ 
+    
+    /*
+    PROPOSITO: Pasar hacia la siguiente celda en un recorrido en direccion *dirPrincipal* y direccion *dirSecundaria*
+    PRECONDICION: La celda actual no es la esquina indicada por *dirPrincipal* y *dirSecundaria*
+    PARAMETROS: *dirPrincipal - direccion - indica cual es la direccion principal a moverse
+                *dirSecundaria - direccion - indica cual es la direccion secundaria a moverse
+    */
+    
+    if(puedeMover(dirPrincipal)){
+        Mover(dirPrincipal)
+    }
+    
+    else{
+        IrAlBorde(opuesto(dirPrincipal))
+        Mover(dirSecundaria)
+    }
+    
+}
+
+function nroVacías(){
+    
+    /*
+    PROPOSITO: Indica la cantidad de celdas vacias en un tablero
+    PRECONDICION: Ninguna
+    TIPO: Numero
+    */
+    
+    IrAlBorde(Oeste)
+    IrAlBorde(Sur)
+    
+    cantidadDeCeldasVacíasVistas := 0 
+    while(not estoyElFinalDeUnRecorrido__(Este,Norte)){
+        cantidadDeCeldasVacíasVistas := cantidadDeCeldasVacíasVistas + indicarSiEsCeldaVacia()
+        PasarASiguienteCeldaAl_Y_(Este,Norte)
+    }
+    
+    return(cantidadDeCeldasVacíasVistas)
+}
+
+program{
+    return(nroVacías())
+}

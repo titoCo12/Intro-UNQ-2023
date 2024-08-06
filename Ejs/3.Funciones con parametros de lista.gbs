@@ -1,0 +1,79 @@
+// a) ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+function las3PrimerasDe_ConLaMismaCantidad(listaDeFilaActual){
+    
+    /*
+    PROPOSITO: Indica si las primeras tres celdas al Oeste de la "listaDeFilaActual" tinen la misma cantidad
+    PRECONDICION: Ninguna
+    PARAMETROS: *listaDeFilaActual: Tipo Lista de cantidades de bolitas rojas
+    TIPO: Booleano
+    */
+    
+    return(primerElementoDeLaLista_(listaDeFilaActual) == segundoElementoDeLaLista_(listaActual) && tercerElementoDeLaLista_(listaActual)) == segundoElementoDeLaLista_(listaActual))
+    
+}
+
+function primerElementoDeLaLista_(listaActual){
+    
+    /*
+    PROPOSITO: Describre el primer valor de "listaActual"
+    PRECONDICION: la lista debe tener  al menos un elemento
+    PARAMETROS: *listaActual: Tipo Lista de algun elemento
+    TIPO: Elemento de la lista dada
+    */
+    
+    return(primero(listaActual))
+}
+
+
+function segundoElementoDeLaLista_(listaActual){
+    
+    /*
+    PROPOSITO: Describre el segundo valor de "listaActual"
+    PRECONDICION: la lista debe tener  al menos dos elementos
+    PARAMETROS: *listaActual: Tipo Lista de algun elemento
+    TIPO: Elemento de la lista dada
+    */
+    return(primero(resto(listaActual)) )
+}
+
+function tercerElementoDeLaLista_(listaActual){
+    
+    /*
+    PROPOSITO: Describre el tercer valor de "listaActual"
+    PRECONDICION: la lista debe tener  al menos tres elementos
+    PARAMETROS: *listaActual: Tipo Lista de algun elemento
+    TIPO: Elemento de la lista dada
+    */
+    
+    return(primero(resto(resto(listaActual))) )
+}
+// b) ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+function las3PrimerasDe_ConDistintasCantidades(listaDeFilaActual){
+    
+    /*
+    PROPOSITO: Indica si las primeras tres celdas al Oeste de la "listaDeFilaActual" tinen distinta cantidad de bolitas
+    PRECONDICION: la lista debe tener  al menos tres elementos
+    PARAMETROS: *listaActual: Tipo Lista de algun elemento
+    TIPO: Elemento de la lista dada
+    */
+    
+    return (primerElementoDeLaLista_(listaDeFilaActual) /= segundoElementoDeLaLista_(listaDeFilaActual) && tercerElementoDeLaLista_(listaDeFilaActual)) /= segundoElementoDeLaLista_(listaDeFilaActual) 
+            && primerElementoDeLaLista_(listaDeFilaActual) /= tercerElementoDeLaLista_(listaDeFilaActual)))
+}
+
+// c) ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+function hayAlgunaCantidadIgualEnLas3PrimerasDe_(listaDeFilaActual){
+    
+    /*
+    PROPOSITO: Determine si en algún caso hay la misma cantidad de bolitas de dos colores
+    PRECONDICION: la lista debe tener  al menos tres elementos
+    PARAMETROS: *listaActual: Tipo Lista de algun elemento
+    TIPO: Elemento de la lista dada
+    */
+    
+    return (primerElementoDeLaLista_(listaDeFilaActual) /= segundoElementoDeLaLista_(listaDeFilaActual) && tercerElementoDeLaLista_(listaDeFilaActual)) /= segundoElementoDeLaLista_(listaDeFilaActual) 
+            && primerElementoDeLaLista_(listaDeFilaActual) /= tercerElementoDeLaLista_(listaDeFilaActual) ))
+}

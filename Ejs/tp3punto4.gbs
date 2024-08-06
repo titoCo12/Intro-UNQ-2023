@@ -1,0 +1,41 @@
+
+
+//    procedure Mover3VecesAl_(direccionAMover) {
+//        /*
+//            PROPÓSITO: Mover al cabezal tres casillas en direccion hacia el **direccionAMover**
+//            PARAMETROS.
+//                *direccionAMover: una direccion que describe la direccion en la cual se movera el
+//                cabezal tres veces
+//            PRECONDICIONES: hay por lo menos 3 casillas en direccion hacia el **direccionAMover**
+//            de la actual
+//        */
+//        repeat (3) {
+//            Mover(direccionAMover)    
+//        }
+//    } 
+
+
+
+/*
+procedure Poner_ADistancia3Al_(color, dirección) {
+Mover3VecesAl_(dirección) Poner(color) }
+*/
+
+//a)
+procedure Poner_ADistancia3Al_(color, dirección) {
+    /*
+        PROPOSITO: Poner una bolita de color **color** despues de moverse
+        3 casillas hacia el **direccion**
+        PARAMETROS:
+        *color: Color - Color de la bolita que se colocara
+        *direccion: Direccion - Direccion en la que se movera 3 casillas
+        PRECONDICIONES: Debe haber por lo menos 3 casillas hacia el **direccionAMover**
+    */
+    Mover3VecesAl_(dirección) 
+    Poner(color) 
+}
+
+//b)
+// El parametro "direccion" reemplazara al "direccionAMover"
+
+

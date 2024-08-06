@@ -1,0 +1,30 @@
+function maximoEntre_Y_(valor1, valor2) {
+    /*
+        PROPÓSITO: Indicar el valor mas grande que hay entre 
+        **valor1** y **valor2**.
+        PARÁMETROS:
+            *valor1: Cantidad - valor 1
+            *valor2: Cantidad - valor 2
+        TIPO: Cantidad.
+        PRECONDICIONES: Ninguna
+    */
+    return (choose valor1 when (valor1>valor2)
+            valor2 otherwise)
+}
+
+
+
+function minimoEntre_Y_(valor1, valor2) {
+    /*
+        PROPÓSITO: Indicar el valor mas chico que hay entre 
+        **valor1** y **valor2**.
+        PARÁMETROS:
+            *valor1: Cantidad - valor 1
+            *valor2: Cantidad - valor 2
+        TIPO: Cantidad.
+        PRECONDICIONES: Ninguna
+    */
+    
+    return (choose valor1 when (valor1<valor2)
+            valor2 otherwise)
+}

@@ -1,0 +1,143 @@
+type Mes is variant {
+    /*PROPOSITO: Modelar los meses del año.
+    */
+    case Enero {}
+    case Febrero {}
+    case Marzo {}
+    case Abril {}
+    case Mayo {}
+    case Junio {}
+    case Julio {}
+    case Agosto {}
+    case Septiembre {}
+    case Octubre {}
+    case Noviembre {}
+    case Diciembre {}
+}
+
+
+type Fecha is record {
+    /* PROPOSITO: Modelar una fecha
+       INV.REP:
+       - los numeros de dia de los meses de Enero, Marzo,
+       Mayo, Julio, Agosto, Octubre y Diciembre, solo pueden 
+       ser un valor entre 1 y 31
+       - los numeros de dia de los meses Abril, Junio, Septiembre y 
+       Noviembre solo pueden ser un valor entre 1 y 30.
+       - el numero de dia del mes de Febrero solo puede ser un numero
+       entre 1 y 28.
+       - en caso de que el numero del año sea divisible por 4, el
+       numero de dia de Febrero puede ser un valor entre 1 y 29
+    */
+    field año // tipo Numero
+    field mes // tipo Mes
+    field dia // tipo Numero
+}
+
+
+
+function diaDeLaMemoria() {
+    /*
+        PROPOSITO: Describir el dia de la memoria
+        TIPO: Fecha.
+        PRECONDICIONES: Ninguna.
+    */
+    return(Fecha(año <- 1967
+                 mes <- Marzo
+                 dia <- 24 )
+    )
+}
+
+function inicioReformaUniversitaria() {
+    /*
+        PROPOSITO: Describir la fecha del inicio de la reforma
+        universitaria.
+        TIPO: Fecha.
+        PRECONDICIONES: Ninguna.
+    */
+    return(Fecha(año <- 1918
+                 mes <- Junio
+                 dia <- 15 )
+    )
+}
+
+function reglamentacionVotoFemeninoArg() {
+    /*
+        PROPOSITO: Describir la fecha de la reglamentacion del
+        voto femenino en Argentina.
+        TIPO: Fecha.
+        PRECONDICIONES: Ninguna.
+    */
+    return(Fecha(año <- 1947
+                 mes <- Septiembre
+                 dia <- 9 )
+    )
+}
+
+function funcionamientoTecnicaturaProgInfoUnq() {
+    /*
+        PROPOSITO: Describir la fecha de la puesta en funcionamiento
+        de la Tecnicatura Universitaria en Programacion Informatica
+        de la UNQ.
+        TIPO: Fecha.
+        PRECONDICIONES: Ninguna.
+    */
+    return(Fecha(año <- 2007
+                 mes <- Abril
+                 dia <- 25 )
+    )
+}
+
+function diaInternacionalTrabajadores() {
+    /*
+        PROPOSITO: Describir la fecha del Dia Internacional de
+        los Trabajadores.
+        TIPO: Fecha.
+        PRECONDICIONES: Ninguna.
+    */
+    return(Fecha(año <- 1886
+                 mes <- Mayo
+                 dia <- 1 )
+    )
+}
+
+function creacionMinisterioCYTArg() {
+    /*
+        PROPOSITO: Describir la creacion del ministerio de ciencia
+        tecnologia e innovacion argentino.
+        TIPO: Fecha.
+        PRECONDICIONES: Ninguna.
+    */
+    return(Fecha(año <- 2007
+                 mes <- Diciembre
+                 dia <- 10 )
+    )
+}
+
+function diaDeLaMujer() {
+    /*
+        PROPOSITO: Describir la fecha del Dia de la Mujer.
+        TIPO: Fecha.
+        PRECONDICIONES: Ninguna.
+    */
+    return(Fecha(año <- 1910
+                 mes <- Marzo
+                 dia <- 8 )
+    )
+}
+
+function disolucionMinisterioCYTArg() {
+    /*
+        PROPOSITO: Describir la fecha de la disolucion del
+        ministerio de Ciencia y Tecnologia argentino.
+        TIPO: Fecha.
+        PRECONDICIONES: Ninguna.
+    */
+    return(Fecha(año <- 2018
+                 mes <- Septiembre
+                 dia <- 5 )
+    )
+}
+
+
+

@@ -1,0 +1,94 @@
+program {
+    DibujarRelojAnalógicoSimplificadoDeRadio_(3)
+}
+
+procedure DibujarRelojAnalógicoSimplificadoDeRadio_(radio) {
+    /*
+        PROPÓSITO: Dibujar un reloj analagico con un radio de **radio**
+        casillas, representando el 12, 3, 6 y 9 de dicho reloj con bolitas
+        rojas
+        PARAMETROS
+            *radio: tamaño del radio del reloj en casillas
+        PRECONDICIONES: Debe haber por lo menos **radio** casillas hacia el
+        Norte, Sur, Este y Oeste del cabezal
+    */
+    Subir_Veces(radio)
+    Poner_Rojas(12)
+    Bajar_Veces(radio)
+    Este_Veces(radio)
+    Poner_Rojas(3)
+    Oeste_Veces(radio)
+    Sur_Veces(radio)
+    Poner_Rojas(6)
+    Norte_Veces(radio)
+    Oeste_Veces(radio)
+    Poner_Rojas(9)
+}
+
+procedure Subir_Veces(cantidadSubir) {
+    /*
+        PROPÓSITO: Mover al cabezal **cantidadSubir** casillas hacia el
+        Norte
+        PARAMETROS
+            *cantidadSubir: Numero - Numero de veces que se movera hacia el Norte
+        PRECONDICIONES: Debe haber por lo menos **cantidadSubir** casillas hacia el 
+        Norte del cabezal
+    */
+    repeat (cantidadSubir) {
+        Mover(Norte)
+    }
+}
+
+procedure Bajar_Veces(cantidadBajar) {
+    /*
+        PROPÓSITO: Mover al cabezal **cantidadBajar** casillas hacia el
+        Sur
+        PARAMETROS
+            *cantidadBajar: Numero - Numero de veces que se movera hacia el Sur
+        PRECONDICIONES: Debe haber por lo menos **cantidadBajar** casillas hacia el
+        Sur del cabezal
+    */
+    repeat (cantidadBajar) {
+        Mover(Sur)
+    }
+}
+
+procedure Este_Veces(cantidadEste) {
+    /*
+        PROPÓSITO: Mover al cabezal **cantidadEste** casillas hacia el
+        Este
+        PARÁMETROS
+            *cantidadEste: Numero - Numero de veces que se movera hacia el Este 
+        PRECONDICIONES: Debe haber por lo menos **cantidadEste** casillas hacia
+        el Este del cabezal
+    */
+    repeat (cantidadEste) {
+        Mover(Este)
+    }
+}
+
+procedure Oeste_Veces(cantidadOeste) {
+    /*
+        PROPÓSITO: Mover al cabezal **cantidadOeste** casillas hacia el
+        Oeste
+        PARÁMETROS:
+            *cantidadOeste: Numero - Numero de veces que se movera hacia el Oeste
+        PRECONDICIONES: Debe haber por lo menos **cantidadOeste** casillas hacia el
+        Oeste del cabezal
+    */
+    repeat (cantidadOeste) {
+        Mover(Oeste)
+    }
+}
+
+procedure Poner_Rojas(numeroRojas) {
+    /*
+        PROPÓSITO: Colocar **numeroRojas** bolitas rojas
+        PARÁMETROS: 
+            * numeroRojas: Numero - Cantidad de bolitas rojas a colocar 
+        PRECONDICIONES: - 
+    */
+    repeat (numeroRojas) {
+        Poner(Rojo)
+    }
+}

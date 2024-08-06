@@ -1,0 +1,61 @@
+function arbol() {
+    /*
+        PROPÓSITO: Indicar el color de los arboles
+        TIPO: Color.
+        PRECONDICIONES: Ninguna
+    */
+    return (Verde)
+}
+
+
+function semilla() {
+    /*
+        PROPÓSITO: Indicar el color de las semillas
+        TIPO: Color.
+        PRECONDICIONES: Ninguna.
+    */
+    return (Rojo)
+}
+
+
+function bomba() {
+    /*
+        PROPÓSITO: Indicar el color de las bombas.
+        TIPO: Color.
+        PRECONDICIONES: Ninguna.
+    */
+    return (Negro)
+}
+
+
+function nutriente() {
+    /*
+        PROPÓSITO: Indicar el color de los nutrientes
+        TIPO: Color.
+        PRECONDICIONES: Ninguna
+    */
+    return (Azul)
+}
+
+
+
+
+
+
+
+function nroTotalDeArbolesEnElTerreno() {
+    /*
+        PROPÓSITO: Describir la cantidad de arboles totales que hay en todo el bosque
+        TIPO: Cantidad.
+        PRECONDICIONES: Ninguna.
+    */
+    IrAPrimeraCeldaEnUnRecorridoAl_Y_(Sur, Oeste)
+    arbolesContados := nroBolitas(arbol)
+    while(haySiguienteCeldaEnUnRecorridoAl_Y_(Sur, Oeste)) {
+        IrASiguienteCeldaEnUnRecorridoAl_Y_(Sur,Oeste)
+        arbolesContados := arbolesContados + nroBolitas(arbol)
+    }
+    return (arbolesContados)
+}
+
+

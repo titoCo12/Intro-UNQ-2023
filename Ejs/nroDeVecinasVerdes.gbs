@@ -1,0 +1,15 @@
+
+
+function nroDeVecinas() {
+    contadorDeVecinas := 0
+    dirBusqueda := minDir()
+    while (dirBusqueda /= maxDir()) {
+        contadorDeVecinas := contadorDeVecinas + contarSiPuedeVecinaAl_(dirBusqueda)
+        dirBusqueda := siguiente(dirBusqueda)
+    }
+}
+
+
+function vecinaAl_(dir) {
+    
+}

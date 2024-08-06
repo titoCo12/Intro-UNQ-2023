@@ -1,0 +1,17 @@
+
+
+procedure EscribirFecha_(fechaDada) {
+    /*
+        PROPOSITO: Representar en bolitas de colores la fecha
+        **fechaDada**
+        PARAMETROS:
+        *fechaDada: Fecha - fecha a representar
+        PRECONDICIONES: Ninguna.
+        OBSERVACIONES: Los dias se representan con bolitas de color Azul.
+        El numero de mes se representa con bolitas de color Rojo.
+        El numero del año se representa con bolitas de color Verde.
+    */
+    Poner_DeColor_(dia(fechaDada), Azul)
+    Poner_DeColor_(mes(fechaDada), Rojo)
+    Poner_DeColor_(año(fechaDada), Verde)
+}

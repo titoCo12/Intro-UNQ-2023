@@ -1,0 +1,156 @@
+
+
+type TipoDeCuenta is variant {
+/* PROPÓSITO: modelar los diferentes tipos de cuenta que
+ofrece el banco
+*/
+case CuentaCorriente {} 
+case CajaDeAhorro {} 
+case CuentaSueldo {} 
+}
+
+
+type Moneda is variant {
+/* PROPÓSITO: modelar los diferentes tipos de moneda con los
+que trabaja el banco
+*/
+case Pesos {} 
+case Dólares {} 
+case Euros {}
+case Reales {} 
+}
+
+
+type Cuenta is record {
+    /* PROPOSITO: modelar una cuenta de banco.
+       INV.REP.: los numeros no pueden ser menores a 0.
+    */
+    field numeroDeCuenta // tipo Numero.
+    field tipoDeCuenta // tipo TipoDeCuenta.
+    field nombreDeCliente // tipo String.
+    field tipoDeMoneda // tipo Moneda.
+    field saldo // tipo Numero.
+}
+
+
+function cuenta_ConSaldoActualizadoA_(cuentaSaldoViejo, saldoNuevo) {
+    /*
+        PROPÓSITO: Describir la cuenta **cuentaSaldoViejo** con el saldo
+        actualizado para ser **saldoNuevo**
+        PARÁMETROS:
+            *cuentaConSaldoViejo: Cuenta - cuenta a actualizar.
+            *saldoNuevo: Numero - Numero del saldo nuevo.
+        TIPO: Cuenta.
+        PRECONDICIONES: El parametro **saldoNuevo** es un numero mayor o igual
+        a 0.
+    */
+    return (Cuenta(cuentaSaldoViejo | saldo <- saldoNuevo) )
+}
+
+
+function cuenta_ConTipoDeCuentaCambiadoA_(cuentaTipoViejo, tipoNuevo) {
+    /*
+        PROPOSITO: Describir la cuenta **cuentaTipoViejo** con el tipo cambiado
+        a **tipoNuevo**.
+        PARAMETROS: 
+            *cuentaTipoViejo: Cuenta - cuenta a actualizar. 
+            *tipoNuevo: tipoDeCuenta - tipo de cuenta a cambiar en la cuenta
+            dada
+        TIPO: Cuenta.
+        PRECONDICIONES: Ninguna.
+    */
+    return( Cuenta(cuentaTipoViejo | tipoDeCuenta <- tipoNuevo) )
+}
+
+
+function cuenta_ConTipoCambiadoSegúnDisposición(cuentaDada) {
+    /*
+        PROPOSITO: Describir la cuenta con el tipo que le corresponda a la 
+        cuenta **cuentaDada**.
+        PARAMETROS:
+            *cuentaDada: Cuenta - cuenta a analizar.
+        TIPO: Cuenta.
+        PRECONDICIONES: Ninguna.
+    */
+    return(choose cuentaDada when ( ( tipoDeCuenta(cuentaDada) /= CuentaSueldo ) || ( saldo(cuentaDada) <= 25000 ) )
+                , Cuenta(cuentaDada | tipoDeCuenta <- CajaDeAhorro) otherwise
+          )
+}
+
+
+function saldoEnPesosDe_(cuentaDada) {
+    /*
+        PROPOSITO: Describir el equivalente al saldo de **cuentaDada** en
+        la moneda Pesos.
+        PARAMETROS:
+            *cuentaDada: Cuenta - cuenta cuyo saldo se actualizara a pesos. 
+        TIPO: Numero.
+        PRECONDICIONES: Ninguna.
+    */
+    return(choose saldo(cuentaDada) * 68 when tipoDeMoneda(cuentaDada) == Dólares 
+                , saldo(cuentaDada) * 74 when tipoDeMoneda(cuentaDada) == Euros
+                , saldo(cuentaDada) * 12 when tipoDeMoneda(cuentaDada) == Reales
+                , saldo(cuentaDada) otherwise
+    )
+}
+
+
+function numeroDeCuentasConMayorSaldoEntre_Y_(cuenta1, cuenta2) {
+    /*
+        PROPOSITO: Describir el numero de la cuenta que tiene el mayor saldo
+        entre las cuentas **cuenta1** y **cuenta2**
+        PARAMETROS: 
+            *cuenta1: Cuenta - cuenta a comparar con **cuenta2**
+            *cuenta2: Cuenta - cuenta a comparar con **cuenta1**
+        TIPO: Numero.
+        PRECONDICIONES: Ninguna.
+    */
+    return(choose numeroDeCuenta(cuenta1) when saldoEnPesosDe_(cuenta1) > saldoEnPesosDe_(cuenta2)
+                , numeroDeCuenta(cuenta2) otherwise
+    )    
+}
+
+
+function cuenta_ActualizadaTrasExtraccionDeCajeroDe_(cuentaDada, cantExtraer) {
+    /*
+        PROPÓSITO: Describir la cuenta **cuentaDada** con el saldo resultante despues
+        de extraer **cantExtraer** de la cuenta.
+        PARÁMETROS:
+            *cuentaDada: Cuenta - cuenta de la cual extraer el monto dado.
+            *cantExtraer: Numero - monto a extraer
+        TIPO: Cuenta.
+        PRECONDICIONES: El parametro **cantExtraer** es mayor o igual a 0 y no 
+        es mayor que el saldo existente en la cuenta **cuentaDada**.
+    */
+    return ( Cuenta ( cuentaDada | saldo <- saldo(cuentaDada) - cantExtraer ) )
+}
+
+
+function puedeExtraer_PorCajeroDeLaCuenta_(montoAExtraer, cuentaDada) {
+    /*
+        PROPOSITO: Indicar si la extraccion de un monto de **montoAExtraer** en 
+        la cuenta **cuentaDada** no resultaria en un saldo negativo.
+        PARAMETROS:
+            *montoAExtraer: Numero - cantidad a extraer de la cuenta.
+            *cuentaDada: Cuenta - cuenta de la cual extraer el monto dado.
+        TIPO: Booleano.
+        PRECONDICIONES: Ninguna.
+    */
+    return( saldo(cuentaDada) >= montoAExtraer )
+}
+
+
+function cuenta_ActualizadaTrasDepositoEnCajeroDe_(cuentaDada, montoADepositar) {
+    /*
+        PROPOSITO: Describir la cuenta resultante luego de depositar **montoADepositar**
+        en la cuenta **cuentaDada**.
+        PARAMETROS:
+            *cuentaDada: Cuenta - cuenta en la cual depositar.
+            *montoADepositar: Numero - cantidad a depositar en la cuenta dada.
+        TIPO: Cuenta.
+        PRECONDICIONES: el parametro **montoADepositar** es un numero mayor o igual a 0. 
+    */
+    return( Cuenta( cuentaDada | saldo <- saldo + montoADepositar))
+}
+
+

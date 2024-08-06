@@ -1,0 +1,54 @@
+procedure RegistrarElDíaDeLaMemoria() {
+    /*
+        PROPÓSITO: Hacer que el cabezal escriba la fecha del dia de la memoria 
+        PRECONDICIONES: El cabezal debe estar en una casilla vacia y deben haber por lo menos
+        dos casillas vacias hacia el Este del cabezal
+    */
+    PonerDiaYMoverseEste()
+    PonerMesYMoverseEste()
+    PonerAño()
+    VolverAlPrincipio()
+}
+
+procedure PonerDiaYMoverse() {
+    /*
+        PROPÓSITO: Hacer que el cabezal ponga 24 bolitas Azules en la casilla actual y luego se
+        mueva una casilla hacia el Este
+        PRECONDICIONES: Debe haber por lo menos una casilla hacia el Este de la actual
+    */
+    repeat(24) {
+        Poner(Azul)
+    }    
+    Mover(Este)
+}
+
+procedure PonerMesYMoverse() {
+    /*
+        PROPÓSITO: Hacer Que el cabezal ponga 3 bolitas Rojas en la casilla actual y luego se
+        mueva una casilla hacia el Este
+        PRECONDICIONES: Debe haber por lo menos una casilla hacia el Este de la actual
+    */
+    repeat(3) {
+        Poner(Rojo)
+    }
+    Mover(Este)
+}
+
+procedure PonerAño() {
+    /*
+        PROPÓSITO: Hacer que el cabezal ponga 1976 bolitas Verdes en la casilla actual
+        PRECONDICIONES: -
+    */
+    repeat(1976) {
+        Poner(Verde)
+    }
+}
+
+procedure VolverAlPrincipio() {
+    /*
+        PROPÓSITO: Hacer que el cabezal se mueva 2 celdas hacia el Oeste
+        PRECONDICIONES: Debe haber por lo menos 2 celdas hacia el Oeste del cabezal
+    */
+    Mover(Oeste)
+    Mover(Oeste)
+}

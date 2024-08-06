@@ -1,0 +1,160 @@
+type Coordenada is record {
+   
+    /*
+    PROPOSITO: modelar las coordenadas del tablero
+    INV. REP: 
+        *La coordenada de origen es 0 en fila y 0 en columna
+    */
+    field fila          // Tipo Numero
+    field columna       // Tipo Numero
+}
+
+// a) -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+function coordenada__(coordenadaX, coordenadaY){
+    
+    /*
+    PROPOSITO: Describe una nueva coordenada con fila "coordenadaX" y columna "coordenadaY"
+    PRECONDICION: Las coordenadas son un numero
+    PARAMETROS: 
+        * numeroX - Numero - 
+        * numeroY - Numero -
+    TIPO: Coordenada
+    */
+    
+    return(Coordenada(fila <- coordenadaX, columna <- coordenadaY))
+}
+
+// b) -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+function esCoordenadaOrigen_(coordenada){
+    
+    /*
+    PROPOSITO: Denota si *coordenada* es la coordenada del origen
+    PRECONDICION: Ninguna
+    PARAMETROS: 
+        * coordenada - Coordenda - describe el conjunto entre la coordenada X e Y
+    TIPO: Coordenada
+    */
+    
+    return(fila(coordenada) == 0 && columna(coordenada) == 0)
+}
+
+// c) -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+function esLaMayorCoordenadaEntre_Y_(primerCoordenada, segundaCoordenada){
+    
+    /*
+    PROPOSITO: Indica si la "primerCoordenada" aparece despues que la "segundaCoordenada" en un recorrido que va primero hacia el Norte y luego hacia el Este
+    PRECONDICION: Ninguna
+    PARAMETROS: 
+        * primerCoordenada - Coordenada - Describe el primer conjunto de coordenadas
+        * segundaCoordenada - Coordenada - Describe el segundo conjunto de coordenadas
+    TIPO: Booleano
+    */
+    
+    return(fila(primerCoordenada) > fila(segundaCoordeanada) || columna(primerCoordenada) > columna(segundaCoordenada))
+}
+
+// d) -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+function coordenadaActual(){
+    
+    /*
+    PROPOSITO: Describe la coordenada donde se encuentra el cabezal
+    PRECONDICION: Ninguna
+    TIPO: Coordenada
+    */
+    
+    return(Coordenada(fila <- cantidadDeCeldasAl_(Oeste) && columna <- cantidadDeFilasAl_(Norte)))
+}
+
+function cantidadDeCeldasAl_(direccion){
+    
+    /*
+    PROPOSITO: Describe la cantidad de celdas hacía la direccion *direccion* que se encuentra el cabezal
+    PRECONDICION: Debe haber celdas hacía la direccion a mover
+    PARAMETROS: 
+        * direccion - direccion - indica hacía que direccion se movera el cabezal
+    TIPO: Numero
+    */
+    
+    cantidadDeCeldasVistas := 0
+    while(puedeMover(direccion)){
+        cantidadDeCeldasVistas := cantidadDeCeldasVistas + 1
+        Mover(direccion)
+    }
+    
+    return(cantidadDeCeldasVistas)
+}
+
+// e) -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+function ultimaCoordenada(){
+    
+    /*
+    PROPOSITO: Describe la última coordenada del tablero en un recorrido hacia el Noreste
+    PRECONDICION: Ninguna
+    TIPO: Coordenada
+    */
+    
+    IrAlOrigen()
+    return(Coordenada(fila <- cantidadDeCeldasAl_(Este) , columna <- cantidadDeCeldasAl_(Norte)))
+}
+
+// f) -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+procedure IrACoordenada_(coordenada){
+    
+    /*
+    PROPOSITO: Desplaza el cabezal hacía la coordenada indicada por *coordenada*
+    PRECONDICION: La celda hacia la *coordenada* debe existir
+    PARAMETROS: coordenada - Coordenada - indica la coordenada hacía la que se desplazara el cabezal
+    */
+    
+    IrAlOrigen()
+    Mover_AlNorteY_AlEste(fila(coordenada), columna(coordenada))
+}
+
+procedure Mover_AlNorteY_AlEste(primeraCantidad, segundaCantidad){
+    
+    /*
+    PROPOSITO: Desplaza el cabezal la cantidad *primerCantidad* hacía el Norte y *segundaCantidad* hacía el Este
+    PRECONDICION: Debe haber celdas hacia  el Norte segun la "primeraCantidad" y hacia el Este segun "segundaCantidad" 
+    PARAMETROS: primeraCantidad - Numero - indica la cantidad de celdas que se va a mover el cabezal hacia el Norte
+                segundaCantidad - Numero - indica la cantidad de celdas que se va a mover el cabezal hacia el Este
+    */
+    
+    Mover__Veces(primeraCantidad, Norte)
+    Mover__Veces(segundaCantidad, Este)
+}
+
+// g) -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+function siguienteCoordenadaA_(coordenada){
+    
+    /*
+    PROPOSITO: Describe la siguiente coordenada en un recorrido que va primero hacia el Norte y luego hacia el Este
+    PRECONDICION: La coordenada dada tiene que existir
+    PARAMETROS: 
+        * coordenada - Coordenada - indica la coordenada que se tomara como margen
+    TIPO: Coordenada
+    */
+    
+    return(Coordenada(fila <- fila(coordenada) + 1 , columna <- columna(coordenada) + 1))
+}
+
+// h) -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+function reflejoDe_(coordenada){
+    
+    /*
+    PROPOSITO: Describe la "coordenada" con los valores de fila y columna invertidos
+    PRECONDICION: Ninguna
+    PARAMETROS: 
+        * coordenada - Coordenada - indica la coordenada que se tomara como margen
+    TIPO: Coordenada
+    */
+    
+    return(Coordenada(fila <- columna(coordenada), columna <- fila(coordenada)))
+}

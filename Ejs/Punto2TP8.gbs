@@ -1,0 +1,102 @@
+
+
+type Carta is record {
+    /*PROPOSITO: Modelar cartas españolas de truco
+    INV.REP.: 
+    - el numero esta entre el 1 y 7, o entre el 10 y 12
+    */
+    field palo // Un valor de tipo Palo
+    field numero // Un valor de tipo Numero 
+}
+
+
+type Palo is Variant {
+    /*PROPOSITO: Modelar los palos de cartas españolas
+    */
+    case Bastos {}
+    case Copas {}
+    case Espadas {}
+    case Oros {}
+}
+
+
+function es_Figura(cartaAComprobar) {
+    /*
+        PROPÓSITO: Indicar si la carta **cartaAComprobar** es 
+        una figura.
+        PARÁMETROS:
+            *cartaAComprobar: Carta.
+        TIPO: Booleano
+        PRECONDICIONES: Ninguna.
+    */
+    return (numero(cartaAComprobar) >= 10)
+}
+
+
+function envidoCon_Y_(carta1, carta2) {
+    /*
+        PROPÓSITO: Indicar el valor del envido que obtiene
+        con un **carta1** y un **carta2**.
+        PARÁMETROS:
+            *carta1: Carta.
+            *carta2: Carta.
+        TIPO: Numero.
+        PRECONDICIONES: Ninguna.
+    */
+    return (choose envidoCon_Y_MismoPalo(carta1, carta2) when palo(carta1) /= palo(carta2)
+                   envidoCon_Y_DistintoPalo(carta1, carta2) otherwise 
+           )
+}
+
+
+function envidoCon_Y_MismoPalo(carta1, carta2) {
+    /*
+        PROPOSITO: Indicar el valor del envido que se obtiene con dos cartas del mismo palo,
+        siendo estas un **carta1** y un **carta2**.
+        PARAMETROS:
+            *carta1: Carta.
+            *carta2: Carta.
+        TIPO: Numero.
+        PRECONDICIONES: Los parametros carta1 y carta2 son dos cartas del mismo palo.
+    */
+    return(choose ( envidoSimpleCon_Y_(carta1, carta2) ) when ( numero(carta1) <= 10 && numero(carta2) <=10 ) 
+                  ( numero(carta1) + 20 )                when ( numero(carta2) >= 10 && numero(carta1) <=10 )
+                  ( numero(carta2) + 20 )                when ( numero(carta1) >=10 && numero(carta2) <= 10 )
+                  20 otherwise
+    )             
+}
+
+
+function envidoCon_Y_DistintoPalo(carta1, carta2) {
+    /*
+        PROPOSITO: Indicar el valor del envido que se obtiene con dos cartas de distinto palo,
+        siendo estas un **carta1** y un **carta2**.
+        PARAMETROS:
+            *carta1: Carta.
+            *carta2: Carta.
+        TIPO: Numero.
+        PRECONDICIONES: Los parametros carta1 y carta2 son dos cartas de diferente palo.
+    */
+    return(choose ( mayorEntre_Y_(numero(carta1), numero(carta2)) ) when ( numero(carta1) < 10 && numero(carta2) < 10 )
+                  ( numero(carta1) )                                when ( numero(carta1) < 10 && numero(carta2) >= 10 )
+                  ( numero(carta2) )                                when ( numero(carta1) >= 10 && numero(carta2) < 10 )
+                  0  otherwise
+    )
+}
+
+
+function envidoCon_Y_mayorA_(carta1, carta2, valor) {
+    /*
+        PROPÓSITO: Indicar si el envido que se obtiene entre un **carta1** y un **carta2** es 
+        igual o mayor a **valor**
+        PARÁMETROS:
+            *carta1: Carta.
+            *carta2: Carta.
+            *valor: Numero - numero a comparar con el envido que se calcula.
+        TIPO: Booleano.
+        PRECONDICIONES: Ninguna.
+    */
+    return (envidoCon_Y_(carta1, carta2) >= valor)
+}
+
+

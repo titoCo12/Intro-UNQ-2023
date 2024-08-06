@@ -1,0 +1,31 @@
+function coordenadaX(){
+   
+    /*
+    PROPOSITO: Indica la cordena de la columna en la que estamos 
+    PRECONCION: Ninguna
+    TIPO: Numero
+    */
+    
+    cantidadDeColumnasVistas := 0 
+    while(puedeMover(Oeste)){
+        cantidadDeColumnasVistas := cantidadDeColumnasVistas + 1
+        Mover(Oeste)
+    }
+    return(cantidadDeColumnas)
+}
+
+function coordenadaY(){
+    
+    /*
+    PROPOSITO: Indica la cordena de la fila en la que estamos 
+    PRECONCION: Ninguna
+    TIPO: Numero
+    */
+    
+    cantidadDeFilasVistas := 0 
+    while(puedeMover(Sur)){
+        cantidadDeFilasVistas := cantidadDeFilasVistas + 1
+        Mover(Sur)
+    }
+    return(cantidadDeColumnas)
+}

@@ -1,0 +1,131 @@
+
+procedure IrAPorLaLlave() {
+    /*
+        PROPÓSITO: Hacer que la protagonista se mueva hasta la llave
+        PRECONDICIONES: Debe haber por lo menos 4 espacios hacia el Este y 3 espacios
+        hacia el Norte de la protagonista
+    */
+    Sacar(Azul)
+    Mover(Este)
+    Poner(Azul)
+    Sacar(Azul)
+    Mover(Este)
+    Poner(Azul)
+    Sacar(Azul)
+    Mover(Este)
+    Poner(Azul)
+    Sacar(Azul)
+    Mover(Norte)
+    Poner(Azul)
+    Sacar(Azul)
+    Mover(Este)
+    Poner(Azul)
+    Sacar(Azul)
+    Mover(Norte)
+    Poner(Azul)
+    Sacar(Azul)
+    Mover(Norte)
+    Poner(Azul)
+}
+
+procedure TomarLlave() {
+    /*
+        PROPÓSITO: Hacer que la protagonista tome la llave de la casilla en la que se encuentra
+        PRECONDICIONES: Debe haber una llave en la casilla actual de la protagonista
+    */
+    Sacar(Verde)
+}
+
+procedure IrAlCofre() {
+    /*
+        PROPÓSITO: Hacer que la protagonista se mueva hacia la casilla del cofre
+        PRECONDICIONES: Debe haber por lo menos una casilla hacia el Norte y 4 Hacia el Oeste
+        de la protagonista
+    */
+    Sacar(Azul)
+    Mover(Oeste)
+    Poner(Azul)
+    Sacar(Azul)
+    Mover(Oeste)
+    Poner(Azul)
+    Sacar(Azul)
+    Mover(Oeste)
+    Poner(Azul)
+    Sacar(Azul)
+    Mover(Norte)
+    Poner(Azul)
+}
+
+procedure AbrirElCofre() {
+    /*
+        PROPÓSITO: Hacer que la protagonista abra el cofre
+        PRECONDICIONES: Debe haber un cofre en la casilla hacia el Oeste de la protagonista
+    */
+    Mover(Oeste)
+    Sacar(Verde)
+    Mover(Este)
+}
+
+procedure VolverConElMago() {
+    /*
+        PROPÓSITO: Hacer que la protagonista vuelva con el mago
+        PRECONDICIONES: Debe haber por lo menos 1 casilla hacia el Oeste y 4 hacia el Sur de 
+        la protagonista
+    */
+    Sacar(Azul)
+    Mover(Sur)
+    Poner(Azul)
+    Sacar(Azul)
+    Mover(Oeste)
+    Poner(Azul)
+    Sacar(Azul)
+    Mover(Sur)
+    Poner(Azul)
+    Sacar(Azul)
+    Mover(Sur)
+    Poner(Azul)
+    Sacar(Azul)
+    Mover(Sur)
+    Poner(Azul)
+}
+
+procedure IntercambiarSombreroPorEspada() {
+    /*
+        PROPÓSITO: Hacer que la protagonista le devuelva el sombrero al mago
+        y a cambio reciba la espada
+        PRECONDICIONES: El mago debe estar en el espacio lindante al Este de la protagonista
+    */
+    Poner(Azul)
+    Poner(Azul)
+    Poner(Azul)
+}
+
+procedure IrHaciaElPrincipe() {
+    /*
+        PROPÓSITO: Hacer que la protagonista se mueva hacia el pricipe y el caballero oscuro
+        PRECONDICIONES: Debe haber por lo menos dos casillas hacia el Este y Norte de la protagonista
+    */
+    Sacar(Azul)
+    Sacar(Azul)
+    Sacar(Azul)
+    Sacar(Azul)
+    Mover(Norte)
+    Poner(Azul)
+    Sacar(Azul)
+    Mover(Norte)
+    Poner(Azul)
+    Sacar(Azul)
+    Mover(Este)
+    Poner(Azul)
+    Poner(Azul)
+    Poner(Azul)
+    Poner(Azul)
+}
+
+procedure SalvarPrincipe() {
+    /*
+        PROPÓSITO: 
+        PRECONDICIONES:
+    */
+    
+}

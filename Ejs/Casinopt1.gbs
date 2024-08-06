@@ -1,0 +1,282 @@
+
+
+procedure AgregarApuestaDe_Al_Para_(monto, nroApostado, nroJugador) {
+    /*
+        PROPÓSITO: Agregar una apuesta de **monto** al **nroApostado** de parte
+        del jugador **nroJugador** en alguna celda vacia del tablero.
+        PARÁMETROS:
+            *monto: Cantidad - Numero del monto apostado
+            *nroApostado: Cantidad - Numero apostado
+            *nroJugador: Cantidad - numero del jugador
+        PRECONDICIONES: Hay por lo menos una celda vacia en el tablero actual.
+    */
+    IrAPrimeraCeldaEnUnRecorridoAl_Y_(Este, Norte)
+    while (not(esVacia())) {
+        IrASiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte)
+    }
+    Poner_Veces_(monto, Verde)
+    Poner_Veces_(nroApostado, Azul)
+    Poner_Veces_(nroJugador, Rojo)
+}
+
+
+
+procedure PagarYCobrarAl_(nroQueSalió) {
+    /*
+        PROPÓSITO: Pagarle a todos los jugadores que apostaron al **nroQueSalio** 5 veces 
+        el monto de dinero que apostaron, y retirar todo el dinero de los jugadores que 
+        no ganaron
+        PARÁMETROS:
+            *nroQueSalio: Cantidad - numero de apuesta ganador
+        PRECONDICIONES: Hay por lo menos un jugador con un numero ganador.
+    */
+    IrAPrimeraCeldaEnUnRecorridoAl_Y_(Este, Norte)
+    while(haySiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte)) {
+        CobrarSiPerdiOPagarSiGano_(nroQueSalió)
+        IrASiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte)
+    }
+    CobrarSiPerdioOPagarSiGano_(nroQueSalió)
+}
+
+
+
+procedure CobrarSiPerdioOPagarSiGano_(nroDeLaApuesta) {
+    /*
+        PROPÓSITO: Pagarle al jugador actual con el quintuple de su monto apostado en caso
+        de haber ganado, en caso contrario remover el total de dicho monto.
+        PARÁMETROS:
+            *nroDeLaApuesta: Cantidad - Numero apostado a revisar.
+        PRECONDICIONES: Hay almenos un peso en la celda actual.
+    */
+    if (nroBolitas(Azul) == nroDeLaApuesta) {
+        Poner_Veces_(nroBolitas(Verde) * 5, Verde)
+    }
+    else {
+        Sacar_Veces_(nroBolitas(Verde), Verde)
+    }
+}
+
+
+
+procedure RecogerPropinas() {
+    /*
+        PROPÓSITO: Extraer un peso de todas las celdas con al menos 15 pesos
+        PRECONDICIONES: Ninguna
+    */
+    IrAPrimeraCeldaEnUnRecorridoAl_Y_(Este, Norte)
+    RevisarYTomarPropina()
+    while (haySiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte)) {
+        IrASiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte)
+        RevisarYTomarPropina()
+    }
+}
+
+
+
+procedure RevisarYTomarPropina() {
+    /*
+        PROPÓSITO: Extraer un peso de la celda actual si y solo si hay una cantidad
+        de 15 pesos o mayor
+        PRECONDICIONES: Ninguna
+    */
+    if (esAptoParaPropina()) {
+        Sacar(Verde)
+    }
+}
+
+
+
+function esAptoParaPropina() {
+    /*
+        PROPÓSITO: Indicar si el jugador en la celda actual aposto al menos 15 pesos
+        TIPO: Booleano
+        PRECONDICIONES: Ninguna
+    */
+    return (nroBolitas(Verde) >= 15)
+}
+
+
+
+procedure SeVaElJugador_(nroJugador) {
+    /*
+        PROPÓSITO: Vaciar todas las celdas del tablero que registran una apuesta del 
+        jugador **nroJugador**
+        PARÁMETROS:
+            *nroJugador: Cantidad - Numero del jugador que se va
+        PRECONDICIONES: El parametro nroJugador es un valor mayor o igual a 1 
+    */
+    IrAPrimeraCeldaEnUnRecorridoAl_Y_(Este, Norte)
+    RevisarYBorrar_(nroJugador)
+    while (haySiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte)) {
+        IrASiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte)
+        RevisarYBorrar_(nroJugador)
+    }
+}
+
+
+
+procedure RevisarYBorrar_(jugadorABorrar) {
+    /*
+        PROPÓSITO: Revisar la celda actual y vaciarla en caso de que contenga una apuesta
+        del jugador **jugadorABorrar**
+        PARÁMETROS:
+            *jugadorABorrar: Cantidad - Numero del jugador a borrar
+        PRECONDICIONES: El parametro jugadorABorrar es un valor mayor o igual a 1
+    */
+    if (nroBolitas(Rojo) == jugadorABorrar) {
+        VaciarCelda()
+    }
+}
+
+
+
+procedure DuplicarApuestasAl_(nroApostado) {
+    /*
+        PROPÓSITO: Duplicar el monto de todas las apuestas del numero **nroApostado**
+        PARÁMETROS:
+            *nroApostado: Cantidad - numero de las apuestas a duplicar
+        PRECONDICIONES: el parametro nroApostado es un valor mayor o igual a 1
+    */
+    IrAPrimeraCeldaEnUnRecorridoAl_Y_(Este, Norte)
+    RevisarYDuplicar_(nroApostado)
+    while (haySiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte)) {
+        IrASiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte)
+        RevisarYDuplicar_(nroApostado)
+    }
+}
+
+
+
+procedure RevisarApuestaYDuplicar_(numero) {
+    /*
+        PROPÓSITO: Revisar la celda actual y duplicar el monto apostado en el caso de
+        que el numero apostado sea **numero**
+        PARÁMETROS:
+            *numero: Cantidad - numero apostado cuyo monto se busca duplicar
+        PRECONDICIONES: Ninguna
+    */
+    if (nroBolitas(Azul) == numero) {
+        Poner_Veces_(nroBolitas(Verde), Verde)
+    }
+}
+
+
+
+procedure DuplicarApuestasDelJugador_(nroJugador) {
+    /*
+        PROPÓSITO: Duplicar todos los montos de todas las apuestas que hizo el jugador
+        **nroJugador**
+        PARÁMETROS:
+            *nroJugador: Cantidad - numero del jugador cuyo monto se apostara
+        PRECONDICIONES:
+            * ....
+    */
+    IrAPrimeraCeldaEnUnRecorridoAl_Y_(Este, Norte)
+    RevisarJugadorYDuplicar_(nroJugador)
+    while (haySiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte)) {
+        IrASiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte)
+        RevisarJugadorYDuplicar_(nroApostado)
+    }
+}
+
+
+
+procedure CambiarNroApostadoDel_Al_(nroAnterior, nroNuevo) {
+    /*
+        PROPÓSITO: Cambiar todas las apuestas al **nroAnterior** para que sean al
+        **nroNuevo**
+        PARÁMETROS:
+            *nroAnterior: Cantidad - numeros apostados a reemplazar
+            *nroNuevo: Cantidad - numeros apostados nuevos 
+        PRECONDICIONES: Los parametros nroAnterior y nroNuevo son valores distintos
+        y mayores o iguales a 1.
+    */
+    IrAPrimeraCeldaEnUnRecorridoAl_Y_(Este, Norte)
+    RevisarYReemplazar_Por_(nroAnterior, nroNuevo)
+    while (haySiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte)) {
+        IrASiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte)
+        RevisarYReemplazar_Por_(nroAnterior, nroNuevo)
+    }
+}
+
+
+
+procedure RevisarYReemplazar_Por_(viejo, nuevo) {
+    /*
+        PROPÓSITO: Si el numero apostado de la celda actual es **viejo** reemplazarlo por
+        **nuevo**
+        PARÁMETROS:
+            *viejo: Cantidad - numero viejo a reemplazar
+            *nuevo: Cantidad - numero nuevo
+        PRECONDICIONES: Ninguna
+    */
+    if (nroBolitas(Azul) == viejo) {
+        Sacar_Veces_(viejo, Azul)
+        Poner_Veces_(nuevo, Azul)
+    }
+}
+
+
+
+procedure AumentarEn_LaApuestaDelJugador_Al_(monto, nroJugador, nroApostado) {
+    /*
+        PROPÓSITO: Agregar **monto** pesos a la apuesta del numero **nroApostado** del
+        jugador **nroJugador**
+        PARÁMETROS:
+            *monto: Cantidad - numero de pesos a agregar al monto 
+            *nroJugador: Cantidad - numero del jugador que se busca
+            *nroApostado: Cantidad - numero apostado que se busca
+        PRECONDICIONES: Hay por lo menos una apuesta de **nroJugador** al numero **nroApostado**
+    */
+    BuscarApuestaDelJugador_Al_(nroJugador, nroApostado)
+    Poner_Veces_()
+}
+
+
+
+procedure SiEs_YAposto_Sumar_(jugador, numero, plata) {
+    /*
+        PROPÓSITO: Si en la celda actual se encuentra la apuesta de **jugador** al numero **numero**
+        sumarle **plata** pesos al monto apostado.
+        PARÁMETROS:
+            *jugador: Cantidad - numero del jugador que se busca
+            *numero: Cantidad - numero apostado que se busca
+            *plata: Cantidad - monto a sumar
+        PRECONDICIONES: Ninguna
+    */
+    if (nroBolitas(Rojo) == jugador && nroBolitas(Azul) == numero) {
+        Poner_Veces_(plata, Verde)
+    }
+}
+
+
+
+procedure BuscarApuestaDelJugador_Al_(nroJugador, nroApostado) {
+    /*
+        PROPÓSITO: Posicionar al cabezal sobre una celda que contenga una apuesta de **nroJugador**
+        al numero **nroApostado**
+        PARÁMETROS:
+            *nroJugador: Cantidad - numero del jugador cuya apuesta se busca
+            *nroApostado: Cantidad - numero apostado
+        PRECONDICIONES: Hay por lo menos una apuesta de **nroJugador** al numero **nroApostado**
+    */
+    IrAPrimeraCeldaEnUnRecorridoAl_Y_(Este, Norte)
+    while (not(es_YAposto_(nroJugador, nroApostado))) {
+        IrASiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte)
+    }
+}
+
+
+
+function es_YAposto_(jugador, numero) {
+    /*
+        PROPÓSITO: Indicar si en la celda actual se encuentra una apuesta de **jugador** al
+        numero **numero**
+        PARÁMETROS:
+            *jugador: Cantidad - numero del jugador que se busca
+            *numero: Cantidad - numero de apuesta que se busca
+        TIPO: Booleano
+        PRECONDICIONES: Ninguna
+    */
+    return (nroBolitas(Azul) == numero && nroBolitas(Rojo) == jugador)
+}

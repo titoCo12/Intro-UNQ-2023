@@ -1,0 +1,92 @@
+// BIBLIOTECA
+
+procedure IrAPrimeraCeldaEnRecorridoAl_YAl_(dirPrincipal, dirSecundaria) {
+  /*
+    Propósito: Ubicar el cabezal en la primera celda de un recorrido hacia
+      el **dirPrincipal** y el **dirSecundaria**.
+    Precondiciones: Ninguna.
+    Parámetros:
+    * dirPrincipal: Dirección - La dirección principal del recorrido.
+    * dirSecundaria: Dirección - La dirección secundaria del recorrido.
+  */
+}
+
+function haySiguienteCeldaEnRecorridoAl_YAl_(dirPrincipal, dirSecundaria) {
+  /*
+    Propósito: Indicar si existen celdas restantes desde la celda actual en un
+      recorrido hacia el **dirPrincipal** y el **dirSecundaria**.
+    Precondiciones: Ninguna.
+    Parámetros:
+    * dirPrincipal: Dirección - La dirección principal del recorrido.
+    * dirSecundaria: Dirección - La dirección secundaria del recorrido.
+    Tipo: Booleano.
+  */
+}
+
+procedure PasarASiguienteCeldaEnRecorridoAl_YAl_(dirPrincipal, dirSecundaria) {
+  /*
+    Propósito: Ubicar el cabezal en celda siguiente a la celda actual en un
+      recorrido hacia el **dirPrincipal** y el **dirSecundaria**.
+    Precondiciones: El cabezal no se encuentra en la última celda de un
+      recorrido hacia el **dirPrincipal** y el **dirSecundaria**.
+    Parámetros:
+    * dirPrincipal: Dirección - La dirección principal del recorrido.
+    * dirSecundaria: Dirección - La dirección secundaria del recorrido.
+  */
+}
+
+// PRIMITIVAS
+
+procedure Subir() {
+  /*
+    Propósito: Ubicar el cabezal en la celda lindante hacia arriba
+      a la celda actual.
+    Precondiciones: Existe una celda lindante hacia arriba desde la
+      celda actual.
+  */
+}
+
+procedure Bajar() {
+  /*
+    Propósito: Ubicar el cabezal en la celda lindante hacia abajo
+      a la celda actual.
+    Precondiciones: Existe una celda lindante hacia abajo desde la
+      celda actual.
+  */
+}
+
+function puedeSubir() {
+  /*
+    Propósito: Indicar si existe una celda lindante hacia arriba desde la
+      celda actual.
+    Precondiciones: Ninguna.
+    Tipo: Booleano.
+  */
+}
+
+function puedeBajar() {
+  /*
+    Propósito: Indicar si existe una celda lindante hacia abajo desde la
+      celda actual.
+    Precondiciones: Ninguna.
+    Tipo: Booleano.
+  */
+}
+
+function estáGobi() {
+  /*
+    Propósito: Indicar si gobi está en la celda actual.
+    Precondiciones: Ninguna.
+    Tipo: Booleano.
+  */
+}
+
+function estáGobiEnEstePiso() {
+  /*
+    Propósito: Indicar si gobi está en el piso actual.
+    Precondiciones: Ninguna.
+    Tipo: Booleano.
+    Observaciones: Llamo "piso actual" al piso sobre el que se encuentra
+      la celda actual.
+  */
+}

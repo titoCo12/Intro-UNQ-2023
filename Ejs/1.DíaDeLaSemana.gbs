@@ -1,0 +1,70 @@
+type DíaDeLaSemana is variant {
+    
+    /*
+    PROPOSITO: Modelar los días de una semana 
+    */
+    
+    case Lunes {}
+    case Martes {}
+    case Miercoles {}
+    case Jueves {}
+    case Viernes {}
+    case Sabado {}
+    case Domingo {}
+}
+
+// a) -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+function díaSiguiente_(día){
+    
+    /*
+    PROPOSITO: Devuelve el día siguiente de la semana al dado
+    PRECONDICION: Ninguna
+    PARAMETROS: día - DíaDelaSemana
+    TIPO: Un valor tipo Dia de la semana
+    */
+    
+    return (choose Domingo when (día == Sabado)
+                   Lunes when (día == Domingo)
+                   Martes when (día == Lunes)
+                   Miercoles when (día == Martes)
+                   Jueves when (día == Miercoles)
+                   Viernes when (día == Jueves)
+                   Sabado when (día == Viernes)
+            "wtf te inventaste un día" otherwise)
+}
+
+// b) -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+function díaPrevio_(día){
+    
+    /*
+    PROPOSITO: Devuelve el dia previo del "dia" dado
+    PRECONDICION: Ninguna
+    PARAMETROS: *dia: Tipo DíaDeLaSemana
+    TIPO: Un valor tipo Dia de la semana
+    */
+    
+    return (choose Lunes when (día == Martes)
+                   Martes when (día == Miercoles)
+                   Miercoles when (día == Jueves)
+                   Jueves when (día == Viernes)
+                   Viernes when (día == Sabado)
+                   Sabado when (día == Domingo)
+                   Domingo when (día == Lunes)
+            "wtf te inventaste un día" otherwise)
+}
+
+// c) -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+function esDíaDeFinDeSemana_(dia){
+    
+    /*
+    PROPOSITO: Denota verdadero si el dia dado es un dia del fin de semana
+    PRECONDICION: Ninguna
+    PARAMETROS: *dia: Tipo DíaDeLaSemana
+    TIPO: Booleano
+    */
+    
+    return(dia == Sabado || dia == Domingo)
+}

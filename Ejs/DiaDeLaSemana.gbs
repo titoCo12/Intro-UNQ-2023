@@ -1,0 +1,63 @@
+
+type DiaDeLaSemana is variant {
+    /*PROPOSITO: Modelar los dias de la semana
+    */
+    case Lunes {}
+    case Martes {}
+    case Miercoles {}
+    case Jueves {}
+    case Viernes {}
+    case Sabado {}
+    case Domingo {}
+}
+
+
+function diaSiguienteA_(diaDeSemana) {
+    /*
+        PROPÓSITO: Indicar el dia de la semana siguiente al dia **diaDeSemana**
+        PARÁMETROS:
+            *diaDeSemana: DiaDeLaSemana.
+        TIPO: DiaDeLaSemana.
+        PRECONDICIONES: Ninguna.
+    */
+    return (choose Lunes     when (diaDeSemana == Domingo)
+                   Martes    when (diaDeSemana == Lunes)
+                   Miercoles when (diaDeSemana == Martes)
+                   Jueves    when (diaDeSemana == Miercoles)
+                   Viernes   when (diaDeSemana == Jueves)
+                   Sabado    when (diaDeSemana == Viernes)
+                   Domingo   otherwise
+    )
+}
+
+
+function diaPrevioA_(diaDeSemana) {
+    /*
+        PROPÓSITO:  Indicar el dia de la semana previo al dia **diaDeSemana**
+        PARÁMETROS:
+            *diaDeSemana: DiaDeLaSemana.
+        TIPO: DiaDeLaSemana.
+        PRECONDICIONES: Ninguna.
+    */
+    
+    return (choose Lunes     when (diaDeSemana == Martes)
+                   Martes    when (diaDeSemana == Miercoles)
+                   Miercoles when (diaDeSemana == Jueves)
+                   Jueves    when (diaDeSemana == Viernes)
+                   Viernes   when (diaDeSemana == Sabado)
+                   Sabado    when (diaDeSemana == Domingo)
+                   Domingo   otherwise
+    )
+}
+
+
+function es_DiaDeFinDeSemana(diaDeSemana) {
+    /*
+        PROPOSITO: Indicar si el dia **diaDeSemana** es un dia de fin de semana o no
+        PARAMETROS:
+        *diaDeSemana: DiaDeLaSemana.
+        TIPO: Booleano.
+        PRECONDICIONES: Ninguna.
+    */
+    return( ( diaDeSemana == Sabado ) || ( diaDeSemana == Domingo ) )
+}

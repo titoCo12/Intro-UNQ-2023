@@ -1,0 +1,68 @@
+procedure Poner_MasUnoVecesAzul(p) { 
+    /*
+        PROPOSITO: Colocar **p** bolitas de color Azul mas una bolita azul
+        adicional en la celda actual.
+        PARAMETROS:
+        *p: Cantidad - cantidad de bolitas a colocar
+        PRECONDICIONES: Ninguna.
+    */
+    p := p + 1 
+    Poner__Veces(Azul, p) 
+}
+
+/*Falta de contrato y nombre adecuado*/
+
+/*---------------------------------------------------------------*/
+
+
+procedure Poner_BolitasAzulesSiNoEs3(p) {
+    /*
+        PROPOSITO: Colocar **p** bolitas azules siempre y cuando
+        el numero dado no sea igual a 3
+        PARAMETROS: 
+        *p: Cantidad - cantidad de bolitas a comprobar y colocar
+        PRECONDICIONES: Ninguna.
+    */
+    if(p /= 3) {
+        Poner__Veces(Azul, p)
+    }
+}
+
+/*Conclui que Nova escribia el programa con el proposito de que si
+el parametro p no es igual a 3, colocaria **p** bolitas de color
+Azul, en el caso contrario el asumio que si usaba una variable no
+definida el programa lo interpretaria como 0, cuando de hecho es un
+error */
+
+/*---------------------------------------------------------------*/
+
+
+procedure PonerAzulYMover_Veces(v) { 
+    /*
+        PROPOSITO: Colocar **v** bolitas de color azul en la celda
+        actual y moverse **v** veces hacia el Este.
+        PARAMETROS:
+        *v: Cantidad - cantidad de bolitas azules a colocar y cantidad
+        de veces que el cabezal se movera hacia el Este.
+        PRECONDICIONES: Hay por lo menos **v** celdas hacia el Este.
+    */
+    Poner__Veces(Azul, v) 
+    Mover__Veces(Este, v) 
+}
+
+/*Nova estaba usando variables/parametros sin definir asi que se lo
+agregue */
+
+/*---------------------------------------------------------------*/
+
+
+procedure Mover10VecesAlEste() {
+    /*
+        PROPOSITO: Mover al cabezal 10 veces hacia el Este
+        PRECONDICION: Hay por lo menos 10 celdas hacia el Este
+        de la actual.
+    */
+Mover__Veces(Este, 10)
+}
+
+/*Tenia un parametro que no usa el procedimiento, acorte el codigo */

@@ -1,0 +1,71 @@
+type Celda is record{
+    
+    /*
+    PROPOSITO: Modelar las celdas del tablero
+    INV-REP: Los numeros son todos mayor 0 iguales a 0
+    */
+    
+    field cantidadDeAzules // un número
+    field cantidadDeNegras // un número
+    field cantidadDeRojas // un número
+    field cantidadDeVerdes // un número
+}
+
+// a) -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+function celdaActual(){
+    
+    /*
+    PROPOSITO: Describe la representacion de la celda actual como un registro de tipo Celda
+    PRECONDICION: Ninguna
+    TIPO: Celda
+    */
+    
+    return(Celda(cantidadDeAzules <- nroBolitas(Azul)
+                ,cantidadDeNegras <- nroBolitas(Negro)
+                ,cantidadDeRojas <- nroBolitas(Rojo)
+                ,cantidadDeVerdes <- nroBolitas(Verde)))
+}
+
+// b) -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+function cantidadDeAzules_(celdaAnterior){
+    
+    /*
+    PRECONDICION: Describre la cantidad de azules como registro de tipo celda
+    PRECONDICION: Ninguna
+    PARAMETROS: *celdaAnterior - Celda - indica el registro que se tomara para calcular las bolitas azules
+    TIPO: Celda
+    */
+    
+    return(Celda(celdaAnterior | cantidadDeAzules <- cantidadDeAzules(celdaAnterior)))
+}
+
+// c) -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+function cantidadTotalDeBolitas_(celdaAnterior){
+   
+    /*
+    PRECONDICION: Describre la cantidad total de bolitas como registro de tipo celda
+    PRECONDICION: Ninguna
+    PARAMETROS: *celdaAnterior - Celda - indica el registro que se tomara para calcular la cantidad de bolitas
+    Tipo: Numero 
+    */
+    
+    return(cantidadDeAzules(celdaAnterior) + cantidadDeNegras(celdaAnterior) + cantidadDeRojas(celdaAnterior) + cantidadDeVerdes(celdaAnterior))
+}
+
+// d) -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+function la_tieneMasBolitasQue_(primerCelda, segundaCelda){
+    
+    /*
+    PRECONDICION: Indica si *primerCelda* tiene más bolitas que *segundaCelda*
+    PRECONDICION: Ninguna
+    PARAMETROS: *primerCelda - Celda - indica el primer registro que se tomara para calcular la cantidad de bolitas
+                *segundaCelda - Celda - indica el segundo registro que se tomara para calcular la cantidad de bolitas
+    Tipo: Booleano 
+    */
+    
+    return(cantidadTotalDeBolitas_(primerCelda) > cantidadTotalDeBolitas_(segundaCelda))
+}

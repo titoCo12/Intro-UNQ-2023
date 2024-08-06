@@ -1,0 +1,63 @@
+program{
+    DibujarBanda_EnDiagonalNEDe_x_(Negro, 4, 5)
+}
+procedure DibujarBanda_EnDiagonalNEDe_x_(color, alto, largo){
+    
+    /*
+    PROPOSITO: Dibujar una banda diagonal del largo *largo* y ancho *ancho* del color *color*
+    PRECONDICION: Debe haber al menos el largo indicado de celdas al Este de la celda actual y el alto * 2 de celdas al Norte de celda la actual 
+    PARAMETROS: *color - color - indica el color que tendra la banda en diagonal
+                *alto - numero - indica el alto que tendra cada banda 
+                *largo - numero - indica el largo que tendra la banda en total
+    */
+    
+    repeat(largo - 1){
+        
+        DibujarLineaVerticalAlNorte(color, alto)
+        AvanzarALaSiguienteLinea()
+    }
+    
+    DibujarLineaVerticalAlNorte(color, alto)
+}
+
+procedure DibujarLineaVerticalAlNorte(colorDeLaLinea, altoDeLaLinea){
+    
+    /*
+    PROPOSITO: Dibujar una linea vertical de largo *largo* del color *color*
+    PRECONDICION: Debe haber al menos el alto indicado de celdas al Norte de la celda actual 
+    PARAMETROS: *colorDeLaLinea - color - indica el color que tendra la banda en diagonal
+                *altoDeLaLinea - numero - indica el alto que tendra cada banda 
+    */
+    
+    repeat(altoDeLaLinea - 1){
+        Poner(colorDeLaLinea)
+        Mover(Norte)
+    }
+    
+    Poner(colorDeLaLinea)
+    VolverAlInicioDeLaLinea(altoDeLaLinea)
+}
+
+procedure VolverAlInicioDeLaLinea(celdasARetornar){
+
+    /*
+    PROPOSITO: Bajar *celdasARetornar* celdas desde la celda actual
+    PRECONDICION: Debe haber tantas celdas al sur como indique *celdasARetornar* desde la celda actual
+    PARAMETROS: *celdasARetornar - numero - Indica la cantidad de celdas que debe volver el cabezal
+    */    
+    
+    repeat (celdasARetornar - 1){
+        Mover(Sur)
+    }
+}
+
+procedure AvanzarALaSiguienteLinea(){
+    
+    /*
+    PROPOSITO: Avanzar hacia la siguiente linea de la diagonal
+    PRECONDICION: Debe haber una celda inmediatamente al Noreste de la celda actual
+    */   
+    
+    Mover(Norte)
+    Mover(Este)
+}

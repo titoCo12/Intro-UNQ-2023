@@ -1,0 +1,10 @@
+procedure VaciarCelda() {
+    /*
+        PROPÓSITO: Vaciar por completo la celda actual
+        PRECONDICIONES: Ninguna
+    */
+    Sacar_Veces_(nroBolitas(Azul), Azul)
+    Sacar_Veces_(nroBolitas(Verde, Verde))
+    Sacar_Veces_(nroBolitas(Rojo), Rojo)
+    Sacar_Veces_(nroBolitas(Negro), Negro)
+}

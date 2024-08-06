@@ -1,0 +1,49 @@
+program {
+    MoverBetoALaPelota()
+    repeat (4) {
+        MoverPieBeto()
+        MoverPelotaYVolver()
+        MoverBetoArriba()
+    }
+    MoverPieBeto()
+    MoverPelotaYVolver()
+    Festejar()
+}
+
+procedure MoverBetoALaPelota() {
+    repeat(5) {
+        Sacar(Azul)
+        Mover(Este)
+        Poner(Azul)
+    }
+}
+
+procedure MoverPieBeto() {
+    Poner(Azul)
+    Sacar(Azul)
+}
+
+procedure MoverPelotaYVolver() {
+    Mover(Este)
+    repeat(3) {
+        Sacar(Negro)
+        Mover(Este)
+        Poner(Negro)
+    }
+    repeat(4) {
+        Mover(Oeste)
+    }
+}
+
+procedure MoverBetoArriba() {
+    Sacar(Azul)
+    Mover(Norte)
+    Poner(Azul)
+}
+
+procedure Festejar() {
+    repeat(100) {
+        Poner(Azul)
+        Sacar(Azul)
+    }
+}

@@ -1,0 +1,16 @@
+procedure IrAlBorde(direccion) {
+    /*
+        PROPOSITO: Ubicar el cabezal en el borde **direccion**
+        del tablero.
+        PARAMETROS:
+        *direccion: Direccion - indica la direccion de borde 
+        hacia donde se debe mover el cabezal.
+        PRECONDICION: Que haya por lo menos una celda hacia el 
+        **direccion** de la celda actual.
+    */
+    while (puedeMover(direccion)) {
+        mover(direccion)
+    }
+}
+
+

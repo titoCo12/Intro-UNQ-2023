@@ -1,0 +1,21 @@
+/*
+Escribir un procedimiento Mover3VecesAl_(direcciónAMover) que dada una
+dirección direcciónAMover mueva el cabezal tres posiciones en dicha dirección.
+Puede usarse como base el procedimiento Mover3VecesAlOeste (realizado en la
+primera práctica). No olvidar escribir el contrato del procedimiento ANTES de realizar el
+código (y que los parámetros son parte del mismo); también discutir la precondición
+escrita con sus compañeros para verificar que la misma es adecuada y correcta.
+*/
+procedure Mover3VecesAl_(direccionAMover) {
+    /*
+        PROPÓSITO: Mover al cabezal tres casillas en direccion hacia el **direccionAMover**
+        PARAMETROS.
+            *direccionAMover: una direccion que describe la direccion en la cual se movera el
+            cabezal tres veces
+        PRECONDICIONES: hay por lo menos 3 casillas en direccion hacia el **direccionAMover**
+        de la actual
+    */
+    repeat (3) {
+        Mover(direccionAMover)    
+    }
+}

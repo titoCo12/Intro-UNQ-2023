@@ -1,0 +1,79 @@
+procedure Poner_SemillasAl_(cantidadDeSemillas, direcciónAPoner) {
+    /*
+        PROPÓSITO: Poner **cantidadDeSemillas** semillas en la celda lindante hacia el
+        **direccionAPoner**
+        PARÁMETROS:
+        *cantidadDeSemillas: Numero - numero de semillas a colocar
+        *direccionAPoner: Direccion - direccion en la cual moverse para colocar semillas
+        PRECONDICIONES: Debe haber por lo menos 1 casilla hacia el **direccionAPoner**
+        OBSERVACION: Deja al cabezal en la celda inicial
+    */
+    Mover(direccionAPoner)
+    repeat (cantidadDeSemillas) {
+        PonerUnaSemilla()
+    }
+    Mover(opuesto(direccionAPoner))
+}
+
+procedure Sacar_ArbolesAl_(cantidadDeArboles, direccionASacar) {
+    /*
+        PROPÓSITO: Sacar **cantidadDeArboles** arboles de la casilla lindante hacia el 
+        **direccionASacar**
+        PARÁMETROS:
+        *cantidadDeArboles: Numero - numero que representa la cantidad de arboles a sacar
+        *direccionASacar: Direccion - direccion que representa la direccion en la que se movera
+        el cabezal para sacar arboles
+        PRECONDICIONES: Debe haber por lo menos una casilla hacia el **direccionASacar**
+        y **cantidadDeArboles** en dicha casilla
+        OBSERVACION: Deja al cabezal en la celda inicial
+    */
+    Mover(direccionASacar)
+    repeat (cantidadDeArboles) {
+        SacarUnÁrbol()
+    }
+    Mover(opuesto(direccionASacar))
+}
+
+procedure Sacar_SemillasEnDiagonalAl_Y_(cantidadDeSemillas, primeraDirDiagonal, segundaDirDiagonal) {
+    /*
+        PROPÓSITO: Sacar **cantidadDeSemillas** de la casilla diagonal hacia el **primeraDirDiagonal**
+        y **segundaDirDiagonal**
+        PARÁMETROS:
+        *cantidadDeSemillas: Numero - numero que representa la cantidad de semillas a sacar de una casilla
+        *primeraDirDiagonal: Direccion - direccion que conforma la primer parte de la direccion diagonal a
+        la que se debe mover el cabezal
+        *segundaDirDiagonal: Direccion - direccion que conforma la segunda parte de la direccion diagonal 
+        a la que se debe mover el cabezazl 
+        PRECONDICIONES: Debe haber por lo menos una casilla en direccion diagonal hacia el **primerDirDiagonal** y 
+        **segundaDirDiagonal**, y debe haber por lo menos **cantidadDeSemillas** semillas en dicha casilla
+        OBSERVACION: Deja al cabezal en la celda inicial
+    */
+    Mover(primeraDirDiagonal)
+    Mover(segundaDirDiagonal)
+    repeat (cantidadDeSemillas) {
+        SacarUnaSemilla()
+    }
+    Mover(opuesto(segundaDirDiagonal))
+    Mover(opuesto(primeraDirDiagonal))
+}
+
+procedure Sacar_ArbolesEnDiagonalHorariaAl_(cantidadDeArboles, direccionDiagonal) {
+    /*
+        PROPÓSITO: Sacar **cantidadDeArboles** arboles de la casilla diagonal lindante hacia el
+        **direccionDiagona** y su siguiente
+        PARÁMETROS:
+        *cantidadDeArboles: Numero - numero que representa la cantidad de arboles a sacar
+        *direccionDiagonal: Direccion - direccion que representa una de las direcciones que conforma la direccion
+        diagonal en la que se movera el cabezal
+        PRECONDICIONES: Debe haber por lo menos una casilla diagonal hacia el **direccionDiagonal** y su siguiente,
+        y por lo menos **cantidadDeArboles** arboles en dicha casilla
+        OBSERVACION: Deja al cabezal en la celda inicial
+    */
+    Mover(direccionDiagonal)
+    Mover(siguiente(direccionDiagonal))
+    repeat (cantidadDeArboles) {
+        SacarUnÁrbol()
+    }
+    Mover(opuesto(siguiente(direccionDiagonal)))
+    Mover(opuesto(direccionDiagonal))
+}

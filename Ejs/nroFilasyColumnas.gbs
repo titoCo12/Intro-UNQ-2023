@@ -1,0 +1,36 @@
+function nroFilas() {
+    /*
+        PROPÓSITO: Indicar la cantidad de filas del tablero.
+        TIPO: Cantidad.
+        PRECONDICIONES: Ninguna
+    */
+    IrAlBorde(Sur)
+    cantidadDeFilas := 1
+    while(puedeMover(Norte)) {
+        Mover(Norte)
+        cantidadDeFilas := cantidadDeFilas + 1
+    }
+    return (cantidadDeFilas)
+}
+
+
+
+function nroColumnas() {
+    /*
+        PROPÓSITO: Indicar la cantidad de columnas del tablero.
+        TIPO: Cantidad.
+        PRECONDICIONES: Ninguna
+    */
+    IrAlBorde(Oeste)
+    cantidadDeColumnas := 1
+    while(puedeMover(Este)) {
+        Mover(Este)
+        cantidadDeColumnas := cantidadDeColumnas + 1
+    }
+    return (cantidadDeColumnas)
+}
+
+
+/*Tecnicamente el cabezal no se mueve, si se hiciese con procedimientos tendria que usar bolitas en una celda
+que se van acumulando segun el cabezal se encuentra celdas columnas/filas sin bolitas de otro color, las cuales
+servirian para marcar una columna/fila ya contada*/

@@ -1,0 +1,11 @@
+
+
+function colorMinimoConBolitas() {
+    /*
+        PROPÓSITO: Describir el color mas chico del cual hay bolitas en la 
+        celda actual.
+        TIPO: Color.
+        PRECONDICIONES: Ninguna.
+    */
+    return (choose )
+}

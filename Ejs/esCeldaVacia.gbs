@@ -1,0 +1,31 @@
+function esCeldaVacia() {
+    /*
+        PROPÓSITO: Indicar si la celda vacia se encuentra vacia 
+        TIPO: Booleano
+        PRECONDICIONES: Ninguna
+    */
+    return(nroBolitas(Verde) == 0 && nroBolitas(Rojo) == 0 && nroBolitas(Azul) == 0 &&
+    nroBolitas(Negro) == 0)
+}
+
+
+function hayAlmenosUnaDeCada() {
+    /*
+        PROPÓSITO: Indicar si hay almenos una bolita de cada color en la celda actual
+        TIPO: Booleano
+        PRECONDICIONES: Ninguna
+    */
+    return (nroBolitas(Verde) >= 1 && nroBolitas(Rojo) >=1 && nroBolitas(Azul) >= 1 &&
+    nroBolitas(Negro) >= 1)
+}
+
+
+function esCeldaConBolitas() {
+    /*
+        PROPÓSITO: Indicar si hay almenos una bolita de cualquier color en la celda actual
+        TIPO: Booleano
+        PRECONDICIONES: Ninguna
+    */
+    return (nroBolitas(Verde) >= 1 || nroBolitas(Rojo) >=1 || nroBolitas(Azul) >= 1 ||
+    nroBolitas(Negro) >= 1)
+}

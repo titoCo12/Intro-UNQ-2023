@@ -1,0 +1,143 @@
+
+/* a) --------------------------------------------------------------------------------------------------*/
+
+
+function esDepositoCentral() {
+    /*
+        PROPÓSITO: Indica si el cabezal se encuentra en el deposito
+        central
+        TIPO: Booleano
+        PRECONDICIONES: Ninguna
+        OBSERVACIONES: El deposito central se representa con 3 bolitas
+        de color negro
+    */
+    return (nroBolitas(Negro) == 3)
+}
+
+function esDepositoLocal() {
+    /*
+        PROPOSITO: Indicar si el cabezal se encuentra en un deposito
+        local
+        TIPO: Booleano
+        PRECONDICIONES: Ninguna
+        OBSERVACIONES: Los depositos locales se representan con 2 bolitas
+        de color negro
+    */
+}
+
+
+/* b) --------------------------------------------------------------------------------------------------*/
+
+
+procedure IrDeCentralAlLocal_(direccion) {
+    /*
+        PROPÓSITO: Mover al cabezal del deposito central al deposito local que esta
+        en direccion hacia el **direccion**
+        PARÁMETROS:
+            *direccion: Direccion - direccion del deposito local al cual ir
+        PRECONDICIONES: El cabezal esta sobre el deposito central.
+        Hay un deposito local hacia el **direccion**
+    */
+    Mover(direccion)
+    while(nroBolitas = 1) {
+        Mover(direccion)
+    }
+}
+
+
+/* c) --------------------------------------------------------------------------------------------------*/
+
+
+procedure IrDeLocal_ACentral(direccion) {
+    /*
+        PROPÓSITO: Mover al cabezal del deposito local que esta al **direccion**
+        hacia el deposito central
+        PARÁMETROS:
+            *direccion: Direccion - direccion del deposito local en el que se encuentra
+            el cabezal 
+        PRECONDICIONES: El cabezal se encuentra sobre el deposito local que esta en
+        direccion hacia el **direccion** del central
+        El deposito central se encuentra hacia la direccion opuesta del **direccion**.
+    */
+    Mover(opuesto(direccion))
+    while (nroBolitas(Negro) == 1) {
+        Mover(opuesto(direccion))
+    }
+}
+
+
+/* d) --------------------------------------------------------------------------------------------------*/
+
+
+procedure Llevar_MercaderiasAlLocal_(cantidad, direccion) {
+    /*
+        PROPÓSITO: Llevar, si hay por lo menos la misma cantidad, **cantidad** de mercaderia 
+        del deposito central hacia el deposito local que esta en direccion hacia el **direccion**
+        PARÁMETROS:
+            *cantidad: Cantidad - Cantidad de mercaderia exacta a llevar a un deposito
+            local.
+            *direccion: Direccion - Direccion del deposito local al cual llevar la mercaderia
+        PRECONDICIONES: El cabezal se encuentra sobre el deposito central.
+        Hay un deposito local en direccion hacia el **direccion**
+        OBSERVACIONES: Una unidad de mercaderia se representa con una bolita azul
+    */
+    if(nroBolitas(Azul) >= cantidad) {
+        Sacar_Veces_(Azul, cantidad)
+        IrDeCentralAlLocal_(direccion)
+        Poner_Veces_(Azul, cantidad)
+    }
+}
+
+
+/* e) --------------------------------------------------------------------------------------------------*/
+
+
+procedure Traer_MercaderiasDelLocal_(cantidad, direccion) {
+    /*
+        PROPÓSITO: Llevar, si hay por lo menos la misma cantidad, **cantidad** unidades de 
+        mercaderia del deposito local que esta en direccion hacia el **direccion** hacia el
+        deposito central en el que se encuentra el cabezal
+        PARÁMETROS:
+            *cantidad: Numero - Cantidad de unidades de mercaderia a llevar
+            *direccion: Direccion - Direccion del deposito local del cual tomar
+            mercaderia
+        PRECONDICIONES: Hay un deposito local hacia el **direccion**.
+        El cabezal se encuentra sobre el deposito central.
+    */
+    IrDeCentralAlLocal_(direccion)
+    if(nroBolitas(Azul) >= cantidad) {
+        Sacar_Veces_(Azul, cantidad)
+        IrDeLocal_ACentral(direccion)
+        Poner_Veces_(Azul, cantidad)
+    }
+    else {
+        IrDeLocal_ACentral(direccion)
+    }
+}
+
+
+/* f) --------------------------------------------------------------------------------------------------*/
+
+
+procedure Mover_MercaderiasDelLocal_AlLocal_(cantidad, origen, destino) {
+    /*
+        PROPÓSITO: Mover, si hay por lo menos la misma cantidad, **cantidad** unidades de
+        mercaderia del deposito local que se encuentra hacia el **origen** a el deposito local
+        que se encuentra hacia el **destino**.
+        PARÁMETROS:
+            *cantidad: Cantidad - cantida de unidades de mercaderia a llevar
+            *origen: Direccion - direccion del deposito del cual tomar la mercaderia
+            *destino: Direccion - direccion del deposito al cual llevar la mercaderia
+        PRECONDICIONES: Hay un deposito local en direccion hacia el **origen** y uno en direccion
+        hacia el **destino**.
+        El cabezal se encuentra sobre el deposito central.
+    */
+    IrDeCentralAlLocal_(origen)
+    if (nroBolitas(Azul) >= cantidad) {
+        IrDeLocal_ACentral(origen)
+        Traer_MercaderiasDelLocal_(cantidad, origen)
+        Llevar_MercaderiasAlLocal_(cantidad, destino)
+    }
+}
+
+

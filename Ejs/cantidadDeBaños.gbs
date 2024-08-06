@@ -1,0 +1,265 @@
+
+
+function cantidadDeBañosEn_(multiverso) {
+    /*
+        PROPOSITO: Describir la cantidad de baños que en hay
+        en cada universo de la lista **multiverso**.
+        PARAMETROS:
+        *multiverso: [Universo] - lista de universos.
+        TIPO: Numero.
+        PRECONDICIONES: Ninguna.
+        OBSERVACIONES: Es un recorrido de acumulacion sobre los universos
+        de la lista **multiverso**, acumulando los baños de cada universo
+        de dicha lista.
+    */
+    bañosContados := 0
+    foreach universo in multiverso {
+        bañosContados := bañosContados + bañosContadosEn_(universo)
+    }
+    return(bañosContados)
+}
+
+
+function bañosContadosEnUniverso_(universoDado) {
+    /*
+        PROPOSITO: Describir la cantidad de baños que en hay
+        en cada galaxia de la lista de galaxias de **universoDado**.
+        PARAMETROS:
+        *universoDado: Universo - Universo a analizar
+        TIPO: Numero.
+        PRECONDICIONES: Ninguna.
+        OBSERVACIONES: Es un recorrido de acumulacion sobre las galaxias 
+        en la lista de galaxias de el universo **universoDado** acumulando
+        los baños de cada galaxia de dicha lista.
+    */
+    bañosContados := 0
+    foreach galaxia in galaxias(universoDado) {
+        bañosContados := bañosContados + bañosContadosEnGalaxia_(galaxia)
+    }
+}
+
+function bañosContadosEnGalaxia_(galaxiaDada) {
+    /*
+        PROPOSITO: Describir la cantidad de baños que en hay
+        en cada planeta de la lista de planetas de **galaxiaDada**.
+        PARAMETROS:
+        *galaxiaDada: Galaxia - Galaxia a analizar
+        TIPO: Numero.
+        PRECONDICIONES: Ninguna.
+        OBSERVACIONES: Es un recorrido de acumulacion sobre los planetas 
+        en la lista de planetas de la galaxia **galaxiaDada** acumulando
+        los baños de cada planeta de dicha lista.
+    */
+    bañosContados := 0
+    foreach planeta in planetas(galaxiaDada) {
+        bañosContados := bañosContados + bañosContadosEnPlaneta_(planeta)
+    }
+}
+
+function bañosContadosEnPlaneta_(planetaDado) {
+    /*
+        PROPOSITO: Describir la cantidad de baños que en hay
+        en cada continente de la lista de continentes de **planetaDado**.
+        PARAMETROS:
+        *planetaDado: Planeta - Planeta a analizar.
+        TIPO: Numero.
+        PRECONDICIONES: Ninguna.
+        OBSERVACIONES: Es un recorrido de acumulacion sobre los continentes 
+        en la lista de continentes del planeta **planetaDado** acumulando
+        los baños de cada continente de dicha lista.
+    */
+    bañosContados := 0
+    foreach continente in continentes(planetaDado) {
+        bañosContados := bañosContados + bañosContadosEnContinente_(continente)
+    }
+}
+
+function bañosContadosEnContinente_(continenteDado) {
+    /*
+        PROPOSITO: Describir la cantidad de baños que en hay
+        en cada pais de la lista de paises de **continenteDado**.
+        PARAMETROS:
+        *continenteDado: Continente - Continente a analizar
+        TIPO: Numero.
+        PRECONDICIONES: Ninguna.
+        OBSERVACIONES: Es un recorrido de acumulacion sobre los paises 
+        en la lista de paises del continente **continenteDado** acumulando
+        los baños de cada pais de dicha lista.
+    */
+    bañosContados := 0
+    foreach pais in paises(continenteDado) {
+        bañosContados := bañosContados + bañosContadosEnPais_(pais)
+    }
+}
+
+function bañosContadosEnPais_(paisDado) {
+    /*
+        PROPOSITO: Describir la cantidad de baños que en hay
+        en cada provincia de la lista de provincias de **paisDado**.
+        PARAMETROS:
+        *paisDado: Pais - Pais a analizar
+        TIPO: Numero.
+        PRECONDICIONES: Ninguna.
+        OBSERVACIONES: Es un recorrido de acumulacion sobre las provincias 
+        en la lista de provincias del pais **paisDado** acumulando
+        los baños de cada provincia de dicha lista.
+    */
+    bañosContados := 0
+    foreach provincia in provincias(paisDado) {
+        bañosContados := bañosContados + bañosContadosEnProvincia_(provincia)
+    }
+}
+
+function bañosContadosEnProvincia_(provinciaDada) {
+    /*
+        PROPOSITO: Describir la cantidad de baños que en hay
+        en cada ciudad de la lista de ciudades de **provinciaDada**.
+        PARAMETROS:
+        *provinciaDada: Provincia - Provincia a analizar
+        TIPO: Numero.
+        PRECONDICIONES: Ninguna.
+        OBSERVACIONES: Es un recorrido de acumulacion sobre las ciudades 
+        en la lista de ciudades de la provincia **provinciaDada** acumulando
+        los baños de cada ciudad de dicha lista.
+    */
+    bañosContados := 0
+    foreach ciudad in ciudades(provinciaDada) {
+        bañosContados := bañosContados + bañosContadosEnCiudad_(ciudad)
+    }
+}
+
+function bañosContadosEnCiudad_(ciudadDada) {
+    /*
+        PROPOSITO: Describir la cantidad de baños que en hay
+        en cada barrio de la lista de barrios de **ciudadDada**.
+        PARAMETROS:
+        *ciudadDada: Ciudad - Ciudad a analizar
+        TIPO: Numero.
+        PRECONDICIONES: Ninguna.
+        OBSERVACIONES: Es un recorrido de acumulacion sobre los barrios 
+        en la lista de barrios de la ciudad **ciudadDada** acumulando
+        los baños de cada barrio de dicha lista.
+    */
+    bañosContados := 0
+    foreach barrio in barrios(ciudadDada) {
+        bañosContados := bañosContados + bañosContadosEnBarrio_(barrio)
+    }
+}
+
+function bañosContadosEnBarrio_(barrioDado) {
+    /*
+        PROPOSITO: Describir la cantidad de baños que en hay
+        en cada calle de la lista de calles de **barrioDado**.
+        PARAMETROS:
+        *barrioDado: Barrio - Barrio a analizar
+        TIPO: Numero.
+        PRECONDICIONES: Ninguna.
+        OBSERVACIONES: Es un recorrido de acumulacion sobre las calles 
+        en la lista de calles del barrio **barrioDado** acumulando
+        los baños de cada calle de dicha lista.
+    */
+    bañosContados := 0
+    foreach calle in calles(barrioDado) {
+        bañosContados := bañosContados + bañosContadosEnCalle_(calle)
+    }
+}
+
+function bañosContadosEnCalle_(calleDada) {
+    /*
+        PROPOSITO: Describir la cantidad de baños que en hay
+        en cada edificio de la lista de edificios de **calleDada**.
+        PARAMETROS:
+        *calleDada: Calle - Calle a analizar
+        TIPO: Numero.
+        PRECONDICIONES: Ninguna.
+        OBSERVACIONES: Es un recorrido de acumulacion sobre los edificios 
+        en la lista de edificios de la calle **calleDada** acumulando
+        los baños de cada edificio de dicha lista.
+    */
+    bañosContados := 0
+    foreach edificio in edificios(calleDada) {
+        bañosContados := bañosContados + bañosContadosEnEdificio_(edificio)
+    }
+}
+
+function bañosContadosEnEdificio_(edificioDado) {
+    /*
+        PROPOSITO: Describir la cantidad de baños que en hay
+        en cada piso de la lista de pisos de **edificioDado**.
+        PARAMETROS:
+        *edificioDado: Edificio - Edificio a analizar
+        TIPO: Numero.
+        PRECONDICIONES: Ninguna.
+        OBSERVACIONES: Es un recorrido de acumulacion sobre los pisos 
+        en la lista de pisos del edificio **edificioDado** acumulando
+        los baños de cada piso de dicha lista.
+    */
+    bañosContados := 0
+    foreach piso in pisos(edificioDado) {
+        bañosContados := bañosContados + bañosContadosEnPiso_(piso)
+    }
+}
+
+function bañosContadosEnPiso_(pisoDado) {
+    /*
+        PROPOSITO: Describir la cantidad de habitaciones de tipo baño
+        que hay en la lista de habitaciones del piso **pisoDado**
+        PARAMETROS:
+        *pisoDado: Piso - Piso a analizar
+        TIPO: Numero.
+        PRECONDICIONES: Ninguna.
+        OBSERVACIONES: Es un recorrido de acumulacion sobre las habitaciones 
+        en la lista de habitaciones del piso **pisoDado** acumulando
+        las habitaciones de tipo baño de cada habitacion de la lista dada.
+    */
+    bañosContados := 0
+    foreach habitacion in habitaciones(pisoDado) {
+        bañosContados := bañosContados + unoSi_0Sino(esBaño_(habitacion))
+    }
+    return(bañosContados)
+}
+
+function esBaño_(habitacionDada) {
+    /*
+        PROPOSITO: Indicar si la habitacion **habitacionDada** es
+        de tipo baño.
+        PARAMETROS:
+        *habitacionDada: Habitacion - habitacion a analizar
+        TIPO: Booleano.
+        PRECONDICIONES: Ninguna.
+    */
+    return(tipoDeHabitacion(habitacionDada) == Baño)
+}
+
+
+
+
+/*
+    PARA CADA UNIVERSO
+
+    VER CADA GALAXIA Y PARA CADA GALAXIA
+    
+    VER CADA PLANETA Y PARA CADA PLANETA
+
+    VER CADA CONTINENTE Y PARA CADA CONTINENTE
+
+    VER CADA PAIS Y PARA CADA PAIS
+
+    VER CADA PROVINCIA Y PARA CADA PROVINCIA 
+
+    VER CADA CIUDAD Y PARA CADA CIUDAD 
+
+    VER CADA BARRIO Y PARA CADA BARRIO 
+    
+    VER CADA CALLE Y PARA CADA CALLE 
+    
+    VER CADA EDIFICIO Y PARA CADA EDIFICIO
+
+    VER CADA PISO Y PARA CADA PISO 
+
+    VER CADA HABITACION Y PARA CADA HABITACION
+
+    VER TIPO DE HABITACION0
+
+
+*/

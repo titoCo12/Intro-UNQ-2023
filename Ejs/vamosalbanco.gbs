@@ -1,0 +1,125 @@
+
+
+procedure Depositar_EnMoneda_ComoPesos(cantidadADepositar, moneda) {
+    /*
+        PROPÓSITO: Depositar el equivalente en pesos de **cantidadADepositar**
+        unidades de moneda **moneda** en la celda actual
+        PARAMETROS: 
+        *cantidadADepositar: Numero - Numero de la moneda a depositar
+        *moneda : Color - color de la moneda a depositar
+        PRECONDICIONES: Ninguna
+    */
+    if (moneda == Verde) {
+        Depositar_Dolares(cantidadADepositar)
+    }
+    elseif (moneda == Azul) {
+        Depositar_Euros(cantidadADepositar)
+    }
+    elseif (moneda == Rojo) {
+        Depositar_Yuanes(cantidadADepositar)
+    }
+}
+
+
+procedure Depositar_Dolares(cantidadDolares) {
+    /*
+        PROPÓSITO: Depositar **cantidadDolares** dolares en pesos
+        PARAMETROS:
+        *cantidadDolares: Numero - Numero de dolares a depositar
+        PRECONDICIONES: Ninguna
+    */
+    repeat (cantidadDolares * 80) {
+        Poner(Negro)
+    }
+}
+
+
+procedure Depositar_Euros(cantidadEuros) {
+    /*
+        PROPÓSITO: Depositar **cantidadEuros** euros en pesos
+        PARAMETROS:
+        *cantidadEuros: Numero - Numero de euros a depositar
+        PRECONDICIONES: Ninguna
+    */
+    repeat (cantidadEuros * 90) {
+        Poner(Negro)
+    }
+}
+
+
+procedure Depositar_Yuanes(cantidadYuanes) {
+    /*
+        PROPÓSITO: Depositar **cantidadYuanes** yuanes en pesos
+        PARAMETROS:
+        *cantidadDolares: Numero - Numero de yuanes a depositar
+        PRECONDICIONES: Ninguna
+    */
+    repeat (cantidadYuanes * 12) {
+        Poner(Negro)
+    }
+}
+
+
+procedure ExtraerHasta_EnMoneda_(cantidadAExtraer, moneda) {
+    /*
+        PROPÓSITO: Extraer hasta **cantidadAExtraer** unidades de moneda **moneda** 
+        PARÁMETROS:
+            *cantidadAExtraer: Numero - Numero unidades de moneda **moneda** a extraer
+            *moneda: Color - Color de la moneda a extraer
+        PRECONDICIONES: Ninguna
+    */
+    if (hayAlmenos_Moneda_(cantidadAExtraer, moneda)) {
+        Extraer_EnMoneda_(cantidadAExtraer, moneda)
+    }
+    else {
+        ExtraerLoQueHayaDe_(moneda)
+    }
+}
+
+
+function hayAlmenos_Moneda_(cantidadAExtraer, moneda) {
+    /*
+        PROPÓSITO: Indicar si por lo menos el numero de bolitas de color **moneda**
+        es equivalente a **cantidadAExtraer**
+        PARÁMETROS:
+            *cantidadAExtraer: Numero - Numero a comparar con el numero de bolitas
+            *moneda: Color - Color de las bolitas cuyo numero se va a comparar
+        TIPO: Booleano
+        PRECONDICIONES: Ninguna
+    */
+    return (nroBolitas(moneda) >= cantidadAExtraer)
+}
+
+
+procedure Extraer_EnMoneda_(cantidadMoneda, tipoMoneda) {
+    /*
+        PROPÓSITO: Extraer **cantidadMoneda** monedas de tipo **tipoMoneda**
+        PARÁMETROS:
+            *cantidadMoneda: Numero - Numero de monedas a extraer
+            *tipoMoneda: Color - Color del tipo de moneda a extraer
+        PRECONDICIONES: Hay por lo menos **cantidadMoneda** Unidades de 
+        **tipoMoneda**
+    */
+    repeat (cantidadMoneda) {
+        Sacar(tipoMoneda)
+    }
+}
+
+
+procedure ExtraerLoQueHayaDe_(monedaAExtraer) {
+    /*
+        PROPÓSITO: Extraer todas las unidades de **monedaAExtraer** del a celda actual
+        PARÁMETROS:
+            *monedaAExtraer: Color - Color de la moneda que se va a extraer
+        PRECONDICIONES: Ninguna
+    */
+    repeat(nroBolitas(monedaAExtraer)) {
+        Sacar(monedaAExtraer)
+    }
+}
+
+
+
+
+
+

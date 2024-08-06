@@ -1,0 +1,95 @@
+procedure LlevarAlCaminanteALaMeta() {
+    /*
+        PROPÓSITO:  ....
+        PRECONDICIONES:
+            * ....
+    */
+    while (not(estaEnLaMeta())) {
+        DarUnPaso()
+    }
+}
+
+
+function estaEnLaMeta() {
+    /*
+    */
+    return(hayBolitas(meta()))
+}
+
+
+procedure DarUnPaso() {
+    /*
+        PROPÓSITO:  ....
+        PRECONDICIONES:
+            * ....
+    */
+    CambiarDireccionSiHayIndicador()
+    DejarHuella()
+    MoverAlCaminanteAl_(direccionIndicada())
+}
+
+
+
+procedure CambiarDireccionSiHayIndicador() {
+    if (hayIndicadorDeCambioDeDireccion()) {
+        Cambiar_ParaImitar_(caminante(), indicador())
+    }
+}
+
+
+
+function hayIndicadorDeCambioDeDireccion() {
+    return(nroBolitas(caminante()) /= nroBolitas(indicador()))
+}
+
+
+
+procedure Cambiar_ParaImitar_(primerColor, segundoColor) {
+    SacarTodasDe_(primerColor)
+    repeat(nroBolitas(segundoColor)) {
+        Poner(primerColor)
+    }
+}
+
+
+
+procedure DejarHuella() {
+    Poner(huella())
+}
+
+
+
+procedure MoverAlCaminanteAl_(direccionDeCaminante) {
+    MoverloAl_(direccionDelCodigo_(direccionDeCaminante))
+}
+
+
+
+procedure MoverloAl_(direccionMoverCaminante) {
+    repeat(nroBolitas(caminante())) {
+        Sacar(caminante())
+        Mover(direccionDeCaminante)
+        Poner(caminante())
+        Mover(opuesto(direccionDeCaminante))
+    }
+    Mover(direccionDeCaminante)
+}
+    
+
+
+function direcciónDelCódigo_(código)
+/* PROPÓSITO:
+describir la dirección correspondiente al
+código dado
+PRECONDICIONES:
+* el código está entre 1 y 4
+PARÁMETROS:
+* código: Número. El número que codifica la
+dirección descripta
+*/
+
+
+
+function direccionIndicada() {
+    return(nroBolitas(Azul))
+}

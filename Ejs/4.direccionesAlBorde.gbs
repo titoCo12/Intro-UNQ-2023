@@ -1,0 +1,42 @@
+function direccionesAlBorde(){
+    
+    /*
+    PROPOSITO: Describe las direcciones hacia las cuales el cabezal no se puede mover
+    PRECONDICION: Ninguna
+    TIPO: Lista de direcciones a las cual no se puede mover
+    */
+    
+    direccionesALasCualesNoMePuedoMover := []
+    direccionActual := minDir()
+    while(direccionActual /= maxDir()){
+        direccionesALasCualesNoMePuedoMover := direccionesALasCualesNoMePuedoMover ++ agregarLa_SiNosePuedeMover(direccionActual) 
+        direccionActual:= siguiente(direccionActual)
+    }
+    return(direccionesALasCualesNoMePuedoMover ++ agregarLa_SiNosePuedeMover(direccionActual))
+}
+
+function agregarLa_SiNosePuedeMover(direccionAMover){
+    
+    /*
+    PROPOSITO: Describe a una "listaDeDireccion" si el cabezal no se puede mover hacia la direccion dada
+    PRECONDICION: Ninguna
+    PARAMETROS: *direccionAMover - direccion - describe la direccion a la cual debe
+    TIPO: Lista de direcciones 
+    */
+    
+    return(choose [direccionAMover] when (not puedeMover(direccionAMover))
+            [] otherwise)
+}
+
+// a)
+
+function elTableroTieneUnaUnicaCelda(){
+   
+    /*
+    PROPOSITO: Indica si el tablero tiene una unica celda
+    PRECONDICION: Ninguna
+    TIPO: Booleano
+    */
+    
+    return(direcionesAlBorde() == [minDir() .. maxDir()])
+}

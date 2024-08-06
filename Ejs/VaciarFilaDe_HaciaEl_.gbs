@@ -1,0 +1,21 @@
+
+
+procedure VaciarFilaDe_HaciaEl_(color, direccion) {
+    /*
+        PROPÓSITO: Sacar todas las bolitas de color **color** de la fila actual en direccion
+        hacia el **direccion**.
+        PARÁMETROS:
+            *color: Color - color de las bolitas a sacar.
+            *direccion: Direccion - direccion en la cual se recorrera la fila desde su opuesto 
+            para sacar las bolitas.
+        PRECONDICIONES: Hay por lo menos una bolita de color **color** en la fila actual.
+        El parametro **direccion** no puede ser la direccion Norte ni Sur.
+    */
+    IrAlBorde_(opuesto(direccion))
+    SacarTodasLasDeColor_(color)
+    while (puedeMover(direccion)) {
+        Mover(direccion)
+        SacarTodasLasDeColor_(color)
+    }
+}
+

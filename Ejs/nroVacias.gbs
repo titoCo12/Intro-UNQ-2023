@@ -1,0 +1,28 @@
+function nroVacias() {
+    /*
+        PROPÓSITO: Describir la cantidad de celdas vacias del tablero
+        TIPO: Cantidad.
+        PRECONDICIONES: Ninguna
+    */
+    IrAPrimeraCeldaEnUnRecorridoAl_Y_(Este, Norte)
+    celdasVaciasContadas := cantidadDeVacio()
+    while(haySiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte)) {
+        IrASiguienteCeldaEnUnRecorridoAl_Y_(Este,Norte)
+        celdasVaciasContadas := celdasVaciasContadas + cantidadDeVacio()
+    }
+    return (celdasVaciasContadas)
+}
+
+
+
+function cantidadDeVacio() {
+    /*
+        PROPOSITO: Indicar 1 si la celda actual se encuentra vacia, o 
+        indicar 0 de lo contrario
+        TIPO: Cantidad
+        PRECONDICIONES: Ninguna.
+    */
+    return (choose 1 when (esVacia())
+    0 otherwise)
+
+}

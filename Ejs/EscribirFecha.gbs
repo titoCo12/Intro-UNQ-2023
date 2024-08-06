@@ -1,0 +1,56 @@
+procedure EscribirFecha___(dia, mes, año) {
+    /*
+        PROPÓSITO: Anotar el numero del dia en la casilla actual, el numero del mes en la
+        casilla lindante hacia el Este de la actual, y el numero del año en la casilla lindante
+        hacia el Este de la casilla del mes, utilizando bolitas de colores
+        PARÁMETROS: 
+            * dia: Numero - Numero del dia a anotar
+            * mes: Numero - Numero del mes a anotar
+            * año: Numero - Numero del año a anotar
+        PRECONDICIONES:
+        OBSERVACION: El dia se representa en bolitas azules, el mes en bolitas rojas, y
+        el año en bolitas verdes
+    */
+    AnotarDia(dia)
+    Mover(Este)
+    AnotarMes(mes)
+    Mover(Este)
+    AnotarAño(año)
+}
+
+procedure AnotarDia(numeroDeDia) {
+    /*
+        PROPÓSITO: Anotar el numero de dias de una fecha en bolitas azules
+        PARÁMETROS: 
+            *numeroDeDia: Numero - Numero de bolitas azules a colocar
+        PRECONDICIONES: -
+    */
+    repeat (numeroDeDia) {
+        Poner(Azul)
+    }
+}
+
+procedure AnotarMes(numeroMes) {
+    /*
+        PROPÓSITO: Anotar el numero de mes de una fecha en bolitas rojas  
+        PARÁMETROS:
+            * numeroMes: Numero - Numero de bolitas rojas a colocar
+        PRECONDICIONES: El parametro numeroMes debe ser un numero del 1 al 12
+    */
+    repeat (numeroMes) {
+        Poner(Rojo)
+    }
+}
+
+procedure AnotarAño(numeroAño) {
+    /*
+        PROPÓSITO: Anotar el numero del año de una fecha en bolitas verdes
+        PARÁMETROS:
+            * numeroAño: Numero - Numero de bolitas verdes a colocar
+        PRECONDICIONES: El parametro numeroAño debe ser mayor o igual a cero
+    */
+    repeat (numeroAño) {
+        Poner(Verde)
+    }
+    
+}

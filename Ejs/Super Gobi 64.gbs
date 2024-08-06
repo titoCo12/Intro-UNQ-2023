@@ -1,0 +1,218 @@
+/*
+  Súper Gobi 64 - Parte 1
+
+  ENUNCIADO: Nova se propuso desarrollar un videojuego 3D en Gobstones. Para eso
+    implementó varias primitivas que le permitieron representar un tablero
+    tridimensional sobre el clásico tablero bidimensional de Gobstones. Llamó
+    al videojuego "Súper Gobi 64". El juego consiste en controlar un personaje
+    llamado "Gobi" que puede explorar el escenario tridimensional luchando con
+    enemigos. No sabemos mucho sobre cómo se representan Gobi o los enemigos y
+    tampoco sabemos cómo funciona la representación del tablero 3D sobre el
+    tablero 2D aunque sí sabemos que todas las primitivas de Gobstones siguen
+    funcionando para interactuar con el cabezal dentro de un mismo "piso". Hace
+    poco Nova nos mostró su progreso y por lo poco que vimos podemos asegurar
+    que el juego promete ser un gran éxito. Todo iba bien hasta que Nova
+    decidió escribir un procedimiento que ubicara el cabezal sobre Gobi.
+    Empezó a realizarlo de dos formas distintas pero en ambas se trabó y ya no
+    sabe cómo seguir. Ayudemos al pobre Nova a continuar su juego. Para eso,
+    elegí una de las opciones y completá el código asumiendo definidas todas
+    las primitivas que hizo Nova y todas las subtareas de biblioteca que se
+    brindan.
+*/
+
+
+procedure IrAGobi() {
+  /*
+    Propósito: Ubicar el cabezal sobre Gobi.
+    Precondiciones: Existe Gobi en el tablero.
+  */
+  IrAGobi2()
+}
+
+
+procedure IrAGobi2() {
+  /*
+    Propósito: Ubicar el cabezal sobre Gobi.
+    Precondiciones: Existe Gobi en el tablero.
+    Observaciones: Primero se ubica el cabezal sobre el
+      piso del tablero 3D en el que se encuentra Gobi
+      y después se ubica a el cabezal sobre Gobi en el
+      piso actual.
+  */
+  IrAlPisoDeGobi()
+  IrAGobiEnEstePiso()
+}
+
+
+procedure IrAlPisoDeGobi() {
+  /*
+    Propósito: Ubicar el cabezal sobre el piso en el que
+      se encuentra Gobi.
+    Precondiciones: Existe Gobi en el tablero.
+    Observaciones: Recorrido de búsqueda sobre el
+      tablero 3D por pisos, buscando el piso sobre
+      el que se encuentra Gobi.
+  */
+    if (not estáGobiEnEstePiso()) {
+        IrALaCimaDePisos()
+        BajarHastaElPisoDeGobi()
+    }
+}
+
+
+procedure IrALaCimaDePisos() {
+    /*
+        PROPÓSITO: Ubicar al cabezal en la celda actual del
+        piso mas alto del tablero 3D
+        PRECONDICIONES: El cabezal esta debajo o en el 
+        piso mas alto del tablero 3D
+    */
+    while (puedeSubir()) {
+        Subir()
+    }
+}
+
+
+procedure BajarHastaElPisoDeGobi() {
+    /*
+        PROPÓSITO: Hacer que el cabezal descienda por los
+        pisos del tablero 3D hasta estar en el mismo piso en
+        el que se encuentra gobi.
+        PRECONDICIONES: Gobi esta en uno de los pisos inferiores
+        o en el piso actual
+    */
+    while (not estáGobiEnEstePiso()) {
+        Bajar()
+    }
+}
+
+
+procedure IrAGobiEnEstePiso() {
+  /*
+    Propósito: Ubicar el cabezal sobre Gobi en el piso actual.
+    Precondiciones: Gobi esta en el piso actual
+  */
+  IrAPrimeraCeldaEnRecorridoAl_YAl_(Este, Norte)
+  while (not estáGobi()) {
+    PasarASiguienteCeldaEnRecorridoAl_YAl_(Este,Norte)
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// BIBLIOTECA
+
+procedure IrAPrimeraCeldaEnRecorridoAl_YAl_(dirPrincipal, dirSecundaria) {
+  /*
+    Propósito: Ubicar el cabezal en la primera celda de un recorrido hacia
+      el **dirPrincipal** y el **dirSecundaria**.
+    Precondiciones: Ninguna.
+    Parámetros:
+    * dirPrincipal: Dirección - La dirección principal del recorrido.
+    * dirSecundaria: Dirección - La dirección secundaria del recorrido.
+  */
+}
+
+function haySiguienteCeldaEnRecorridoAl_YAl_(dirPrincipal, dirSecundaria) {
+  /*
+    Propósito: Indicar si existen celdas restantes desde la celda actual en un
+      recorrido hacia el **dirPrincipal** y el **dirSecundaria**.
+    Precondiciones: Ninguna.
+    Parámetros:
+    * dirPrincipal: Dirección - La dirección principal del recorrido.
+    * dirSecundaria: Dirección - La dirección secundaria del recorrido.
+    Tipo: Booleano.
+  */
+}
+
+procedure PasarASiguienteCeldaEnRecorridoAl_YAl_(dirPrincipal, dirSecundaria) {
+  /*
+    Propósito: Ubicar el cabezal en celda siguiente a la celda actual en un
+      recorrido hacia el **dirPrincipal** y el **dirSecundaria**.
+    Precondiciones: El cabezal no se encuentra en la última celda de un
+      recorrido hacia el **dirPrincipal** y el **dirSecundaria**.
+    Parámetros:
+    * dirPrincipal: Dirección - La dirección principal del recorrido.
+    * dirSecundaria: Dirección - La dirección secundaria del recorrido.
+  */
+}
+
+// PRIMITIVAS
+
+procedure Subir() {
+  /*
+    Propósito: Ubicar el cabezal en la celda lindante hacia arriba
+      a la celda actual.
+    Precondiciones: Existe una celda lindante hacia arriba desde la
+      celda actual.
+  */
+}
+
+procedure Bajar() {
+  /*
+    Propósito: Ubicar el cabezal en la celda lindante hacia abajo
+      a la celda actual.
+    Precondiciones: Existe una celda lindante hacia abajo desde la
+      celda actual.
+  */
+}
+
+function puedeSubir() {
+  /*
+    Propósito: Indicar si existe una celda lindante hacia arriba desde la
+      celda actual.
+    Precondiciones: Ninguna.
+    Tipo: Booleano.
+  */
+}
+
+function puedeBajar() {
+  /*
+    Propósito: Indicar si existe una celda lindante hacia abajo desde la
+      celda actual.
+    Precondiciones: Ninguna.
+    Tipo: Booleano.
+  */
+}
+
+function estáGobi() {
+  /*
+    Propósito: Indicar si gobi está en la celda actual.
+    Precondiciones: Ninguna.
+    Tipo: Booleano.
+  */
+}
+
+function estáGobiEnEstePiso() {
+  /*
+    Propósito: Indicar si gobi está en el piso actual.
+    Precondiciones: Ninguna.
+    Tipo: Booleano.
+    Observaciones: Llamo "piso actual" al piso sobre el que se encuentra
+      la celda actual.
+  */
+}

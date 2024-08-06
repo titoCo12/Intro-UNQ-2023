@@ -1,0 +1,76 @@
+program {
+    /*  
+        PROPOSITO: Dibujar una Piramide invertida con una base de 5 casillas,
+        una parte media de 3 casillas y una punta de una singular casilla
+        PRECONDICIONES: Debe haber por lo menos 4 casillas hacia el Este
+        y 2 hacia el Norte de la casilla inicial
+    */
+    IrALaEsquinaOesteSuperior()
+    DibujarBase()
+    PosicionarseParaDibujarMedio()
+    DibujarMedio()
+    PosicionarseParaDibujarPunta()
+    DibujarPunta()
+}
+
+procedure IrALaEsquinaOesteSuperior() {
+    /*
+        PROPÓSITO: Hacer que el cabezal se mueva a la esquina Oeste Superior
+        del tablero
+        PRECONDICIONES: -
+    */
+    IrAlBorde(Oeste)
+    IrAlBorde(Norte)
+}
+procedure PosicionarseParaDibujarMedio() {
+    /*
+        PROPÓSITO: Hacer que el cabezal se mueva para dibujar el
+        medio de la piramide
+        PRECONDICIONES: Debe haber por lo menos 3 casillas hacia el
+        Oeste y una hacia el Sur del cabezal
+    */
+    repeat(3) {
+        Mover(Oeste)
+    }
+    Mover(Sur)
+}
+
+procedure PosicionarseParaDibujarMedio() {
+    /*
+        PROPÓSITO: Hacer que el cabezal se mueva para dibujar la
+        punta de la piramide
+        PRECONDICIONES: Debe haber por lo menos una casilla hacia 
+        el Oeste y el Sur del cabezal
+    */
+    Mover(Oeste)
+    Mover(Sur)
+}
+
+procedure DibujarBase() {
+    /* PROPÓSITO: Dibujar una base de pirámide de 5 celdas de lado
+    a partir de la celda actual y hacia el Este.
+    PRECONDICIONES:
+    * La celda actual está vacía
+    * Hay al menos cuatro celdas al Este del cabezal y las
+    cuatro más cercanas están vacías
+    */
+}
+
+procedure DibujarMedio() {
+    /* PROPÓSITO: Dibujar un sector del medio de pirámide de 3
+    celdas de lado a partir de la celda actual
+    y hacia el Este.
+    PRECONDICIONES:
+    * La celda actual está vacía
+    * Hay al menos dos celdas al Este del cabezal y
+    las dos más cercanas están vacías
+    */
+}
+
+procedure DibujarPunta() {
+    /* PROPÓSITO: Dibujar una punta de pirámide en la celda actual.
+    PRECONDICIONES:
+    * La celda actual está vacía
+    */
+}
+

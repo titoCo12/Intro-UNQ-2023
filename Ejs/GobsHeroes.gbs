@@ -1,0 +1,66 @@
+
+
+function protectoraConAnimalesVacunadosConAntirrabicasSiCorrespondeEn_(protectoraDada) {
+    /*
+        PROPOSITO: Describir a la protectora **protectoraDada** con todos los animales mayores a 2 meses
+        de edad con la antirrabica incluida en sus vacunas, y en el caso de los animales que ya la tengan
+        no modificarlos.
+        PARAMETROS:
+        *protectoraDada: Protectora - protectora a modificar y describir.
+        TIPO: Protectora.
+        PRECONDICIONES: Ninguna.
+    */
+    return(Protectora(protectoraDada | animales <- cambiarAnimalesMayoresA2MesesSinAntirrabicaDe_(animales(protectoraDada)))
+    )
+}
+
+
+function cambiarAnimalesMayoresA2MesesSinAntirrabicaDe_(listaAnimales) {
+    /*
+        PROPOSITO: Describe la lista de animales **listaAnimales** con los animales cuya edad sea
+        mayor a 2 meses y sin vacuna antirrabica modificados para tener dicha vacuna. 
+        PARAMETROS:
+        *listaAnimales: [Animal] - lista de animales a modificar.
+        TIPO:
+        PRECONDICIONES:
+        OBSERVACION: Es un recorrido de transformacion sobre la lista de animales **listaAnimales**,
+        transforma los animales cuya edad sea mayor a 2 meses y que no tengan la vacuna antirrabica.
+    */
+    listaNueva := listaAnimales
+    listaSinRecorrer := []
+    while (not(esVacía(listaSinRecorrer))) {
+        listaNueva := listaNueva ++ animal_ConAntirrabicaSiEsMayorQue2MesesYNoLaTiene(primero(listaSinRecorrer))
+        listaSinRecorrer := resto(listaSinRecorrer)
+    }
+}
+
+
+//mejor quedate con esta
+function cambiarAnimalesMayoresA2MesesSinAntirrabicaDe_(listaAnimales) {
+    /*
+        PROPOSITO: Describe la lista de animales **listaAnimales** con los animales cuya edad sea
+        mayor a 2 meses y sin vacuna antirrabica modificados para tener dicha vacuna. 
+        PARAMETROS:
+        *listaAnimales: [Animal] - lista de animales a modificar.
+        TIPO:
+        PRECONDICIONES:
+        OBSERVACION: Es un recorrido de filtrado sobre la lista de animales **listaAnimales**,
+        modifica a los animales cuya edad sea mayor a 2 meses y que no tengan la vacuna antirrabica.
+    */
+    listaFiltrada := []
+    foreach animal in listaAnimales {
+        listaFiltrada := listaFiltrada ++ animalConAntirrabicaA_SiEsMayorYNoTiene(animal)
+    }
+    return(listaFiltrada)
+}
+
+
+
+function animal_ConAntirrabicaSiEsMayorYNoLaTiene(animalDado) {
+    /*
+        PROPOSITO:
+        PARAMETROS:
+        TIPO:
+        PRECONDICIONES:
+    */
+}

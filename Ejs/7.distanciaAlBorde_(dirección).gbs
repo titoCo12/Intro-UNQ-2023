@@ -1,0 +1,16 @@
+function distanciaAlBorde_(dirección){
+    /*
+    PROPOSITO: Describre la distancia hacia el borde en dirección "dirección" indicado
+    PRECONCION:Ninguna
+    PARAMETROS: *dirección: Tipo Dirección, indica hacia que borde vamos a calcular la distancia
+    TIPO: Numero 
+    */
+    
+    cantidadDeCeldasVistas := 0
+    while(puedeMover(dirección)){
+        cantidadDeCeldasVistas := cantidadDeCeldasVistas + 1
+        Mover(dirección)
+    }
+    
+    return(cantidadDeCeldasVistas)
+}
